@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Etece Studio — open http://localhost:3000</title>
+  <meta http-equiv="refresh" content="0;url=http://localhost:3000/">
+  <style>
+    html, body { margin: 0; min-height: 100vh; background: #fff; color: #0f0f12;
+      font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
+    body { display: grid; place-items: center; padding: 2rem; text-align: center; }
+    .card { max-width: 720px; }
+    h1 { font-size: 1.2rem; letter-spacing: 0.2em; color: #EC0000;
+      text-transform: uppercase; margin: 0 0 1.2rem; border: 2px solid #EC0000;
+      display: inline-block; padding: 0.4rem 0.8rem; }
+    p { line-height: 1.55; font-size: 0.95rem; }
+    code { background: #f1f1f4; padding: 0.15em 0.4em; border-radius: 4px; }
+    a { color: #EC0000; }
+    .warn { background: #fff5f5; border: 1px solid #EC0000; padding: 1rem;
+      margin-top: 1.4rem; text-align: left; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Wrong URL</h1>
+    <p>This file is not the live app. The live app is a <strong>Next.js</strong> project.</p>
+    <p>Open <a href="http://localhost:3000/"><strong>http://localhost:3000</strong></a> instead.</p>
+    <p>If the page does not redirect automatically, run <code>npm run dev</code> in the project root, then open the link above.</p>
+    <div class="warn" id="liveServerWarn" hidden>
+      <strong>You are using Live Server (port 5500).</strong>
+      <p style="margin:0.4rem 0 0">Stop the Live Server extension and use <code>npm run dev</code> instead.
+        Live Server cannot run the Next.js app — it can only serve static files,
+        which is why your preloader changes appear to do nothing.</p>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var host = location.host || "";
+      var isLiveServer = /:(5500|5501)$/.test(host);
+      if (isLiveServer) {
+        var w = document.getElementById("liveServerWarn");
+        if (w) w.hidden = false;
+      }
+      if (location.protocol !== "file:") {
+        location.replace("http://localhost:3000/");
+      }
+    })();
+  </script>
+</body>
+</html>

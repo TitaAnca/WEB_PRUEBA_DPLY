@@ -1,0 +1,558 @@
+/* ============================================================
+   ETECÉ STUDIO · Contact — "THE BRIEF ROOM"
+   Una sala de brief negra y editorial vive dentro de una página clara.
+   El formulario está integrado en una superficie negra premium con
+   tipografía fantasma, una declaración controlada, acentos rojos de
+   marca y el gesto de tres puntos Etecé. No es un formulario: es una
+   experiencia de marca donde se inicia un proyecto.
+   ============================================================ */
+
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 6vw, 6.5rem);
+  /* Sin padding lateral: el shell (.shell) aplica el gutter global → margen
+     lateral idéntico al de Nosotros/Enfoque en cada tamaño. */
+  padding-inline: 0;
+  background: linear-gradient(135deg, #f6f5f8 0%, #efedf2 100%);
+  /* Color de fondo claro explícito: la nav lee background-color de la sección
+     para el contraste → el logo top-left se mantiene rojo/normal (no blanco).
+     La superficie negra es interior y no altera ese comportamiento. */
+  background-color: #f3f2f6;
+  color: #0a0a0a;
+
+  --red: #ec0000;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Neutraliza el layout global de .landing-block sin tocar globals.css. */
+.section:global(.landing-block),
+.section:global(.landing-block--contacto) {
+  height: auto;
+  min-height: 100svh;
+  max-height: none;
+  padding-block: clamp(3.5rem, 6vw, 6.5rem);
+  background: linear-gradient(135deg, #f6f5f8 0%, #efedf2 100%);
+  background-color: #f3f2f6;
+}
+
+/* ─── SHELL: la sala de brief negra ───────────────────────── */
+.shell {
+  position: relative;
+  /* Shell de sección unificado (misma fórmula en Nosotros/Contacto/Enfoque):
+     tope = --section-max-width; margen lateral = --section-gutter a cada lado. */
+  width: min(var(--section-max-width), calc(100% - var(--section-gutter) * 2));
+  min-height: clamp(560px, 76vh, 800px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 0.9fr);
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+  align-items: stretch;
+  padding: clamp(2.4rem, 4.6vw, 4.6rem);
+  border-radius: clamp(1.4rem, 2vw, 2.4rem);
+  background:
+    radial-gradient(circle at 84% 78%, rgba(255, 255, 255, 0.075), transparent 34%),
+    linear-gradient(135deg, #080808 0%, #020202 100%);
+  color: #fff;
+  overflow: hidden;
+  box-shadow:
+    0 42px 120px rgba(0, 0, 0, 0.3),
+    0 16px 44px rgba(0, 0, 0, 0.18);
+}
+
+/* ─── CAPA VISUAL: tres puntos Etecé como firma de fondo ───── */
+.backgroundDots {
+  position: absolute;
+  right: clamp(-2.5rem, -3vw, -1rem);
+  bottom: clamp(-2.5rem, -4vw, -1.5rem);
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.backgroundDots span {
+  width: clamp(5rem, 11vw, 12rem);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.04)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 28px 80px rgba(0, 0, 0, 0.22);
+  opacity: 0.82;
+}
+
+/* ─── IZQUIERDA: invitación del estudio ───────────────────── */
+.left {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  /* Centramos el bloque (igual que el formulario, align-self: center) para
+     que el email suba a la misma banda que el botón rojo, en lugar de quedar
+     anclado al fondo de la columna y verse más bajo. */
+  justify-content: center;
+  gap: clamp(2.4rem, 5vw, 4rem);
+  min-height: 100%;
+  min-width: 0;
+}
+
+.leadIn {
+  min-width: 0;
+}
+
+.kicker {
+  margin: 0;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.62rem, 0.75vw, 0.78rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+}
+
+.statement {
+  margin: clamp(1.8rem, 3.6vw, 3.2rem) 0 0;
+  max-width: 640px;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(2.3rem, 4.6vw, 4.9rem);
+  line-height: 0.9;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #fff;
+}
+
+.statement span {
+  display: block;
+}
+
+/* Los tres signos de interrogación, en rojo, integrados en la última línea
+   del titular (inline, sin romper la línea ni cambiar el footprint). */
+.statement .statementMarks {
+  display: inline;
+  color: var(--red);
+}
+
+.statementAccent {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.copy {
+  margin-top: clamp(1.6rem, 2.5vw, 2.4rem);
+  max-width: 520px;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.98rem, 1.05vw, 1.15rem);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.emailBlock {
+  position: relative;
+  z-index: 2;
+}
+
+.emailBlock span {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
+  font-weight: 700;
+}
+
+.emailBlock a {
+  display: inline-block;
+  /* Sube SOLO la línea del email (no la etiqueta EMAIL). Usamos top en vez
+     de transform para no interferir con el translateY del hover. */
+  position: relative;
+  top: -10px;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  padding-bottom: 0.36rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+  transition:
+    color 320ms var(--ease),
+    border-color 320ms var(--ease),
+    transform 320ms var(--ease);
+}
+
+.emailBlock a:hover,
+.emailBlock a:focus-visible {
+  color: var(--red);
+  border-color: var(--red);
+  transform: translateY(-1px);
+  outline: 0;
+}
+
+/* ─── DERECHA: formulario integrado ───────────────────────── */
+.right {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  min-width: 0;
+}
+
+.form {
+  position: relative;
+  padding: clamp(1.8rem, 3.6vw, 3.2rem);
+  border-radius: clamp(1rem, 1.6vw, 1.8rem);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.105),
+    rgba(255, 255, 255, 0.045)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.formLabel {
+  margin: 0 0 clamp(1.8rem, 3vw, 2.8rem);
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(0.72rem, 0.85vw, 0.9rem);
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.6rem, 2.6vw, 2.4rem) clamp(1.4rem, 2.4vw, 2.2rem);
+}
+
+.field {
+  min-width: 0;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.85rem;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.label[data-required="true"]::after {
+  content: " *";
+  color: var(--red);
+  font-weight: 900;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  padding: 0.3rem 0 0.85rem;
+  transition:
+    border-color 320ms var(--ease),
+    box-shadow 320ms var(--ease);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 1px 0 var(--red);
+}
+
+.textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.fieldError {
+  margin: 0.6rem 0 0;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: #ff6b6b;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.submit {
+  margin-top: clamp(2.1rem, 4vw, 3rem);
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--red);
+  color: #fff;
+  padding: 1rem 1.6rem;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 18px 48px rgba(236, 0, 0, 0.22);
+  transition:
+    transform 320ms var(--ease),
+    box-shadow 320ms var(--ease),
+    background 320ms var(--ease);
+}
+
+.submit:hover,
+.submit:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 58px rgba(236, 0, 0, 0.28);
+  outline: 0;
+}
+
+.submit:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.submit:disabled {
+  opacity: 0.62;
+  cursor: progress;
+  transform: none;
+}
+
+.arrow {
+  font-size: 0.95rem;
+  transition: transform 320ms var(--ease);
+}
+
+.submit:hover .arrow,
+.submit:focus-visible .arrow {
+  transform: translateX(4px);
+}
+
+.formError {
+  margin: 0;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.formError a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+/* ─── ESTADO DE ÉXITO: dentro de la zona del formulario ───── */
+.success {
+  min-height: clamp(360px, 46vw, 520px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 4vw, 3.4rem);
+  border-radius: clamp(1rem, 1.6vw, 1.8rem);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.2), transparent 34%),
+    var(--red);
+  color: #fff;
+  box-shadow:
+    0 30px 90px rgba(236, 0, 0, 0.32),
+    0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: contactSuccessIn 520ms var(--ease) both;
+}
+
+@keyframes contactSuccessIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.successDots {
+  display: inline-flex;
+  gap: 0.4rem;
+  margin-bottom: clamp(1rem, 1.8vw, 1.5rem);
+}
+
+.successDot {
+  width: clamp(10px, 1vw, 14px);
+  height: clamp(10px, 1vw, 14px);
+  background: #fff;
+  border-radius: 50%;
+}
+
+.successTitle {
+  margin: 0;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.successSubtitle {
+  margin: clamp(1rem, 1.8vw, 1.4rem) 0 0;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(1rem, 1.05vw, 1.08rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 42ch;
+  font-weight: 500;
+}
+
+.successHint {
+  margin: clamp(1.2rem, 2vw, 1.6rem) 0 0;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 500;
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .shell {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: clamp(2.5rem, 7vw, 3.5rem);
+    padding: clamp(2rem, 7vw, 3rem);
+  }
+
+  .left {
+    display: block;
+  }
+
+  .emailBlock {
+    margin-top: clamp(2.2rem, 6vw, 3rem);
+  }
+
+  .right {
+    align-self: stretch;
+  }
+
+  .backgroundDots {
+    right: -2rem;
+    bottom: -1.5rem;
+    gap: 0.8rem;
+  }
+
+  .backgroundDots span {
+    width: clamp(3.4rem, 18vw, 6.5rem);
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .shell {
+    /* El ancho lo gobierna el shell global (gutter por breakpoint); aquí solo
+       se ajusta el radio para el formato compacto. */
+    border-radius: 1.2rem;
+  }
+
+  .backgroundDots {
+    right: -1.6rem;
+    bottom: -1rem;
+    opacity: 0.72;
+  }
+
+  .kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    line-height: 1.35;
+    max-width: 100%;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statement {
+    font-size: clamp(2rem, 9.5vw, 3.4rem);
+  }
+
+  .form {
+    padding: clamp(1.4rem, 6vw, 2rem);
+  }
+
+  .submit {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .emailBlock a {
+    word-break: break-word;
+  }
+}
+
+/* Móvil: altura natural y padding de sección compacto. */
+@media (max-width: 768px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--contacto) {
+    min-height: auto;
+    padding-block: clamp(3rem, 9vw, 4.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit,
+  .arrow,
+  .emailBlock a {
+    transition: none;
+  }
+
+  .submit:hover .arrow,
+  .submit:focus-visible .arrow {
+    transform: none;
+  }
+
+  .success {
+    animation: none;
+  }
+}

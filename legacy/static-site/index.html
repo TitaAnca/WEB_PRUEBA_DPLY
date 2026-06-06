@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etecé Studio | Branding &amp; Comunicación Visual</title>
+  <meta name="description" content="Estudio de branding y comunicación visual. Diseñamos identidades con criterio, precisión y visión editorial.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=horizontal-reveal-2026-05-26">
+</head>
+<body class="preloading">
+  <a href="#inicio" class="site-brand" aria-label="Etecé Studio">
+    <span class="hero-logo-swap" aria-hidden="true">
+      <img
+        src="public/assets/_LOGO_NegroRojo.svg"
+        alt="Etecé Studio"
+        class="hero-logo-img hero-logo-full hero-logo-full--light"
+      >
+      <img
+        src="public/assets/_LOGO_NegroRojo.svg"
+        alt=""
+        class="hero-logo-img hero-logo-full hero-logo-full--dark"
+        aria-hidden="true"
+      >
+      <img
+        src="public/assets/Símbolo_EtecéStudio_Rojo.svg"
+        alt=""
+        class="hero-logo-img hero-logo-symbol hero-logo-symbol--light"
+        aria-hidden="true"
+      >
+      <img
+        src="public/assets/Símbolo_Etecé_Blanco.svg"
+        alt=""
+        class="hero-logo-img hero-logo-symbol hero-logo-symbol--dark"
+        aria-hidden="true"
+      >
+    </span>
+  </a>
+
+  <!-- Transición final: expansión roja + apertura de paneles -->
+  <div id="brandTransition" class="brand-transition" aria-hidden="true">
+    <div class="brand-fill-surface" id="brandFillSurface"></div>
+    <div class="brand-panels" id="brandPanels">
+      <div class="brand-panel brand-panel-left"></div>
+      <div class="brand-panel brand-panel-right"></div>
+    </div>
+  </div>
+
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-stage">
+      <div class="preloader-logo-stack" aria-hidden="true">
+        <!-- Layer 1 — Black base logo. Single, undistorted Preloader_EtecéStudio.svg.
+             GSAP fades it in with a tiny vertical lift (opacity 0→1, y 12→0). -->
+        <div class="preloader-logo-layer preloader-logo-layer--black">
+          <img
+            class="preloader-logo-base"
+            src="public/assets/Preloader_EtecéStudio.svg"
+            alt="Etecé Studio"
+            width="540"
+            height="228"
+          />
+        </div>
+
+        <!-- Layer 2 — Coloured full logo. Single Preloader_EtecéStudio_Rojo.svg
+             (symbol red, ETECE black, STUDIO red — the official lockup).
+             Revealed left→right by the sweep via clip-path. -->
+        <div class="preloader-logo-layer preloader-logo-layer--color">
+          <img
+            class="preloader-logo-final"
+            src="public/assets/Preloader_EtecéStudio_Rojo.svg"
+            alt=""
+            aria-hidden="true"
+            width="540"
+            height="228"
+          />
+        </div>
+
+        <!-- Traveling red sweep band that paints the color reveal. -->
+        <span class="px-sweep" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+
+  <header class="text-nav" aria-label="Navegación de secciones">
+    <nav aria-label="Redes sociales">
+      <div class="nav-social-row" aria-label="Redes sociales">
+        <a class="nav-social-link" href="https://www.instagram.com/etece_studio/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <span class="nav-social-icon-stack" aria-hidden="true">
+            <img class="nav-social-icon nav-social-icon--png" src="public/assets/instagram.png" data-src-default="public/assets/instagram.png" data-src-on-red="public/assets/instagram_blanco.png" alt="">
+          </span>
+        </a>
+        <a class="nav-social-link" href="https://x.com/etecestudio" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <span class="nav-social-icon-slot nav-social-icon-slot--x">
+            <span class="nav-social-icon-stack" aria-hidden="true">
+              <img class="nav-social-icon nav-social-icon--png nav-social-icon--x-weight" src="public/assets/x-twitter.png" data-src-default="public/assets/x-twitter.png" data-src-on-red="public/assets/x-twitter-blanco.png" alt="">
+            </span>
+          </span>
+        </a>
+        <a class="nav-social-link" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <span class="nav-social-icon-stack" aria-hidden="true">
+            <img class="nav-social-icon nav-social-icon--png" src="public/assets/Linkedin.png" data-src-default="public/assets/Linkedin.png" data-src-on-red="public/assets/Linkedin_blanco.png" alt="">
+          </span>
+        </a>
+      </div>
+      <div class="nav-label-row">
+        <a href="#nosotros" data-nav="nosotros"><span class="nav-label-word">Nosotros</span></a>
+        <a href="#enfoque" data-nav="enfoque"><span class="nav-label-word">Enfoque</span></a>
+        <a href="#contacto" data-nav="contacto"><span class="nav-label-word">Contacto</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="narrative-flow">
+    <!-- Block 1 — Hero -->
+    <section class="landing-block landing-block--hero" data-theme="dark">
+      <div class="story-block hero" id="inicio" data-reveal>
+        <!-- Intro concept: kinetic ellipsis system. -->
+        <div id="brandIntro" class="brand-intro" aria-hidden="true">
+          <div class="brand-intro-inner">
+            <div class="brand-intro-main-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="brand-intro-grid" aria-hidden="true">
+              <div class="brand-intro-grid-row row-a">
+                <div class="brand-intro-grid-track">... ... ... ... ... ... ... ... ...</div>
+                <div class="brand-intro-grid-track" aria-hidden="true">... ... ... ... ... ... ... ... ...</div>
+              </div>
+              <div class="brand-intro-grid-row row-b">
+                <div class="brand-intro-grid-track">... ... ... ... ... ... ... ... ...</div>
+                <div class="brand-intro-grid-track" aria-hidden="true">... ... ... ... ... ... ... ... ...</div>
+              </div>
+              <div class="brand-intro-grid-row row-c">
+                <div class="brand-intro-grid-track">... ... ... ... ... ... ... ... ...</div>
+                <div class="brand-intro-grid-track" aria-hidden="true">... ... ... ... ... ... ... ... ...</div>
+              </div>
+              <div class="brand-intro-grid-row row-d">
+                <div class="brand-intro-grid-track">... ... ... ... ... ... ... ... ...</div>
+                <div class="brand-intro-grid-track" aria-hidden="true">... ... ... ... ... ... ... ... ...</div>
+              </div>
+              <div class="brand-intro-grid-row row-e">
+                <div class="brand-intro-grid-track">... ... ... ... ... ... ... ... ...</div>
+                <div class="brand-intro-grid-track" aria-hidden="true">... ... ... ... ... ... ... ... ...</div>
+              </div>
+            </div>
+            <div class="brand-intro-typo-dots" aria-hidden="true">
+              <div class="brand-typo-dot brand-typo-dot--a">
+                <div class="brand-typo-dot-track">MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO ·</div>
+                <div class="brand-typo-dot-track" aria-hidden="true">MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO ·</div>
+              </div>
+              <div class="brand-typo-dot brand-typo-dot--b">
+                <div class="brand-typo-dot-track">SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO ·</div>
+                <div class="brand-typo-dot-track" aria-hidden="true">SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO ·</div>
+              </div>
+              <div class="brand-typo-dot brand-typo-dot--c">
+                <div class="brand-typo-dot-track">MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA ·</div>
+                <div class="brand-typo-dot-track" aria-hidden="true">MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA · MOVIMIENTO · MENOS RUIDO · PROCESO · SISTEMA ·</div>
+              </div>
+            </div>
+            <div class="brand-intro-fragments" id="brandIntroFragments" aria-hidden="true"></div>
+            <p class="brand-intro-word" id="brandIntroWord" aria-live="polite"></p>
+          </div>
+        </div>
+        <!-- Image-sequence visual system (art-directed scenes filled by JS) -->
+        <div class="hero-sequence" aria-hidden="true">
+          <div class="hero-scene hero-scene-a">
+            <div class="hero-scene-fill"></div>
+            <div class="hero-scene-fragment hero-scene-fragment--left"></div>
+            <div class="hero-scene-fragment hero-scene-fragment--right"></div>
+            <div class="hero-scene-focus"></div>
+            <div class="hero-scene-frame" aria-hidden="true"></div>
+            <div class="hero-scene-duo" aria-hidden="true">
+              <img class="hero-scene-duo-img hero-scene-duo-img--a" alt="" decoding="async">
+              <img class="hero-scene-duo-img hero-scene-duo-img--b" alt="" decoding="async">
+            </div>
+            <div class="hero-scene-type" aria-hidden="true">
+              <div class="hero-scene-type-layer hero-scene-type-layer--a"></div>
+              <div class="hero-scene-type-layer hero-scene-type-layer--b"></div>
+              <div class="hero-scene-type-layer hero-scene-type-layer--c"></div>
+              <div class="hero-scene-type-stroke"></div>
+            </div>
+            <div class="hero-scene-statement" aria-hidden="true"></div>
+            <div class="hero-scene-closing" aria-hidden="true">
+              <span class="hero-scene-closing-dot"></span>
+              <span class="hero-scene-closing-dot"></span>
+              <span class="hero-scene-closing-dot"></span>
+            </div>
+            <img class="hero-scene-main" alt="" decoding="async">
+          </div>
+          <div class="hero-scene hero-scene-b">
+            <div class="hero-scene-fill"></div>
+            <div class="hero-scene-fragment hero-scene-fragment--left"></div>
+            <div class="hero-scene-fragment hero-scene-fragment--right"></div>
+            <div class="hero-scene-focus"></div>
+            <div class="hero-scene-frame" aria-hidden="true"></div>
+            <div class="hero-scene-duo" aria-hidden="true">
+              <img class="hero-scene-duo-img hero-scene-duo-img--a" alt="" decoding="async">
+              <img class="hero-scene-duo-img hero-scene-duo-img--b" alt="" decoding="async">
+            </div>
+            <div class="hero-scene-type" aria-hidden="true">
+              <div class="hero-scene-type-layer hero-scene-type-layer--a"></div>
+              <div class="hero-scene-type-layer hero-scene-type-layer--b"></div>
+              <div class="hero-scene-type-layer hero-scene-type-layer--c"></div>
+              <div class="hero-scene-type-stroke"></div>
+            </div>
+            <div class="hero-scene-statement" aria-hidden="true"></div>
+            <div class="hero-scene-closing" aria-hidden="true">
+              <span class="hero-scene-closing-dot"></span>
+              <span class="hero-scene-closing-dot"></span>
+              <span class="hero-scene-closing-dot"></span>
+            </div>
+            <img class="hero-scene-main" alt="" decoding="async">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 2 — Nosotros -->
+    <section class="landing-block landing-block--nosotros" id="nosotros" data-theme="red"></section>
+
+    <!-- Block 3 — Enfoque -->
+    <section class="landing-block landing-block--enfoque" id="enfoque" data-theme="dark"></section>
+
+    <!-- Block 4 — White content block -->
+    <section class="landing-block landing-block--contacto" id="contacto" data-theme="light"></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    (function () {
+      const NAV_SOCIAL_ICON_SELECTOR = ".text-nav nav .nav-social-icon--png[data-src-on-red]";
+
+      /** Swap nav social PNG `src` instantly: red section → _blanco, other sections → default. */
+      function applyNavSocialIconSources(isRedSection) {
+        document.querySelectorAll(NAV_SOCIAL_ICON_SELECTOR).forEach((img) => {
+          const next = isRedSection ? img.getAttribute("data-src-on-red") : img.getAttribute("data-src-default");
+          if (next && img.getAttribute("src") !== next) {
+            img.setAttribute("src", next);
+          }
+        });
+      }
+
+      function setupHeroLogoSwap() {
+        const heroSection = document.querySelector(".landing-block--hero");
+        const fullLogo = document.querySelector(".hero-logo-full");
+        const symbolLogo = document.querySelector(".hero-logo-symbol");
+        if (!heroSection || !fullLogo || !symbolLogo) return;
+
+        const applyHeroState = () => {
+          const rect = heroSection.getBoundingClientRect();
+          const heroVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+          document.body.classList.toggle("hero-past", !heroVisible);
+        };
+
+        const observer = new IntersectionObserver(
+          () => {
+            applyHeroState();
+          },
+          {
+            threshold: [0, 0.01],
+          }
+        );
+
+        let ticking = false;
+        const syncOnScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            ticking = false;
+            applyHeroState();
+          });
+        };
+
+        observer.observe(heroSection);
+        window.addEventListener("scroll", syncOnScroll, { passive: true });
+        window.addEventListener("resize", syncOnScroll);
+        applyHeroState();
+      }
+
+      async function setupHeroImageSequence() {
+        const sceneA = document.querySelector(".hero-scene-a");
+        const sceneB = document.querySelector(".hero-scene-b");
+        const hero = document.querySelector(".landing-block--hero");
+        if (!hero || !sceneA || !sceneB) return;
+        const body = document.body;
+        const intro = document.getElementById("brandIntro");
+        const introWord = document.getElementById("brandIntroWord");
+
+        const pad2 = (n) => String(n).padStart(2, "0");
+        const tryLoad = (src, timeoutMs = 450) =>
+          new Promise((resolve) => {
+            const img = new Image();
+            const t = window.setTimeout(() => resolve(false), timeoutMs);
+            img.decoding = "async";
+            img.onload = () => {
+              window.clearTimeout(t);
+              resolve(true);
+            };
+            img.onerror = () => {
+              window.clearTimeout(t);
+              resolve(false);
+            };
+            img.src = src;
+          });
+
+        const resolveFirstExisting = async (candidates) => {
+          for (const src of candidates) {
+            // eslint-disable-next-line no-await-in-loop
+            const ok = await tryLoad(src);
+            if (ok) return src;
+          }
+          return null;
+        };
+
+        const waitForSiteReveal = () =>
+          new Promise((resolve) => {
+            if (body.classList.contains("site-revealed")) {
+              resolve();
+              return;
+            }
+            const observer = new MutationObserver(() => {
+              if (!body.classList.contains("site-revealed")) return;
+              observer.disconnect();
+              resolve();
+            });
+            observer.observe(body, { attributes: true, attributeFilter: ["class"] });
+          });
+
+        const runBrandIntro = async () => {
+          if (!intro) return;
+          const mainDots = intro.querySelectorAll(".brand-intro-main-dots span");
+          if (!mainDots.length) return;
+          const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+          const SCENES = ["s01", "s02", "s03", "s04", "s05", "s06", "s07", "s08", "s09"];
+          const setScene = (sceneName) => {
+            intro.classList.remove(...SCENES);
+            if (sceneName) intro.classList.add(sceneName);
+          };
+
+          intro.classList.add("is-active");
+          intro.classList.remove("is-exiting", ...SCENES);
+          mainDots.forEach((dot) => dot.classList.remove("is-on"));
+
+          // Scene 01 (0.0 - 0.4)
+          setScene("s01");
+          await wait(400);
+
+          // Scene 02 (0.4 - 1.2)
+          mainDots.forEach((dot) => dot.classList.add("is-on"));
+          setScene("s02");
+          await wait(800);
+
+          // Scene 03 (1.2 - 2.0)
+          setScene("s03");
+          await wait(800);
+
+          // Scene 04 (2.0 - 3.0)
+          setScene("s04");
+          await wait(1000);
+
+          // Scene 05 (3.0 - 4.0)
+          setScene("s05");
+          await wait(1000);
+
+          // Scene 06 (4.0 - 4.9)
+          setScene("s06");
+          await wait(900);
+
+          // Scene 07 (4.9 - 5.7)
+          setScene("s07");
+          await wait(800);
+
+          // Scene 08 (5.7 - 6.5)
+          setScene("s08");
+          await wait(800);
+
+          // Scene 09 (6.5 - 7.3)
+          if (introWord) introWord.textContent = "ETECE STUDIO";
+          setScene("s09");
+          await wait(800);
+
+          intro.classList.add("is-exiting");
+          await wait(120);
+          intro.classList.remove("is-active", "is-exiting", ...SCENES);
+          mainDots.forEach((dot) => dot.classList.remove("is-on"));
+        };
+
+        await waitForSiteReveal();
+        await runBrandIntro();
+
+        const frameExts = ["png", "jpg", "jpeg", "webp", "avif", "jfif"];
+        const blockIds = ["Block01", "Block02", "Block03", "Block04", "Block05", "Block06"];
+        const statementPhrases = [
+          "NOS ENCARGAMOS DE TODO",
+          "DE TODO LO DEMAS...",
+          "TE IMPULSAMOS",
+          "MENOS RUIDO",
+          "EMPIEZA EVOLUCIONA ESCALA",
+        ];
+        const frames = [];
+        const HERO_FRAME_MS = 1760;
+        const PEAK_FRAME_MS = 3640;
+        const STATEMENT_MS = 3140;
+        const CLOSING_MS = 2800;
+        const CROSSFADE_MS = 920;
+        const STATEMENT_CROSSFADE_MS = 760;
+        const CLOSING_CROSSFADE_MS = 860;
+
+        const resolveHeroFrameFromBlock = async (blockId, frameNumber) => {
+          const candidates = frameExts.map((ext) => `/assets/${blockId}/hero${pad2(frameNumber)}.${ext}`);
+          return resolveFirstExisting(candidates);
+        };
+
+        const resolveNegroFromBlock = async (blockId, blockNumber) => {
+          const names = [`NEGRO${pad2(blockNumber)}`, `negro${pad2(blockNumber)}`, `NEGRO_${pad2(blockNumber)}`, `negro_${pad2(blockNumber)}`];
+          const candidates = [];
+          for (const name of names) {
+            for (const ext of frameExts) candidates.push(`/assets/${blockId}/${name}.${ext}`);
+          }
+          return resolveFirstExisting(candidates);
+        };
+
+        for (let blockIndex = 0; blockIndex < blockIds.length; blockIndex++) {
+          const blockId = blockIds[blockIndex];
+          const heroStart = blockIndex * 8;
+          const heroEnd = heroStart + 7;
+          for (let frameNumber = heroStart; frameNumber <= heroEnd; frameNumber++) {
+            // eslint-disable-next-line no-await-in-loop
+            const heroSrc = await resolveHeroFrameFromBlock(blockId, frameNumber);
+            if (heroSrc) {
+              const isPeak = frameNumber === heroEnd;
+              frames.push({
+                src: heroSrc,
+                ms: isPeak ? PEAK_FRAME_MS : HERO_FRAME_MS,
+                kind: isPeak ? "hero-peak" : "hero",
+                blockIndex,
+              });
+            }
+          }
+
+          if (blockIndex < statementPhrases.length) {
+            frames.push({
+              src: null,
+              ms: STATEMENT_MS,
+              kind: "statement",
+              blockIndex,
+              phrase: statementPhrases[blockIndex],
+            });
+          }
+        }
+        frames.push({
+          src: null,
+          ms: CLOSING_MS,
+          kind: "closing",
+          blockIndex: blockIds.length,
+        });
+
+        if (!frames.length) return;
+
+        const preloadImage = (src) =>
+          new Promise((resolve) => {
+            const img = new Image();
+            img.decoding = "async";
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = src;
+          });
+
+        const imageMetaCache = new Map();
+        const getFrameMeta = async (src) => {
+          if (imageMetaCache.has(src)) return imageMetaCache.get(src);
+          const p = new Promise((resolve) => {
+            const img = new Image();
+            img.decoding = "async";
+            img.onload = () => {
+              const canvas = document.createElement("canvas");
+              canvas.width = 24;
+              canvas.height = 24;
+              const ctx = canvas.getContext("2d", { willReadFrequently: true });
+              if (!ctx) {
+                resolve({
+                  isDark: false,
+                  aspectRatio: img.naturalWidth / Math.max(1, img.naturalHeight),
+                  dominantColor: { r: 18, g: 18, b: 18 },
+                });
+                return;
+              }
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+              let lum = 0;
+              let rSum = 0;
+              let gSum = 0;
+              let bSum = 0;
+              const pxCount = data.length / 4;
+              for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                lum += 0.2126 * r + 0.7152 * g + 0.0722 * b;
+                rSum += r;
+                gSum += g;
+                bSum += b;
+              }
+              const avgLum = lum / pxCount;
+              resolve({
+                isDark: avgLum < 62,
+                aspectRatio: img.naturalWidth / Math.max(1, img.naturalHeight),
+                dominantColor: {
+                  r: Math.round(rSum / pxCount),
+                  g: Math.round(gSum / pxCount),
+                  b: Math.round(bSum / pxCount),
+                },
+              });
+            };
+            img.onerror = () =>
+              resolve({
+                isDark: false,
+                aspectRatio: 16 / 9,
+                dominantColor: { r: 18, g: 18, b: 18 },
+              });
+            img.src = src;
+          });
+          imageMetaCache.set(src, p);
+          return p;
+        };
+
+        const setSceneImage = (
+          sceneEl,
+          src,
+          secondarySrc,
+          isStatement,
+          phrase,
+          isPeak,
+          isTypographic,
+          isReconstructed,
+          useTonalFit,
+          useDuo,
+          frameMeta,
+          blockIndex
+        ) => {
+          const fill = sceneEl.querySelector(".hero-scene-fill");
+          const fragLeft = sceneEl.querySelector(".hero-scene-fragment--left");
+          const fragRight = sceneEl.querySelector(".hero-scene-fragment--right");
+          const focus = sceneEl.querySelector(".hero-scene-focus");
+          const typeLayers = sceneEl.querySelectorAll(".hero-scene-type-layer");
+          const statement = sceneEl.querySelector(".hero-scene-statement");
+          const closing = sceneEl.querySelector(".hero-scene-closing");
+          const duoA = sceneEl.querySelector(".hero-scene-duo-img--a");
+          const duoB = sceneEl.querySelector(".hero-scene-duo-img--b");
+          const main = sceneEl.querySelector(".hero-scene-main");
+          if (!fill || !fragLeft || !fragRight || !focus || !main || !statement || !closing || !duoA || !duoB) return;
+
+          if (isStatement) {
+            const words = (phrase || "").split(/\s+/).filter(Boolean);
+            const isThreeWordLine = words.length === 3 && words.join(" ") === "EMPIEZA EVOLUCIONA ESCALA";
+            statement.classList.toggle("statement-single-line", isThreeWordLine);
+            statement.innerHTML = words
+              .map((word, index) => {
+                const accent = word === "TODO" || word === "RUIDO" || word === "EVOLUCIONA";
+                return `<span class="statement-word${accent ? " statement-word--accent" : ""}" style="--word-index:${index};">${word}</span>`;
+              })
+              .join("");
+          } else {
+            statement.classList.remove("statement-single-line");
+            statement.innerHTML = "";
+            const imageUrl = `url("${src}")`;
+            fragLeft.style.backgroundImage = imageUrl;
+            fragRight.style.backgroundImage = imageUrl;
+            focus.style.backgroundImage = imageUrl;
+            typeLayers.forEach((el) => {
+              el.style.backgroundImage = imageUrl;
+            });
+            main.src = src;
+            duoA.src = src;
+            duoB.src = secondarySrc || src;
+          }
+
+          const focalMap = [
+            { x: "52%", y: "46%" },
+            { x: "50%", y: "42%" },
+            { x: "48%", y: "50%" },
+            { x: "55%", y: "48%" },
+            { x: "47%", y: "44%" },
+            { x: "51%", y: "47%" },
+          ];
+          const focal = focalMap[blockIndex % focalMap.length];
+          sceneEl.style.setProperty("--peak-focus-x", focal.x);
+          sceneEl.style.setProperty("--peak-focus-y", focal.y);
+          sceneEl.style.setProperty("--left-crop-x", `${18 + (blockIndex % 3) * 8}%`);
+          sceneEl.style.setProperty("--right-crop-x", `${82 - (blockIndex % 3) * 7}%`);
+          sceneEl.classList.remove("motion-0", "motion-1", "motion-2");
+          sceneEl.classList.add(`motion-${blockIndex % 3}`);
+
+          const palette = [
+            { bgA: "#060606", bgB: "#111111", line: "rgba(255,255,255,0.08)" },
+            { bgA: "#05080d", bgB: "#151a20", line: "rgba(236,0,0,0.14)" },
+            { bgA: "#070707", bgB: "#191919", line: "rgba(255,255,255,0.07)" },
+            { bgA: "#05070a", bgB: "#12161c", line: "rgba(236,0,0,0.12)" },
+            { bgA: "#060606", bgB: "#171717", line: "rgba(255,255,255,0.09)" },
+            { bgA: "#040608", bgB: "#141920", line: "rgba(236,0,0,0.1)" },
+          ];
+          const tone = palette[blockIndex % palette.length];
+          fill.style.setProperty("--scene-bg-a", tone.bgA);
+          fill.style.setProperty("--scene-bg-b", tone.bgB);
+          fill.style.setProperty("--scene-line", tone.line);
+          if (frameMeta && frameMeta.dominantColor) {
+            const { r, g, b } = frameMeta.dominantColor;
+            fill.style.setProperty("--tone-bg", `rgb(${r}, ${g}, ${b})`);
+            fill.style.setProperty("--tone-bg-deep", `rgb(${Math.max(0, r - 18)}, ${Math.max(0, g - 18)}, ${Math.max(0, b - 18)})`);
+          }
+
+          sceneEl.classList.toggle("is-statement", isStatement);
+          sceneEl.classList.toggle("is-closing", phrase === "__CLOSING__");
+          sceneEl.classList.toggle("is-peak", isPeak);
+          sceneEl.classList.toggle("is-reconstructed", isReconstructed);
+          sceneEl.classList.toggle("is-tonal-fit", useTonalFit);
+          sceneEl.classList.toggle("is-duo", useDuo);
+          sceneEl.classList.remove("is-typographic");
+          sceneEl.classList.remove("statement-animate");
+          sceneEl.classList.remove("closing-animate");
+          if (isStatement) {
+            void sceneEl.offsetWidth;
+            sceneEl.classList.add("statement-animate");
+          }
+          if (phrase === "__CLOSING__") {
+            void sceneEl.offsetWidth;
+            sceneEl.classList.add("closing-animate");
+          }
+          if (isTypographic) {
+            // Restart reveal animation every time this designed typographic key visual appears.
+            void sceneEl.offsetWidth;
+            sceneEl.classList.add("is-typographic");
+          }
+        };
+
+        // Crossfaded scene composer: each frame is rebuilt as an art-directed layered scene.
+        let current = sceneA;
+        let next = sceneB;
+        current.style.opacity = "0";
+        current.style.visibility = "hidden";
+        next.style.opacity = "0";
+        next.style.visibility = "hidden";
+        current.style.transitionDuration = `${CROSSFADE_MS}ms`;
+        next.style.transitionDuration = `${CROSSFADE_MS}ms`;
+
+        const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+        let frameIndex = 0;
+        let nextPreloadedSrc = null;
+
+        while (true) {
+          const step = frames[frameIndex];
+          const upcoming = frames[(frameIndex + 1) % frames.length];
+          const target = next;
+          const previous = current;
+          const previousWasStatement = previous.classList.contains("is-statement");
+          const isStatement = step.kind === "statement";
+          const isClosing = step.kind === "closing";
+          const isPeak = step.kind === "hero-peak";
+          let isReconstructed = false;
+          let isTypographic = false;
+          let useTonalFit = false;
+          let useDuo = false;
+          let frameMeta = null;
+          if (!isStatement && !isClosing) {
+            // Analyze frame once to decide selective treatment.
+            // eslint-disable-next-line no-await-in-loop
+            const meta = await getFrameMeta(step.src);
+            frameMeta = meta;
+            const viewportAspect = window.innerWidth / Math.max(1, window.innerHeight);
+            const aspectDelta = Math.abs(meta.aspectRatio - viewportAspect);
+            isReconstructed = isPeak || aspectDelta > 0.2;
+            useTonalFit = aspectDelta > 0.2;
+            useDuo = false;
+            // Typographic activation only for dark peak frames where words usually sit on black.
+            isTypographic = isPeak && meta.isDark;
+          }
+          const activeCrossfadeMs = isClosing ? CLOSING_CROSSFADE_MS : isStatement ? STATEMENT_CROSSFADE_MS : CROSSFADE_MS;
+          const activeOverlapHideMs = activeCrossfadeMs + 150;
+
+          if (!isStatement && !isClosing && (!nextPreloadedSrc || nextPreloadedSrc !== step.src)) {
+            // eslint-disable-next-line no-await-in-loop
+            const ok = await preloadImage(step.src);
+            if (!ok) {
+              frameIndex = (frameIndex + 1) % frames.length;
+              // eslint-disable-next-line no-continue
+              continue;
+            }
+          }
+
+          setSceneImage(
+            target,
+            step.src,
+            upcoming.src || null,
+            isStatement || isClosing,
+            isClosing ? "__CLOSING__" : step.phrase || "",
+            isPeak,
+            isTypographic,
+            isReconstructed,
+            useTonalFit,
+            useDuo,
+            frameMeta,
+            step.blockIndex || 0
+          );
+
+          // Transition choreography for black-screen statements:
+          // outgoing scene softens into black; incoming scene blooms out of black.
+          previous.classList.toggle("to-black-transition", isStatement);
+          target.classList.toggle("from-black-transition", previousWasStatement && !isStatement);
+
+          target.style.visibility = "visible";
+          target.style.transitionDuration = `${activeCrossfadeMs}ms`;
+          previous.style.transitionDuration = `${activeCrossfadeMs}ms`;
+          target.style.opacity = "1";
+          previous.style.opacity = "0";
+
+          const preloadPromise =
+            upcoming.kind === "statement" || upcoming.kind === "closing"
+              ? Promise.resolve()
+              : preloadImage(upcoming.src).then((ok) => {
+                  nextPreloadedSrc = ok ? upcoming.src : null;
+                });
+
+          const outgoingEl = previous;
+          window.setTimeout(() => {
+            // Hide after crossfade so both layers overlap naturally.
+            outgoingEl.style.visibility = "hidden";
+            outgoingEl.classList.remove("to-black-transition", "from-black-transition");
+          }, activeOverlapHideMs);
+
+          current = target;
+          next = current === sceneA ? sceneB : sceneA;
+          frameIndex = (frameIndex + 1) % frames.length;
+
+          // Wait for frame beat while preloading next frame in parallel.
+          // eslint-disable-next-line no-await-in-loop
+          await Promise.all([wait(step.ms), preloadPromise]);
+          if (isClosing) break;
+        }
+      }
+
+      function setupContrastNav() {
+        const body = document.body;
+        const nav = document.querySelector(".text-nav nav");
+        const heroLogo = document.querySelector(".hero-logo-swap");
+        const trackedBlocks = Array.from(
+          document.querySelectorAll(".landing-block--nosotros, .landing-block--enfoque, .landing-block--contacto")
+        );
+        const themedSections = Array.from(document.querySelectorAll(".landing-block[data-theme]"));
+
+        if (window.gsap && window.ScrollTrigger) {
+          window.gsap.registerPlugin(window.ScrollTrigger);
+        }
+
+        const links = Array.from(document.querySelectorAll(".text-nav a[data-nav]"));
+        const NAV_THEME_COLORS = {
+          dark: { label: "#ffffff", dot: "#EC0000" },
+          red: { label: "#ffffff", dot: "#000000" },
+          light: { label: "#000000", dot: "#EC0000" },
+        };
+
+        let lastNavTheme = null;
+
+        function applyNavThemeColors(theme) {
+          const g = window.gsap;
+          if (!g) return;
+          const safe = NAV_THEME_COLORS[theme] ? theme : "dark";
+          const { label, dot } = NAV_THEME_COLORS[safe];
+          if (lastNavTheme === safe) return;
+          lastNavTheme = safe;
+          body.setAttribute("data-nav-theme", safe);
+
+          const labelEls = g.utils.toArray(".text-nav nav a[data-nav]");
+          const dotEls = g.utils.toArray(".text-nav nav .nav-label-ellipsis-dot");
+          /* Color-only tweens: overwrite "auto" affects same props only — does not remove ellipsis motion (opacity / x) */
+          const colorTweenOpts = { duration: 0.28, ease: "power2.out", overwrite: "auto" };
+
+          g.to(labelEls, {
+            ...colorTweenOpts,
+            color: label,
+            webkitTextFillColor: label,
+          });
+          if (dotEls.length) {
+            g.to(dotEls, {
+              ...colorTweenOpts,
+              backgroundColor: dot,
+            });
+          }
+          applyNavSocialIconSources(safe === "red");
+        }
+
+        const getActiveBlockByViewportY = (y) => {
+          for (const block of trackedBlocks) {
+            const rect = block.getBoundingClientRect();
+            if (rect.top <= y && rect.bottom > y) return block;
+          }
+          return null;
+        };
+
+        const getCurrentBlock = () => {
+          const viewportTop = window.scrollY;
+          const viewportBottom = viewportTop + window.innerHeight;
+          let activeBlock = null;
+          let maxOverlap = -1;
+
+          for (const block of trackedBlocks) {
+            const top = block.offsetTop;
+            const bottom = top + block.offsetHeight;
+            const overlap = Math.max(0, Math.min(viewportBottom, bottom) - Math.max(viewportTop, top));
+            if (overlap > maxOverlap) {
+              maxOverlap = overlap;
+              activeBlock = block;
+            }
+          }
+
+          if (maxOverlap <= 0) return null;
+          return activeBlock;
+        };
+
+        const getDominantThemedSection = () => {
+          if (!themedSections.length) return null;
+          const viewportTop = window.scrollY;
+          const viewportBottom = viewportTop + window.innerHeight;
+          const vMid = (viewportTop + viewportBottom) / 2;
+          let best = null;
+          let bestOverlap = -1;
+          let bestDist = Infinity;
+          for (const section of themedSections) {
+            const top = section.offsetTop;
+            const bottom = top + section.offsetHeight;
+            const overlap = Math.max(0, Math.min(viewportBottom, bottom) - Math.max(viewportTop, top));
+            if (overlap <= 0) continue;
+            const sectionMid = (top + bottom) / 2;
+            const dist = Math.abs(sectionMid - vMid);
+            if (overlap > bestOverlap || (overlap === bestOverlap && dist < bestDist)) {
+              bestOverlap = overlap;
+              bestDist = dist;
+              best = section;
+            }
+          }
+          return best;
+        };
+
+        const getBlockUnderPoint = (x, y) => {
+          const el = document.elementFromPoint(x, y);
+          if (!el) return null;
+          const block = el.closest(".landing-block--nosotros, .landing-block--enfoque, .landing-block--contacto");
+          return block || getActiveBlockByViewportY(y);
+        };
+
+        const parseRgb = (value) => {
+          const m = value && value.match(/\d+/g);
+          if (!m || m.length < 3) return null;
+          return [Number(m[0]), Number(m[1]), Number(m[2])];
+        };
+
+        const isDarkBackground = (el) => {
+          if (!el) return false;
+          const bg = window.getComputedStyle(el).backgroundColor;
+          const rgb = parseRgb(bg);
+          if (!rgb) return false;
+          const [r, g, b] = rgb;
+          const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+          return luminance < 0.45;
+        };
+
+        const setContrastStateAtPoint = (x, y) => {
+          const block = getBlockUnderPoint(x, y);
+          const darkSurface = isDarkBackground(block);
+          body.classList.toggle("logo-dark", darkSurface);
+          body.classList.toggle("on-dark-bg", darkSurface);
+          body.classList.toggle("on-light-bg", !darkSurface);
+        };
+
+        const apply = () => {
+          if (!nav) return;
+
+          const logoRect = heroLogo ? heroLogo.getBoundingClientRect() : null;
+          const logoX = logoRect ? logoRect.left + logoRect.width / 2 : window.innerWidth / 2;
+          const logoY = logoRect ? logoRect.top + logoRect.height / 2 : window.innerHeight / 2;
+
+          const currentBlock = getCurrentBlock();
+          const activeId = currentBlock ? currentBlock.id || null : null;
+
+          body.setAttribute("data-nav-section", activeId || "none");
+          body.classList.toggle("section-nosotros", activeId === "nosotros");
+          body.classList.toggle("section-enfoque", activeId === "enfoque");
+          body.classList.toggle("section-contacto", activeId === "contacto");
+          links.forEach((a) => a.classList.toggle("is-active", activeId && a.dataset.nav === activeId));
+
+          const dominantThemed = getDominantThemedSection();
+          const rawTheme = dominantThemed && dominantThemed.getAttribute("data-theme");
+          const navTheme =
+            rawTheme === "red" || rawTheme === "light" || rawTheme === "dark" ? rawTheme : "dark";
+          applyNavThemeColors(navTheme);
+
+          setContrastStateAtPoint(logoX, logoY);
+        };
+
+        let ticking = false;
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            ticking = false;
+            apply();
+          });
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        apply();
+      }
+
+      function setupNavSocialHoverGsap() {
+        if (!window.gsap) return;
+        const isTouchLike = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+        const labelLinks = Array.from(document.querySelectorAll(".text-nav a[data-nav]"));
+        const iconLinks = Array.from(document.querySelectorAll(".text-nav .nav-social-link"));
+        if (!iconLinks.length || !labelLinks.length) return;
+
+        gsap.set(labelLinks, { y: 0, letterSpacing: "0.14em" });
+        gsap.set(iconLinks, { x: 0, y: 0, scale: 1, rotate: 0, opacity: 1 });
+
+        labelLinks.forEach((labelLink) => {
+          if (typeof labelLink._navHoverCleanup === "function") {
+            labelLink._navHoverCleanup();
+            labelLink._navHoverCleanup = null;
+          }
+
+          const wordSpan =
+            labelLink.querySelector(".nav-label-word") ||
+            (() => {
+              const ws = document.createElement("span");
+              ws.className = "nav-label-word";
+              while (labelLink.firstChild) {
+                ws.appendChild(labelLink.firstChild);
+              }
+              labelLink.appendChild(ws);
+              return ws;
+            })();
+
+          let ellipsis = wordSpan.querySelector(".nav-label-ellipsis");
+          if (!ellipsis) {
+            ellipsis = labelLink.querySelector(".nav-label-ellipsis");
+            if (ellipsis && ellipsis.parentElement !== wordSpan) {
+              wordSpan.appendChild(ellipsis);
+            }
+          }
+          if (!ellipsis) {
+            ellipsis = document.createElement("span");
+            ellipsis.className = "nav-label-ellipsis";
+            ellipsis.setAttribute("aria-hidden", "true");
+            const dotA = document.createElement("span");
+            const dotB = document.createElement("span");
+            const dotC = document.createElement("span");
+            dotA.className = "nav-label-ellipsis-dot";
+            dotB.className = "nav-label-ellipsis-dot";
+            dotC.className = "nav-label-ellipsis-dot";
+            ellipsis.append(dotA, dotB, dotC);
+            wordSpan.appendChild(ellipsis);
+          }
+
+          const dots = Array.from(ellipsis.querySelectorAll(".nav-label-ellipsis-dot"));
+
+          function timingForViewport() {
+            return window.matchMedia("(max-width: 767px)").matches
+              ? { duration: 0.4, stagger: 0.038 }
+              : window.matchMedia("(max-width: 1024px)").matches
+                ? { duration: 0.44, stagger: 0.044 }
+                : { duration: 0.5, stagger: 0.052 };
+          }
+
+          /** Track width = word span only (ellipsis lives inside it so 100% width matches letters). */
+          function measureEllipsisXs() {
+            const w = Math.max(0, wordSpan.getBoundingClientRect().width);
+            const d = dots[0] ? dots[0].getBoundingClientRect().width || 5.5 : 5.5;
+            const pad = 1.5;
+            const maxLeft = Math.max(0, w - d - pad);
+            let g = Math.min(5, Math.max(0, (w - 3 * d - 2 * pad) / 2));
+            let endX2 = maxLeft;
+            let endX1 = endX2 - d - g;
+            let endX0 = endX1 - d - g;
+            while (endX0 < pad && g > 0.25) {
+              g -= 0.25;
+              endX1 = endX2 - d - g;
+              endX0 = endX1 - d - g;
+            }
+            if (endX0 < pad) endX0 = pad;
+            if (endX1 < endX0) endX1 = endX0;
+            if (endX2 < endX1) endX2 = endX1;
+            const cluster = Math.min(2.5, Math.max(1, d * 0.4));
+            let startX0 = pad;
+            let startX1 = pad + cluster;
+            let startX2 = pad + cluster * 2;
+            const clampLeft = (x) => Math.min(Math.max(0, x), maxLeft);
+            startX0 = clampLeft(startX0);
+            startX1 = clampLeft(startX1);
+            startX2 = clampLeft(startX2);
+            endX0 = clampLeft(endX0);
+            endX1 = clampLeft(endX1);
+            endX2 = clampLeft(endX2);
+            return {
+              startXs: [startX0, startX1, startX2],
+              endXs: [endX0, endX1, endX2],
+            };
+          }
+
+          let tl = null;
+          let resizeObserver = null;
+          let ellipsisResizeTick = null;
+
+          function rebuildEllipsisTimeline() {
+            const timing = timingForViewport();
+            const { startXs, endXs } = measureEllipsisXs();
+            if (tl) {
+              tl.kill();
+              tl = null;
+            }
+            gsap.killTweensOf(dots, "opacity,x");
+            gsap.set(ellipsis, { opacity: 1, x: 0, y: 0 });
+            gsap.set(dots, { opacity: 0, x: (i) => startXs[i] || 0 });
+            tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+            tl.to(
+              dots,
+              {
+                opacity: 1,
+                x: (i) => endXs[i] || 0,
+                duration: timing.duration,
+                stagger: timing.stagger,
+              },
+              0
+            );
+            return timing;
+          }
+
+          let timing = rebuildEllipsisTimeline();
+
+          const play = () => {
+            timing = rebuildEllipsisTimeline();
+            tl.play(0);
+          };
+          const reverse = () => {
+            if (tl) tl.reverse();
+          };
+          let touchReset = null;
+          const tapPreview = () => {
+            play();
+            if (touchReset) touchReset.kill();
+            const hold = timing.duration + timing.stagger * (dots.length - 1) + 0.22;
+            touchReset = gsap.delayedCall(hold, reverse);
+          };
+          labelLink.addEventListener("mouseenter", play);
+          labelLink.addEventListener("mouseleave", reverse);
+          labelLink.addEventListener("focus", play);
+          labelLink.addEventListener("blur", reverse);
+          if (isTouchLike) {
+            labelLink.addEventListener("touchstart", tapPreview, { passive: true });
+          }
+
+          function onLabelEllipsisResize() {
+            if (ellipsisResizeTick) ellipsisResizeTick.kill();
+            ellipsisResizeTick = gsap.delayedCall(0.08, () => {
+              ellipsisResizeTick = null;
+              const hovering =
+                labelLink.matches(":hover") || document.activeElement === labelLink;
+              timing = rebuildEllipsisTimeline();
+              if (hovering && tl) {
+                tl.progress(1, false);
+              } else if (tl) {
+                tl.pause(0);
+              }
+            });
+          }
+
+          if (typeof ResizeObserver !== "undefined") {
+            resizeObserver = new ResizeObserver(onLabelEllipsisResize);
+            resizeObserver.observe(wordSpan);
+          }
+
+          requestAnimationFrame(() => {
+            timing = rebuildEllipsisTimeline();
+          });
+
+          labelLink._navHoverCleanup = () => {
+            labelLink.removeEventListener("mouseenter", play);
+            labelLink.removeEventListener("mouseleave", reverse);
+            labelLink.removeEventListener("focus", play);
+            labelLink.removeEventListener("blur", reverse);
+            if (isTouchLike) {
+              labelLink.removeEventListener("touchstart", tapPreview);
+            }
+            if (resizeObserver) {
+              resizeObserver.disconnect();
+              resizeObserver = null;
+            }
+            if (ellipsisResizeTick) {
+              ellipsisResizeTick.kill();
+              ellipsisResizeTick = null;
+            }
+            if (touchReset) touchReset.kill();
+            if (tl) {
+              tl.kill();
+              tl = null;
+            }
+          };
+        });
+
+        iconLinks.forEach((iconLink) => {
+          if (typeof iconLink._navIconHoverCleanup === "function") {
+            iconLink._navIconHoverCleanup();
+            iconLink._navIconHoverCleanup = null;
+          }
+
+          const baseIcon = iconLink.querySelector(".nav-social-icon--png");
+          if (!baseIcon) {
+            iconLink._navIconHoverCleanup = () => {};
+            return;
+          }
+
+          const iconSlot = iconLink.querySelector(".nav-social-icon-slot");
+          let redrawIcon = null;
+
+          function mountRedrawFromVisualSource() {
+            if (redrawIcon && redrawIcon.parentNode) {
+              redrawIcon.remove();
+            }
+            redrawIcon = baseIcon.cloneNode(true);
+            redrawIcon.classList.add("nav-social-redraw");
+            redrawIcon.setAttribute("aria-hidden", "true");
+            (iconSlot || iconLink).append(redrawIcon);
+          }
+
+          mountRedrawFromVisualSource();
+          if (iconSlot && redrawIcon && redrawIcon.parentElement !== iconSlot) {
+            iconSlot.append(redrawIcon);
+          }
+
+          let redrawTl = null;
+          let socialHoverGen = 0;
+
+          function killAndResetSocialIcon() {
+            socialHoverGen += 1;
+            if (redrawTl) {
+              redrawTl.kill();
+              redrawTl = null;
+            }
+            const killTargets = [baseIcon, iconLink].concat(redrawIcon ? [redrawIcon] : []);
+            gsap.killTweensOf(killTargets);
+            gsap.set(baseIcon, { clearProps: "opacity,transform,clipPath,webkitClipPath" });
+            if (redrawIcon) {
+              gsap.set(redrawIcon, {
+                clearProps: "opacity,transform,clipPath,webkitClipPath",
+              });
+            }
+            gsap.set(iconLink, { clearProps: "opacity,transform" });
+            applyNavSocialIconSources(document.body.getAttribute("data-nav-theme") === "red");
+            gsap.set(baseIcon, { opacity: 1, scale: 1, x: 0, y: 0, immediateRender: true });
+            if (redrawIcon) {
+              gsap.set(redrawIcon, {
+                opacity: 0,
+                scale: 1,
+                x: 0,
+                y: 0,
+                clipPath: "inset(0 100% 0 0)",
+                immediateRender: true,
+              });
+            }
+            gsap.set(iconLink, { opacity: 1, scale: 1, x: 0, y: 0, immediateRender: true });
+          }
+
+          function playRedraw() {
+            killAndResetSocialIcon();
+            mountRedrawFromVisualSource();
+            const gen = socialHoverGen;
+
+            redrawTl = gsap.timeline({
+              defaults: { ease: "power2.out" },
+              onComplete: () => {
+                if (gen !== socialHoverGen) return;
+                const endTargets = [baseIcon].concat(redrawIcon ? [redrawIcon] : []);
+                gsap.killTweensOf(endTargets);
+                applyNavSocialIconSources(document.body.getAttribute("data-nav-theme") === "red");
+                gsap.set(baseIcon, { opacity: 1, immediateRender: true });
+                if (redrawIcon) {
+                  gsap.set(redrawIcon, {
+                    opacity: 0,
+                    clipPath: "inset(0 100% 0 0)",
+                    immediateRender: true,
+                  });
+                }
+                redrawTl = null;
+              },
+            });
+
+            redrawTl
+              .to(baseIcon, { opacity: 0, duration: 0.07, ease: "power1.out" }, 0)
+              .to(redrawIcon, { opacity: 1, duration: 0.01, ease: "none" }, 0.06)
+              .to(redrawIcon, { clipPath: "inset(0 0% 0 0)", duration: 0.24 }, 0.07)
+              .to(baseIcon, { opacity: 1, duration: 0.11 }, 0.23)
+              .to(redrawIcon, { opacity: 0, duration: 0.09 }, 0.31);
+          }
+
+          killAndResetSocialIcon();
+
+          let touchReset = null;
+          const tapPreview = () => {
+            playRedraw();
+            if (touchReset) touchReset.kill();
+            touchReset = gsap.delayedCall(0.52, killAndResetSocialIcon);
+          };
+
+          iconLink.addEventListener("mouseenter", playRedraw);
+          iconLink.addEventListener("mouseleave", killAndResetSocialIcon);
+          iconLink.addEventListener("focus", playRedraw);
+          iconLink.addEventListener("blur", killAndResetSocialIcon);
+          if (isTouchLike) {
+            iconLink.addEventListener("touchstart", tapPreview, { passive: true });
+          }
+
+          iconLink._navIconHoverCleanup = () => {
+            iconLink.removeEventListener("mouseenter", playRedraw);
+            iconLink.removeEventListener("mouseleave", killAndResetSocialIcon);
+            iconLink.removeEventListener("focus", playRedraw);
+            iconLink.removeEventListener("blur", killAndResetSocialIcon);
+            if (isTouchLike) {
+              iconLink.removeEventListener("touchstart", tapPreview);
+            }
+            if (touchReset) touchReset.kill();
+            killAndResetSocialIcon();
+            if (redrawIcon && redrawIcon.parentNode) {
+              redrawIcon.remove();
+            }
+            redrawIcon = null;
+          };
+        });
+      }
+
+      /** Scroll imagotype only (scroll state): smooth scroll to hero (#inicio). */
+      function setupScrollImagotypeToHero() {
+        const imgs = document.querySelectorAll(".site-brand .hero-logo-symbol");
+        const heroEl = document.getElementById("inicio");
+        if (!imgs.length) return;
+        imgs.forEach((img) => {
+          img.addEventListener("click", (e) => {
+            if (!document.body.classList.contains("hero-past")) return;
+            e.preventDefault();
+            e.stopPropagation();
+            if (heroEl) {
+              heroEl.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          });
+        });
+      }
+
+      window.addEventListener("load", () => {
+        setupHeroLogoSwap();
+        setupHeroImageSequence();
+        setupNavSocialHoverGsap();
+        setupContrastNav();
+        setupScrollImagotypeToHero();
+      });
+    })();
+  </script>
+
+  <footer class="site-footer">
+    <p>Etecé Studio</p>
+    <p>Branding & Comunicación Visual</p>
+  </footer>
+
+  <script src="script.js?v=horizontal-reveal-2026-05-26"></script>
+</body>
+</html>

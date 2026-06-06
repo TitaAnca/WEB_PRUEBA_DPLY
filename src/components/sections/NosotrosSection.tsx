@@ -1,0 +1,241 @@
+"use client";
+
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import styles from "./NosotrosSection.module.css";
+
+export function NosotrosSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useGSAP(
+    () => {
+      const root = sectionRef.current;
+      if (!root) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        { motionOK: "(prefers-reduced-motion: no-preference)" },
+        (context) => {
+          if (!context.conditions?.motionOK) return;
+
+          const q = gsap.utils.selector(root);
+          const ease = "power3.out";
+
+          const visual = q(`.${styles.visualFrame}`);
+          if (visual.length) {
+            gsap.from(visual, {
+              y: 34,
+              opacity: 0,
+              duration: 1,
+              ease,
+              clearProps: "transform,opacity",
+              scrollTrigger: { trigger: root, start: "top 82%" },
+            });
+          }
+
+          const titleLines = q(`.${styles.titleLine}`);
+          if (titleLines.length) {
+            gsap.from(titleLines, {
+              yPercent: 110,
+              opacity: 0,
+              duration: 0.85,
+              ease,
+              stagger: 0.08,
+              scrollTrigger: { trigger: root, start: "top 80%" },
+            });
+          }
+
+          const copy = q(`.${styles.copy}`);
+          if (copy.length) {
+            gsap.from(copy, {
+              y: 22,
+              opacity: 0,
+              duration: 0.7,
+              ease,
+              scrollTrigger: { trigger: copy[0], start: "top 90%" },
+            });
+          }
+
+          const blackWord = q(`.${styles.blackWord}`);
+          if (blackWord.length) {
+            gsap.from(blackWord, {
+              opacity: 0,
+              x: 48,
+              duration: 1.1,
+              ease,
+              scrollTrigger: { trigger: q(`.${styles.sheetBottom}`)[0], start: "top 88%" },
+            });
+          }
+
+          const closingLines = q(`.${styles.closingLine}`);
+          if (closingLines.length) {
+            gsap.from(closingLines, {
+              y: 34,
+              opacity: 0,
+              duration: 0.85,
+              ease,
+              stagger: 0.12,
+              scrollTrigger: {
+                trigger: q(`.${styles.closing}`)[0],
+                start: "top 90%",
+              },
+            });
+          }
+
+          // Hilo rojo · acento sutil: se "dibuja" el subrayado curvo bajo el
+          // título (no cruza texto ni entra en la banda negra).
+          const accentPaths = q(`.${styles.threadAccent} path`);
+          if (accentPaths.length) {
+            const main = accentPaths[0] as unknown as SVGPathElement;
+            const len = main.getTotalLength();
+            gsap.set(accentPaths, { strokeDasharray: len, strokeDashoffset: len });
+            gsap.to(accentPaths, {
+              strokeDashoffset: 0,
+              duration: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: q(`.${styles.title}`)[0] ?? root,
+                start: "top 82%",
+              },
+            });
+          }
+
+          const dots = q(`.${styles.dots} span`);
+          if (dots.length) {
+            gsap.from(dots, {
+              scale: 0,
+              opacity: 0,
+              duration: 0.5,
+              ease,
+              stagger: 0.12,
+              scrollTrigger: {
+                trigger: q(`.${styles.dots}`)[0],
+                start: "top 96%",
+              },
+            });
+          }
+        },
+      );
+    },
+    { scope: sectionRef },
+  );
+
+  return (
+    <section
+      ref={sectionRef}
+      id="nosotros"
+      data-theme="red"
+      className={`landing-block landing-block--nosotros ${styles.section}`}
+      aria-label="Nosotros"
+    >
+      {/* Hoja editorial diseñada: zona superior clara + zona inferior negra
+          dominante con gráfico de contorno blanco derivado de la identidad. */}
+      <div className={styles.sheet}>
+        {/* ─── ZONA SUPERIOR CLARA ─────────────────────────────── */}
+        <div className={styles.sheetTop}>
+          {/* Palabras fantasma atmosféricas: HILO (negro tenue, arriba) y ROJO
+              (rojo tenue, junto a la ruta del hilo). Estructura, no titulares. */}
+          <span className={styles.ghost} aria-hidden="true">
+            Hilo
+          </span>
+          <span className={styles.ghostRojo} aria-hidden="true">
+            Rojo
+          </span>
+
+          <p className={styles.meta}>
+            Etecé Studio / Branding &amp; Comunicación Visual
+          </p>
+
+          <div className={styles.grid}>
+            <div className={styles.visual}>
+              <div className={styles.visualFrame}>
+                <img
+                  src="/assets/Studio.png"
+                  alt=""
+                  className={styles.visualImg}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            <div className={styles.editorial}>
+              <h2 className={styles.title}>
+                <span className={styles.titleLine}>ETECÉ ES LA FILOSOFÍA</span>
+                <span className={styles.titleLine}>DE HACER QUE</span>
+                <span className={styles.titleLine}>TODO LO DEMÁS IMPORTE.</span>
+              </h2>
+
+              {/* Hilo rojo · acento editorial: subrayado corto, orgánico y con
+                  relieve (sombra + filo de luz) justo bajo "ROJO.". El concepto
+                  "hilo rojo" como detalle controlado, sin cruzar la sección. */}
+              <div className={styles.threadAccent} aria-hidden="true">
+                <svg
+                  viewBox="0 0 220 36"
+                  preserveAspectRatio="none"
+                  focusable="false"
+                >
+                  <path
+                    className={styles.accentShadow}
+                    d="M6 20 C45 16 78 22 112 18 C145 15 172 16 208 12"
+                  />
+                  <path
+                    className={styles.accentMain}
+                    d="M6 20 C45 16 78 22 112 18 C145 15 172 16 208 12"
+                  />
+                  <path
+                    className={styles.accentHighlight}
+                    d="M6 19 C45 15 78 21 112 17 C145 14 172 15 208 11"
+                  />
+                </svg>
+              </div>
+
+              <div className={styles.copy}>
+                <p className={styles.copyText}>
+                  El &ldquo;etcétera&rdquo; no es lo que queda al final. Es todo
+                  lo que hace que una marca tenga sentido cuando sale al mundo: la
+                  forma en la que habla, se ordena, se reconoce y consigue que
+                  cada detalle parezca parte de la misma idea.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── ZONA INFERIOR NEGRA DOMINANTE ───────────────────── */}
+        <div className={styles.sheetBottom}>
+          {/* Tipografía fantasma editorial: "ETECÉ" gigante, recortada, como
+              capa gráfica de fondo (ligada a la filosofía de la sección). */}
+          <span className={styles.blackWord} aria-hidden="true">
+            Etecé
+          </span>
+
+          <div className={styles.closing}>
+            <p className={styles.closingFirst}>
+              <span className={styles.closingLine}>Lo importante</span>
+              <span className={styles.closingLine}>es lo que tú haces.</span>
+            </p>
+
+            <p className={styles.closingSecond}>
+              <span className={styles.closingLine}>
+                El <strong className={styles.red}>etecé</strong>
+              </span>
+              <span className={styles.closingLine}>es cosa nuestra.</span>
+            </p>
+
+            <div className={styles.dots} aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

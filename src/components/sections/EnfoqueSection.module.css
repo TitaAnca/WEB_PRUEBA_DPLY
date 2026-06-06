@@ -1,0 +1,477 @@
+/* ============================================================
+   ETECÉ · Enfoque — editorial, foto de proceso + paneles
+   "No empieza en el diseño. Empieza en decisiones."
+   Negro texturizado · rojo #ec0000 · blanco #ffffff
+   ============================================================ */
+
+.enfoque {
+  --ec-black: #000000;
+  --ec-white: #ffffff;
+  --ec-red: #ec0000;
+  --ec-muted: rgba(255, 255, 255, 0.68);
+  --ec-line: rgba(255, 255, 255, 0.14);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: relative;
+  width: 100%;
+  color: var(--ec-white);
+  background: var(--ec-black);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.enfoque:global(.landing-block--enfoque) {
+  height: auto;
+  min-height: 100svh;
+  max-height: none;
+  padding-block: 0;
+}
+
+/* ─── Panel negro enmarcado (shell visible) ───────────────────
+   La sección Enfoque es full-bleed negra (las franjas laterales quedan negras
+   → el logo blanco superior-izq. sigue siendo legible y el tema de nav no
+   cambia: se detecta por selector .landing-block--enfoque). Pero el NEGRO
+   VISIBLE se enmarca como shell centrado, con el MISMO ancho/gutter que la
+   tarjeta de Nosotros y el shell de Contacto → mismo ritmo lateral en todos
+   los tamaños (deja de tocar los bordes en portátil/14"). Aloja la textura
+   recortada por su radio. */
+.bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: min(var(--section-max-width), calc(100% - var(--section-gutter) * 2));
+  z-index: 0;
+  pointer-events: none;
+  background: #070707;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: clamp(1.25rem, 2vw, 2.25rem);
+  overflow: hidden;
+}
+
+.bgStripe {
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  background: repeating-linear-gradient(
+    -10deg,
+    transparent 0,
+    transparent 16px,
+    rgba(255, 255, 255, 0.025) 16px,
+    rgba(255, 255, 255, 0.025) 17px
+  );
+}
+
+.bgWash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 48% at 80% 22%,
+    rgba(236, 0, 0, 0.2) 0%,
+    transparent 52%
+  );
+}
+
+.bgGrain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.35) 0,
+    rgba(255, 255, 255, 0.35) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+}
+
+/* ─── Contenedor ──────────────────────────────────────────── */
+.inner {
+  position: relative;
+  z-index: 2;
+  /* Mismo shell que el panel .bg (idéntica fórmula que Nosotros/Contacto): el
+     contenido se centra con el mismo tope y gutter → márgenes consistentes
+     entre secciones. El padding horizontal mantiene el contenido separado del
+     borde del panel enmarcado. */
+  width: min(var(--section-max-width), calc(100% - var(--section-gutter) * 2));
+  margin: 0 auto;
+  padding: clamp(3rem, 5.5vw, 5.5rem) clamp(24px, 4vw, 72px);
+}
+
+/* ─── Composición editorial superior: el titular arropa la imagen ──
+   Móvil: una columna (línea 1 → bloque título → párrafo → imagen).
+   Desktop: grid entrelazado →
+     fila 1   línea 1 (atraviesa por encima de la imagen)
+     col izq  bloque "NOSOTROS / VEMOS SISTEMA." + párrafo
+     col der  imagen (filas 2–3) → enmarcada por el texto. */
+.topEditorial {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.2rem, 4vw, 2rem);
+  align-items: start;
+  /* Separación limpia entre la zona editorial (imagen) y la fila de tarjetas
+     (~22–35px). La imagen pertenece SOLO a esta zona superior. */
+  margin-bottom: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+
+@media (min-width: 900px) {
+  .topEditorial {
+    grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.1fr);
+    /* Filas auto (no 1fr): los tracks se ajustan al contenido y a la imagen
+       que abarca filas 2–3, evitando que ésta desborde sobre las tarjetas. */
+    grid-template-rows: auto auto auto;
+    column-gap: clamp(2rem, 4vw, 4.5rem);
+    row-gap: clamp(0.8rem, 1.4vw, 1.4rem);
+    align-items: start;
+  }
+}
+
+.kicker {
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.72rem, 0.9vw, 0.86rem);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ec-muted);
+  margin: 0 0 clamp(1.2rem, 2.4vw, 2rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.kicker::before {
+  content: "";
+  width: clamp(26px, 3vw, 44px);
+  height: 2px;
+  background: var(--ec-red);
+}
+
+/* El h2 no genera caja: sus partes (línea 1 y bloque línea 2) se colocan
+   directamente como celdas del grid superior. */
+.title {
+  display: contents;
+}
+
+.title,
+.line1,
+.line2 {
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  text-transform: uppercase;
+  color: var(--ec-white);
+}
+
+/* Línea 1 — abre la composición por encima de la imagen. */
+.line1 {
+  font-weight: 900;
+  font-size: clamp(2.6rem, 5.5vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
+
+/* Bloque línea 2 — ancla la izquierda, junto a la imagen. */
+.line2 {
+  font-weight: 900;
+  font-size: clamp(2.8rem, 6vw, 6.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.07em;
+}
+
+@media (min-width: 900px) {
+  .line1 {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: clamp(0.4rem, 1vw, 0.9rem);
+  }
+
+  .line2 {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: clamp(0.9rem, 1.8vw, 1.5rem);
+  }
+}
+
+.titleLine {
+  display: block;
+}
+
+.intro {
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(1rem, 1.1vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--ec-muted);
+  margin: 0;
+  max-width: 38ch;
+}
+
+@media (min-width: 900px) {
+  .intro {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+  }
+}
+
+/* ─── Foto editorial · limpia, sin overlays pegados ───────────
+   Altura DEFINIDA (no min-height) → caja determinista que recorta con
+   overflow + object-fit: cover. La imagen termina con claridad por encima
+   de la fila de tarjetas, sin invadirla. */
+.photoWrap {
+  position: relative;
+  isolation: isolate;
+  height: clamp(280px, 56vw, 380px);
+}
+
+@media (min-width: 900px) {
+  .photoWrap {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: start;
+    /* ~10–18% más baja que antes (≈560px → ≈500px máx) para eliminar el
+       solape sin agrandar la sección. */
+    height: clamp(340px, 40vw, 500px);
+  }
+}
+
+/* Glow rojo ambiental DETRÁS de la foto (nunca encima) */
+.photoWrap::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 72% 28%,
+    rgba(236, 0, 0, 0.22),
+    transparent 56%
+  );
+  filter: blur(28px);
+  opacity: 0.55;
+}
+
+.photo {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  border-radius: clamp(22px, 2.4vw, 38px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 42px 90px rgba(0, 0, 0, 0.42);
+}
+
+.photoMedia {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #0a0a0a;
+}
+
+.photoImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1.4s var(--ease);
+}
+
+@media (hover: hover) {
+  .photoWrap:hover .photoImg {
+    transform: scale(1.015);
+  }
+}
+
+/* ─── Método: cuatro paneles redondeados horizontales ─────── */
+.method {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+}
+
+@media (min-width: 600px) {
+  .method {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1040px) {
+  .method {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.7rem, 1.2vw, 1rem);
+  padding: clamp(1.5rem, 2.2vw, 2.1rem);
+  border: 1px solid var(--ec-line);
+  border-radius: clamp(18px, 1.8vw, 30px);
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--ec-white);
+  transition:
+    background-color 450ms ease,
+    color 450ms ease,
+    border-color 450ms ease,
+    transform 600ms var(--ease);
+}
+
+.cardNumber {
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ec-red);
+}
+
+.cardTitle {
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.92rem, 1.15vw, 1.08rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin: 0;
+  color: inherit;
+}
+
+.cardText {
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  line-height: 1.55;
+  color: var(--ec-muted);
+  margin: 0;
+  transition: color 450ms ease;
+}
+
+.cardLine {
+  display: block;
+  height: 2px;
+  width: 100%;
+  margin-top: auto;
+  background: var(--ec-line);
+  transform: scaleX(0.35);
+  transform-origin: left center;
+  transition:
+    transform 600ms var(--ease),
+    background-color 450ms ease;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    background: var(--ec-white);
+    color: var(--ec-black);
+    border-color: var(--ec-red);
+    transform: translateY(-8px);
+  }
+
+  .card:hover .cardText {
+    color: rgba(0, 0, 0, 0.72);
+  }
+
+  .card:hover .cardNumber {
+    color: var(--ec-red);
+  }
+
+  .card:hover .cardLine {
+    transform: scaleX(1);
+    background: var(--ec-red);
+  }
+}
+
+.card:focus-within {
+  border-color: var(--ec-red);
+}
+
+/* ─── Cierre interno de Enfoque ───────────────────────────── */
+.closing {
+  margin-top: clamp(2.6rem, 5vw, 4rem);
+  padding-top: clamp(1.6rem, 3vw, 2.4rem);
+  border-top: 1px solid var(--ec-line);
+}
+
+.closingLine {
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 3.2rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--ec-white);
+  margin: 0;
+}
+
+.closingLine + .closingLine {
+  margin-top: 0.3em;
+  color: var(--ec-muted);
+}
+
+/* Cierre: tres puntos redondos rojos (sustituyen al antiguo punto cuadrado). */
+.closingDots {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  margin-top: clamp(1rem, 1.6vw, 1.4rem);
+}
+
+.closingDots span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--ec-red);
+  box-shadow: 0 8px 18px rgba(236, 0, 0, 0.18);
+}
+
+/* ─── Reduced motion ──────────────────────────────────────── */
+/* Móvil: altura natural y padding compacto (sin forzar 100vh). */
+@media (max-width: 768px) {
+  .enfoque:global(.landing-block--enfoque) {
+    min-height: auto;
+  }
+
+  .inner {
+    padding-block: clamp(3rem, 9vw, 4.75rem);
+  }
+
+  /* En móvil el titular se simplifica a una columna y ajusta naturalmente
+     (sin nowrap) para evitar desbordes; conserva jerarquía y fuerza. */
+  .line1,
+  .line2 {
+    font-size: clamp(2.4rem, 8.5vw, 3.8rem);
+    letter-spacing: -0.045em;
+  }
+
+  .line1 {
+    margin-bottom: clamp(0.2rem, 2vw, 0.6rem);
+  }
+
+  .line2 {
+    margin-bottom: clamp(0.8rem, 4vw, 1.4rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .line1,
+  .line2 {
+    font-size: clamp(2.1rem, 9.5vw, 3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoImg {
+    transition: none;
+  }
+
+  .card,
+  .cardLine {
+    transition-duration: 0.01ms;
+  }
+}

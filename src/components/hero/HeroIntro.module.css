@@ -1,0 +1,93 @@
+/* ============================================================
+   ETECÉ · Hero intro — overlay de los tres puntos
+   Negro opaco sobre el hero, se desvanece al terminar.
+   ============================================================ */
+
+.root {
+  position: absolute;
+  inset: 0;
+  z-index: 6; /* por encima de .hero-sequence (z-index 1) */
+  background: #000000;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* Micro destello rojo de marca */
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #ec0000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+/* Estela roja del empuje final */
+.trail {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34vw;
+  height: clamp(8px, 1.2vw, 16px);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  background: #ec0000;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Tres puntos originales */
+.threeDots {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 3vw, 56px);
+  will-change: transform;
+}
+
+.dot {
+  width: clamp(22px, 4vw, 64px);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  background: #ffffff;
+  flex: 0 0 auto;
+  will-change: transform, opacity;
+}
+
+/* Matriz / palabra de puntos */
+.grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gridInner {
+  --ec-cell: 10px;
+  display: grid;
+  gap: 6px;
+  will-change: transform;
+}
+
+.cell {
+  width: var(--ec-cell);
+  height: var(--ec-cell);
+  border-radius: 50%;
+  background: #ffffff;
+  will-change: transform, opacity;
+}

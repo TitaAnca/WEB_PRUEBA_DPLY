@@ -1,0 +1,484 @@
+/* ============================================================
+   ETECÉ STUDIO · Nosotros — HOJA EDITORIAL DISEÑADA
+   Una sola "hoja" tipo folleto/cartel: zona superior clara (meta,
+   imagen Studio + título editorial) y zona inferior NEGRA dominante
+   con un gráfico de contorno blanco derivado de la identidad Etecé
+   (corchetes que encierran el "etcétera" + tres puntos) y el cierre.
+   Inspiración: spread de brochure de estudio creativo, blanco/negro,
+   tipografía bold, contornos gráficos sobre negro.
+   ============================================================ */
+
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(3.5rem, 6vw, 6.5rem);
+  /* Sin padding lateral: el shell (.sheet) es quien aplica el gutter global,
+     así el margen lateral es idéntico al de Contacto/Enfoque en cada tamaño. */
+  padding-inline: 0;
+  background: linear-gradient(135deg, #f5f4f6 0%, #efedf2 100%);
+  /* Color de fondo claro explícito: la detección de contraste de la nav lee
+     background-color → mantiene el logo top-left rojo/normal en Nosotros. */
+  background-color: #f3f2f6;
+  color: #0a0a0a;
+  overflow: hidden;
+
+  --ink: #0a0a0a;
+  --muted: #8b8b91;
+  --red: #ec0000;
+  --black: #0b0b0d;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Neutraliza el layout global de .landing-block sin tocar globals.css ni la
+   navegación. Conserva data-theme="red" → la nav la trata como clara. */
+.section:global(.landing-block),
+.section:global(.landing-block--nosotros) {
+  height: auto;
+  min-height: 100svh;
+  max-height: none;
+  padding-block: clamp(3.5rem, 6vw, 6.5rem);
+  background: linear-gradient(135deg, #f5f4f6 0%, #efedf2 100%);
+  background-color: #f3f2f6;
+}
+
+/* ─── HOJA / FOLLETO ──────────────────────────────────────── */
+.sheet {
+  position: relative;
+  /* Shell de sección unificado (misma fórmula en Nosotros/Contacto/Enfoque):
+     tope = --section-max-width; margen lateral = --section-gutter a cada lado. */
+  width: min(var(--section-max-width), calc(100% - var(--section-gutter) * 2));
+  margin-inline: auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fafaff;
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.12),
+    0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── HILO ROJO · acento editorial (subrayado corto bajo el título) ───
+   El concepto "hilo rojo" expresado como un detalle pequeño y controlado: un
+   subrayado rojo, orgánico y con relieve (sombra difusa + trazo + filo de luz)
+   justo bajo "ROJO.". No cruza la sección, ni el párrafo, ni entra en la banda
+   negra, ni cubre letras. Reemplaza el antiguo trazo gigante. */
+.threadAccent {
+  width: clamp(96px, 11vw, 168px);
+  height: 20px;
+  margin-top: clamp(0.55rem, 1vw, 0.9rem);
+  position: relative;
+  pointer-events: none;
+}
+
+.threadAccent svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.threadAccent path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Sombra difusa desplazada → relieve sutil. */
+.accentShadow {
+  stroke: rgba(90, 0, 0, 0.24);
+  stroke-width: 7;
+  filter: blur(5px);
+  transform: translateY(3px);
+}
+
+/* Trazo principal: rojo Etecé. */
+.accentMain {
+  stroke: var(--red);
+  stroke-width: 4;
+}
+
+/* Filo de luz finísimo → satinado 3D. */
+.accentHighlight {
+  stroke: rgba(255, 190, 190, 0.55);
+  stroke-width: 1.1;
+}
+
+/* ─── ZONA SUPERIOR CLARA ─────────────────────────────────── */
+.sheetTop {
+  position: relative;
+  padding: clamp(2rem, 4vw, 3.6rem);
+  background: #fafaff;
+  overflow: hidden;
+}
+
+/* Palabra fantasma "HILO" (negro tenue, arriba): atmósfera, no titular. */
+.ghost {
+  position: absolute;
+  top: clamp(-1.4rem, -1vw, -0.6rem);
+  right: clamp(1rem, 3vw, 2.6rem);
+  margin: 0;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(5rem, 13vw, 13rem);
+  line-height: 0.82;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.025);
+  text-shadow: 8px 8px 0 rgba(236, 0, 0, 0.018);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+/* Palabra fantasma "ROJO" (rojo tenue) junto a la ruta del hilo, en el espacio
+   negativo de la derecha → refuerza la narrativa sin competir con el título. */
+.ghostRojo {
+  position: absolute;
+  top: 60%;
+  right: clamp(-1.5rem, -2vw, -0.4rem);
+  transform: translateY(-50%);
+  margin: 0;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(4rem, 11vw, 11rem);
+  line-height: 0.82;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  color: rgba(236, 0, 0, 0.035);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.meta {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 clamp(1.6rem, 2.4vw, 2.4rem);
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.62rem, 0.7vw, 0.78rem);
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.52);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ─── GRID EDITORIAL: imagen · texto ──────────────────────── */
+.grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.4rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 981px) {
+  .grid {
+    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 6rem);
+  }
+}
+
+/* ─── IMAGEN STUDIO.png como pieza gráfica ────────────────── */
+.visual {
+  display: flex;
+  min-width: 0;
+}
+
+.visualFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5.4;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #111;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.visualImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ─── TEXTO EDITORIAL ─────────────────────────────────────── */
+.editorial {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: clamp(0.2rem, 1vw, 0.8rem);
+}
+
+.title {
+  margin: 0;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  /* Título-manifiesto más largo: cuerpo ligeramente reducido + line-height
+     controlado para mantener la fuerza editorial sin aumentar la altura de la
+     hoja ni provocar overflow horizontal. */
+  font-size: clamp(3rem, 4.6vw, 5.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.065em;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleAccent {
+  color: var(--ink);
+}
+
+/* "ROJO." — remate rojo del título: el hilo de la marca ES rojo. Mismo cuerpo
+   tipográfico que el resto (pertenece al sistema del título). */
+.titleRed {
+  color: var(--red);
+}
+
+.copy {
+  margin-top: clamp(1.8rem, 3.4vw, 2.6rem);
+  max-width: 560px;
+}
+
+.copyText {
+  margin: 0;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(1rem, 1.06vw, 1.16rem);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: rgba(0, 0, 0, 0.64);
+  font-weight: 400;
+}
+
+/* ─── ZONA INFERIOR NEGRA DOMINANTE ───────────────────────── */
+.sheetBottom {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: clamp(2.6rem, 4.6vw, 4rem);
+  min-height: clamp(240px, 32vh, 380px);
+  background: var(--black);
+  overflow: hidden;
+}
+
+/* Línea roja fina marcando la transición claro → negro. */
+.sheetBottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--red) 0%,
+    var(--red) 22%,
+    transparent 60%
+  );
+  z-index: 3;
+}
+
+/* ─── TIPOGRAFÍA FANTASMA EDITORIAL ("ETCÉTERA") ──────────── */
+.blackWord {
+  position: absolute;
+  right: clamp(-1rem, -1vw, 0rem);
+  bottom: clamp(-1.4rem, -1.4vw, -0.4rem);
+  margin: 0;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(5rem, 14vw, 12rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* Pequeño acento rojo para dar ritmo sin sobredecorar. */
+.blackWord::after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  bottom: 30%;
+  width: 56px;
+  height: 2px;
+  background: rgba(236, 0, 0, 0.9);
+}
+
+/* ─── CIERRE / MANIFIESTO ─────────────────────────────────── */
+.closing {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+}
+
+.closingFirst,
+.closingSecond {
+  margin: 0;
+  font-family: "Poppins", "Manrope", system-ui, sans-serif;
+  font-size: clamp(2.1rem, 3.2vw, 3.7rem);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #fff;
+}
+
+.closingSecond {
+  margin-top: clamp(1.1rem, 2vw, 1.6rem);
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.closingLine {
+  display: block;
+}
+
+.red {
+  color: var(--red);
+  font-weight: 900;
+}
+
+.dots {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: clamp(1.2rem, 2.2vw, 1.8rem);
+}
+
+.dots span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 0.2rem;
+  background: var(--red);
+  box-shadow:
+    0 8px 16px rgba(236, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .grid {
+    justify-items: center;
+  }
+
+  .visual {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 5;
+    max-height: 58vh;
+  }
+
+  .editorial {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .meta {
+    text-align: left;
+  }
+
+  .title {
+    font-size: clamp(2.9rem, 7vw, 5rem);
+  }
+
+  .blackWord {
+    font-size: clamp(4rem, 18vw, 8rem);
+    right: -0.5rem;
+    bottom: -0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .sheetTop,
+  .sheetBottom {
+    padding: 1.4rem;
+  }
+
+  .sheetBottom {
+    min-height: 220px;
+  }
+
+  .title {
+    font-size: clamp(2.8rem, 13vw, 4.8rem);
+  }
+
+  .copyText {
+    font-size: clamp(0.95rem, 4vw, 1.05rem);
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.7rem, 8vw, 2.5rem);
+  }
+
+  .ghost {
+    font-size: clamp(4rem, 22vw, 7rem);
+  }
+
+  .ghostRojo {
+    font-size: clamp(3rem, 18vw, 5.4rem);
+    top: 62%;
+  }
+
+  .blackWord {
+    font-size: clamp(3.2rem, 20vw, 5.8rem);
+    color: rgba(255, 255, 255, 0.08);
+    right: -0.5rem;
+    bottom: -0.5rem;
+  }
+
+  .visualFrame {
+    max-height: 52vh;
+  }
+}
+
+@media (max-width: 420px) {
+  .visualFrame {
+    max-height: 48vh;
+  }
+}
+
+/* Móvil: altura natural (sin forzar 100vh → evita huecos) y padding más
+   compacto. Iguala la especificidad de las reglas .landing-block. */
+@media (max-width: 768px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: auto;
+    padding-block: clamp(3rem, 9vw, 4.75rem);
+  }
+}
+
+/* ─── HILO ROJO · acento responsive (se mantiene pequeño bajo el título) ── */
+@media (max-width: 768px) {
+  .title {
+    font-size: clamp(2.35rem, 10vw, 4rem);
+    line-height: 0.92;
+  }
+
+  .threadAccent {
+    width: 100px;
+    height: 16px;
+    margin-top: 0.5rem;
+  }
+}
