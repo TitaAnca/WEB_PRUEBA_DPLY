@@ -23,7 +23,10 @@ export default function NotFound() {
         />
         <div className={styles.notFoundText}>
           <h1>404</h1>
-          <p>Esta página no existe, pero el etcétera continúa.</p>
+          <p>
+            Esta página no existe, pero el{" "}
+            <span className={styles.brandRed}>etecé</span> continúa.
+          </p>
           <Link href="/">Volver al inicio</Link>
         </div>
       </section>

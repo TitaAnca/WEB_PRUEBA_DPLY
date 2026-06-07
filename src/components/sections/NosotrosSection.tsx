@@ -87,24 +87,6 @@ export function NosotrosSection() {
             });
           }
 
-          // Hilo rojo · acento sutil: se "dibuja" el subrayado curvo bajo el
-          // título (no cruza texto ni entra en la banda negra).
-          const accentPaths = q(`.${styles.threadAccent} path`);
-          if (accentPaths.length) {
-            const main = accentPaths[0] as unknown as SVGPathElement;
-            const len = main.getTotalLength();
-            gsap.set(accentPaths, { strokeDasharray: len, strokeDashoffset: len });
-            gsap.to(accentPaths, {
-              strokeDashoffset: 0,
-              duration: 1,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: q(`.${styles.title}`)[0] ?? root,
-                start: "top 82%",
-              },
-            });
-          }
-
           const dots = q(`.${styles.dots} span`);
           if (dots.length) {
             gsap.from(dots, {
@@ -138,14 +120,16 @@ export function NosotrosSection() {
       <div className={styles.sheet}>
         {/* ─── ZONA SUPERIOR CLARA ─────────────────────────────── */}
         <div className={styles.sheetTop}>
-          {/* Palabras fantasma atmosféricas: HILO (negro tenue, arriba) y ROJO
-              (rojo tenue, junto a la ruta del hilo). Estructura, no titulares. */}
-          <span className={styles.ghost} aria-hidden="true">
-            Hilo
-          </span>
-          <span className={styles.ghostRojo} aria-hidden="true">
-            Rojo
-          </span>
+          {/* Atmósfera editorial sutil: profundidad de papel + líneas finas de
+              alineación + micro-acentos rojos en el espacio negativo. Sin objeto
+              ni caja: estructura invisible detrás del contenido legible. */}
+          <div className={styles.editorialLayer} aria-hidden="true">
+            <span className={styles.editorialLineOne} />
+            <span className={styles.editorialLineTwo} />
+            <span className={styles.editorialLineFlow} />
+            <span className={styles.redMarkImage} />
+            <span className={styles.redMarkParagraph} />
+          </div>
 
           <p className={styles.meta}>
             Etecé Studio / Branding &amp; Comunicación Visual
@@ -156,7 +140,7 @@ export function NosotrosSection() {
               <div className={styles.visualFrame}>
                 <img
                   src="/assets/Studio.png"
-                  alt=""
+                  alt="Espacio creativo de Etecé Studio, agencia de branding, diseño web y comunicación visual"
                   className={styles.visualImg}
                   loading="lazy"
                   decoding="async"
@@ -166,34 +150,16 @@ export function NosotrosSection() {
 
             <div className={styles.editorial}>
               <h2 className={styles.title}>
-                <span className={styles.titleLine}>ETECÉ ES LA FILOSOFÍA</span>
+                <span className={styles.titleLine}>
+                  <span className={styles.titleRed}>ETECÉ</span> ES LA FILOSOFÍA
+                </span>
                 <span className={styles.titleLine}>DE HACER QUE</span>
                 <span className={styles.titleLine}>TODO LO DEMÁS IMPORTE.</span>
               </h2>
 
-              {/* Hilo rojo · acento editorial: subrayado corto, orgánico y con
-                  relieve (sombra + filo de luz) justo bajo "ROJO.". El concepto
-                  "hilo rojo" como detalle controlado, sin cruzar la sección. */}
-              <div className={styles.threadAccent} aria-hidden="true">
-                <svg
-                  viewBox="0 0 220 36"
-                  preserveAspectRatio="none"
-                  focusable="false"
-                >
-                  <path
-                    className={styles.accentShadow}
-                    d="M6 20 C45 16 78 22 112 18 C145 15 172 16 208 12"
-                  />
-                  <path
-                    className={styles.accentMain}
-                    d="M6 20 C45 16 78 22 112 18 C145 15 172 16 208 12"
-                  />
-                  <path
-                    className={styles.accentHighlight}
-                    d="M6 19 C45 15 78 21 112 17 C145 14 172 15 208 11"
-                  />
-                </svg>
-              </div>
+              {/* Regla editorial breve: ancla el título con el párrafo (micro
+                  decisión roja, sin concepto de hilo). */}
+              <span className={styles.titleRule} aria-hidden="true" />
 
               <div className={styles.copy}>
                 <p className={styles.copyText}>
@@ -214,6 +180,19 @@ export function NosotrosSection() {
           <span className={styles.blackWord} aria-hidden="true">
             Etecé
           </span>
+
+          {/* "Todo lo demás": campo tenue de micro-decisiones (marca-agua
+              editorial). Vive detrás del cierre, no compite con él. */}
+          <div className={styles.bandField} aria-hidden="true">
+            <span>TONO</span>
+            <span>RITMO</span>
+            <span>FORMA</span>
+            <span>CRITERIO</span>
+            <span>SISTEMA</span>
+            <span>DETALLE</span>
+            <span>DIRECCIÓN</span>
+            <span>IDENTIDAD</span>
+          </div>
 
           <div className={styles.closing}>
             <p className={styles.closingFirst}>

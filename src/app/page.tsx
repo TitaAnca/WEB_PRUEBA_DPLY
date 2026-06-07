@@ -18,6 +18,24 @@ export default function HomePage() {
       <NavigationLocked />
       <MobileNav />
       <main className="narrative-flow">
+        {/* h1 principal para SEO/accesibilidad: oculto visualmente (no altera el
+            diseño ni el layout), expone el posicionamiento de marca a buscadores
+            y lectores de pantalla. */}
+        <h1
+          style={{
+            position: "absolute",
+            width: "1px",
+            height: "1px",
+            padding: 0,
+            margin: "-1px",
+            overflow: "hidden",
+            clip: "rect(0, 0, 0, 0)",
+            whiteSpace: "nowrap",
+            border: 0,
+          }}
+        >
+          Etecé Studio — Agencia de branding, diseño web y comunicación visual
+        </h1>
         <HeroSection />
         <NosotrosSection />
         <EnfoqueSection />

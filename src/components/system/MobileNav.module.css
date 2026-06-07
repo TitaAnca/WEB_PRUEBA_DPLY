@@ -36,7 +36,11 @@
 }
 
 .mobileTopNavLogo img {
-  width: clamp(54px, 18vw, 82px);
+  /* Logo (wordmark Blanco/Rojo) con más presencia en la barra sólida. Solo
+     afecta a esta barra responsive (≤1024px); el logo de escritorio/flotante y
+     el del Hero no se tocan. height: auto + la barra centra el contenido →
+     crece de forma proporcional sin volverse un banner. */
+  width: clamp(68px, 18vw, 100px);
   height: auto;
   display: block;
 }
@@ -106,7 +110,7 @@
   }
 
   .mobileTopNavLogo img {
-    width: 52px;
+    width: 64px;
   }
 
   .mobileTopNavLinks {

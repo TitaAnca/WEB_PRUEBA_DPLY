@@ -59,50 +59,19 @@
     0 14px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* ─── HILO ROJO · acento editorial (subrayado corto bajo el título) ───
-   El concepto "hilo rojo" expresado como un detalle pequeño y controlado: un
-   subrayado rojo, orgánico y con relieve (sombra difusa + trazo + filo de luz)
-   justo bajo "ROJO.". No cruza la sección, ni el párrafo, ni entra en la banda
-   negra, ni cubre letras. Reemplaza el antiguo trazo gigante. */
-.threadAccent {
-  width: clamp(96px, 11vw, 168px);
-  height: 20px;
-  margin-top: clamp(0.55rem, 1vw, 0.9rem);
-  position: relative;
-  pointer-events: none;
-}
-
-.threadAccent svg {
-  width: 100%;
-  height: 100%;
+/* ─── REGLA EDITORIAL · micro-decisión que ancla título → párrafo ───
+   Un trazo rojo breve y limpio (no es un "hilo", no cruza la sección): marca de
+   decisión que conecta visualmente el título con el cuerpo de texto. */
+.titleRule {
   display: block;
-  overflow: visible;
-}
-
-.threadAccent path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Sombra difusa desplazada → relieve sutil. */
-.accentShadow {
-  stroke: rgba(90, 0, 0, 0.24);
-  stroke-width: 7;
-  filter: blur(5px);
-  transform: translateY(3px);
-}
-
-/* Trazo principal: rojo Etecé. */
-.accentMain {
-  stroke: var(--red);
-  stroke-width: 4;
-}
-
-/* Filo de luz finísimo → satinado 3D. */
-.accentHighlight {
-  stroke: rgba(255, 190, 190, 0.55);
-  stroke-width: 1.1;
+  width: clamp(48px, 5vw, 72px);
+  height: 4px;
+  border-radius: 999px;
+  margin-top: clamp(1.1rem, 1.8vw, 1.5rem);
+  background: var(--red);
+  box-shadow: 0 10px 24px rgba(236, 0, 0, 0.18);
+  position: relative;
+  z-index: 2;
 }
 
 /* ─── ZONA SUPERIOR CLARA ─────────────────────────────────── */
@@ -113,45 +82,101 @@
   overflow: hidden;
 }
 
-/* Palabra fantasma "HILO" (negro tenue, arriba): atmósfera, no titular. */
-.ghost {
+/* ─── CAPA EDITORIAL · "MAPA DE DECISIONES" ───────────────────
+   Atmósfera de sistema invisible que conecta imagen, título y párrafo: una
+   profundidad ambiental muy tenue, líneas finas de alineación en el espacio
+   negativo, una marca de sistema (corchetes + tres puntos) y micro-acentos
+   rojos que representan "pequeñas decisiones". Todo detrás del contenido y sin
+   cubrir nunca el texto. */
+.editorialLayer {
   position: absolute;
-  top: clamp(-1.4rem, -1vw, -0.6rem);
-  right: clamp(1rem, 3vw, 2.6rem);
-  margin: 0;
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(5rem, 13vw, 13rem);
-  line-height: 0.82;
-  font-weight: 900;
-  letter-spacing: -0.08em;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.025);
-  text-shadow: 8px 8px 0 rgba(236, 0, 0, 0.018);
+  inset: 0;
   pointer-events: none;
   user-select: none;
-  white-space: nowrap;
   z-index: 0;
 }
 
-/* Palabra fantasma "ROJO" (rojo tenue) junto a la ruta del hilo, en el espacio
-   negativo de la derecha → refuerza la narrativa sin competir con el título. */
-.ghostRojo {
+/* Profundidad ambiental: dos halos casi imperceptibles (rojo + negro) que dan
+   cuerpo de "papel editorial" sin dibujar una caja visible. */
+.editorialLayer::before {
+  content: "";
   position: absolute;
-  top: 60%;
-  right: clamp(-1.5rem, -2vw, -0.4rem);
-  transform: translateY(-50%);
-  margin: 0;
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(4rem, 11vw, 11rem);
-  line-height: 0.82;
-  font-weight: 900;
-  letter-spacing: -0.07em;
-  text-transform: uppercase;
-  color: rgba(236, 0, 0, 0.035);
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  z-index: 0;
+  inset: clamp(1.5rem, 3vw, 3rem);
+  border-radius: clamp(1.4rem, 2vw, 2.4rem);
+  background:
+    radial-gradient(circle at 26% 26%, rgba(236, 0, 0, 0.045), transparent 30%),
+    radial-gradient(circle at 78% 44%, rgba(0, 0, 0, 0.05), transparent 34%);
+  filter: blur(16px);
+  opacity: 0.7;
+}
+
+/* Líneas finas de alineación: viven en el espacio negativo, nunca cruzan el
+   título ni el párrafo (se ocultan en tablet/móvil más abajo). */
+.editorialLineOne,
+.editorialLineTwo,
+.editorialLineFlow {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
+  opacity: 0.5;
+}
+
+.editorialLineOne {
+  height: 1px;
+  width: 26%;
+  top: 17%;
+  right: 6%;
+}
+
+.editorialLineTwo {
+  height: 1px;
+  width: 20%;
+  bottom: 12%;
+  left: 7%;
+}
+
+/* Flujo vertical sutil que insinúa la lectura imagen → título → párrafo. */
+.editorialLineFlow {
+  width: 1px;
+  height: 30%;
+  top: 30%;
+  left: 50%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(0, 0, 0, 0.08),
+    transparent
+  );
+  opacity: 0.45;
+}
+
+/* Micro-acentos rojos: dos decisiones mínimas alineadas con imagen y párrafo. */
+.redMarkImage,
+.redMarkParagraph {
+  position: absolute;
+  border-radius: 999px;
+  background: var(--red);
+  opacity: 0.85;
+}
+
+.redMarkImage {
+  width: 4px;
+  height: 38px;
+  top: 30%;
+  left: clamp(1rem, 2.2vw, 2.2rem);
+  box-shadow: 0 10px 22px rgba(236, 0, 0, 0.16);
+}
+
+.redMarkParagraph {
+  width: 26px;
+  height: 4px;
+  bottom: 16%;
+  right: clamp(1.5rem, 4vw, 4rem);
+  box-shadow: 0 10px 22px rgba(236, 0, 0, 0.16);
 }
 
 .meta {
@@ -199,9 +224,12 @@
   border-radius: 18px;
   background: #111;
   border: 1px solid rgba(0, 0, 0, 0.08);
+  /* Profundidad editorial refinada: sombra ambiental suave + halo cercano +
+     filo de luz interior → la imagen "flota" conectada a la composición. */
   box-shadow:
-    0 26px 60px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 30px 70px rgba(0, 0, 0, 0.16),
+    0 8px 22px rgba(0, 0, 0, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.38);
 }
 
 .visualImg {
@@ -221,13 +249,14 @@
 }
 
 .title {
-  margin: 0;
+  margin: 0 0 clamp(0.4rem, 1vw, 0.8rem);
   font-family: "Poppins", "Manrope", system-ui, sans-serif;
   /* Título-manifiesto más largo: cuerpo ligeramente reducido + line-height
      controlado para mantener la fuerza editorial sin aumentar la altura de la
-     hoja ni provocar overflow horizontal. */
+     hoja ni provocar overflow horizontal. line-height ligeramente más holgado
+     para dar aire entre líneas sin crecer la sección. */
   font-size: clamp(3rem, 4.6vw, 5.4rem);
-  line-height: 0.9;
+  line-height: 0.94;
   letter-spacing: -0.065em;
   font-weight: 900;
   text-transform: uppercase;
@@ -249,17 +278,18 @@
 }
 
 .copy {
-  margin-top: clamp(1.8rem, 3.4vw, 2.6rem);
-  max-width: 560px;
+  /* Más aire entre título y párrafo → composición menos comprimida. */
+  margin-top: clamp(2.2rem, 4vw, 3rem);
+  max-width: 54ch;
 }
 
 .copyText {
   margin: 0;
   font-family: "Jura", "Inter", system-ui, sans-serif;
   font-size: clamp(1rem, 1.06vw, 1.16rem);
-  line-height: 1.75;
+  line-height: 1.8;
   letter-spacing: 0.01em;
-  color: rgba(0, 0, 0, 0.64);
+  color: rgba(0, 0, 0, 0.68);
   font-weight: 400;
 }
 
@@ -270,7 +300,11 @@
   align-items: center;
   padding: clamp(2.6rem, 4.6vw, 4rem);
   min-height: clamp(240px, 32vh, 380px);
-  background: var(--black);
+  /* Profundidad sutil: halo rojo muy tenue en la esquina inferior derecha +
+     degradado vertical → la banda deja de verse plana sin volverse roja. */
+  background:
+    radial-gradient(circle at 80% 74%, rgba(236, 0, 0, 0.08), transparent 32%),
+    linear-gradient(180deg, #0b0b0d 0%, #030303 100%);
   overflow: hidden;
 }
 
@@ -321,6 +355,46 @@
   background: rgba(236, 0, 0, 0.9);
 }
 
+/* "Todo lo demás": campo tenue de micro-decisiones (marca-agua editorial) en la
+   esquina inferior derecha de la banda negra. Extremadamente sutil → nunca
+   compite con el cierre. Vive detrás (z-index 0). */
+.bandField {
+  position: absolute;
+  right: clamp(1.6rem, 5vw, 4.5rem);
+  bottom: clamp(1.6rem, 3.5vw, 3.2rem);
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.5rem 1.6rem;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.bandField span {
+  position: relative;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.58rem, 0.72vw, 0.74rem);
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.16);
+}
+
+/* Tres micro-puntos rojos como separadores de "decisión" (sin glow fuerte). */
+.bandField span:nth-child(3n)::before {
+  content: "";
+  position: absolute;
+  left: -0.85rem;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(236, 0, 0, 0.55);
+  transform: translateY(-50%);
+}
+
 /* ─── CIERRE / MANIFIESTO ─────────────────────────────────── */
 .closing {
   position: relative;
@@ -368,6 +442,20 @@
   box-shadow:
     0 8px 16px rgba(236, 0, 0, 0.24),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* ─── MARGEN PREMIUM · rango intermedio escritorio/portátil ───
+   Solo entre 14" y 27" (1366–1919px): margen lateral firme de ~80px por lado
+   topando en 1360px (= --section-max-width) → mismo tope que el resto de
+   secciones y SIN salto al pasar a ≥1920px. Solo afecta al shell exterior
+   (.sheet); el contenido interno, tipografía e imágenes no se tocan. */
+@media (min-width: 1366px) and (max-width: 1919px) {
+  .sheet {
+    width: calc(100% - 160px);
+    max-width: 1360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ─── RESPONSIVE ──────────────────────────────────────────── */
@@ -431,15 +519,6 @@
     font-size: clamp(1.7rem, 8vw, 2.5rem);
   }
 
-  .ghost {
-    font-size: clamp(4rem, 22vw, 7rem);
-  }
-
-  .ghostRojo {
-    font-size: clamp(3rem, 18vw, 5.4rem);
-    top: 62%;
-  }
-
   .blackWord {
     font-size: clamp(3.2rem, 20vw, 5.8rem);
     color: rgba(255, 255, 255, 0.08);
@@ -469,16 +548,64 @@
   }
 }
 
-/* ─── HILO ROJO · acento responsive (se mantiene pequeño bajo el título) ── */
 @media (max-width: 768px) {
   .title {
     font-size: clamp(2.35rem, 10vw, 4rem);
     line-height: 0.92;
   }
 
-  .threadAccent {
-    width: 100px;
-    height: 16px;
-    margin-top: 0.5rem;
+  .titleRule {
+    width: 56px;
+    margin-top: 0.9rem;
+  }
+}
+
+/* ─── CAPA EDITORIAL · responsive ──────────────────────────────
+   La atmósfera se simplifica al estrechar el viewport para priorizar la
+   legibilidad: menos opacidad y más aire en portátil/tablet; sin líneas finas,
+   micro-acentos ni campo de la banda en móvil. */
+@media (max-width: 1024px) {
+  .editorialLineOne,
+  .editorialLineTwo,
+  .editorialLineFlow {
+    opacity: 0.32;
+  }
+
+  .copy {
+    max-width: 56ch;
+  }
+
+  .copyText {
+    line-height: 1.78;
+  }
+
+  .bandField {
+    opacity: 0.4;
+    right: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .editorialLineOne,
+  .editorialLineTwo,
+  .editorialLineFlow,
+  .redMarkImage,
+  .redMarkParagraph,
+  .bandField {
+    display: none;
+  }
+
+  .copy {
+    max-width: 100%;
+  }
+
+  .copyText {
+    line-height: 1.75;
+  }
+}
+
+@media (max-width: 520px) {
+  .editorialLayer::before {
+    display: none;
   }
 }

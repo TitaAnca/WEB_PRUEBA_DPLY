@@ -1,5 +1,5 @@
 /* ============================================================
-   ETECÉ · Hero cinemático — una imagen + transiciones editoriales
+   ETECÉ · Hero collage de tarjetas apiladas
    ============================================================ */
 
 .root {
@@ -7,323 +7,27 @@
   width: 100%;
   height: 100%;
   min-height: 100svh;
-  /* Negro dominante con profundidad premium: glow rojo muy tenue arriba,
-     halo blanco suave abajo. Sin textura ruidosa. */
   background:
     radial-gradient(circle at 50% 38%, rgba(236, 0, 0, 0.075), transparent 34%),
     radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.045), transparent 28%),
     #000000;
   overflow: hidden;
   --ticker-h: clamp(34px, 3.8vw, 48px);
-  /* Radio único del pop-up: imagen, marco y clip-path SIEMPRE comparten este
-     valor → las esquinas nunca cambian de forma durante la animación. */
-  --hero-popup-radius: 22px;
+  --hero-card-radius: 22px;
 }
 
-/* ─── Hero estático (restauración de emergencia) ───────────── */
-.staticStage {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: #000000;
-}
-
-.staticImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 8;
-  background: #000000;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-/* ─── Intro kinética local del hero ───────────────────────────
-   "Antes de la imagen, el sistema": lienzo negro, tipografía blanca
-   editorial, puntuación roja #ec0000. Composición distribuida (no por
-   tamaño): reglas + marca + fragmentos en bordes + columna técnica +
-   palabra central + tres puntos + lockup. El overlay recorta (overflow
-   hidden) → nunca hay overflow horizontal. */
-.introStage {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-/* Solo los elementos CENTRADOS comparten celda (puntos, ruido→orden, frase,
-   lockup, barrido). Los estallidos usan position:absolute (ignoran el grid). */
-.dots,
-.ghosts,
-.introPhrase,
-.lockup,
-.introSweep {
-  grid-area: 1 / 1;
-}
-
-.dots {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(16px, 2.6vw, 44px);
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Puntos rojos circulares (el etcétera como origen tipográfico). Pequeños:
-   son marcadores que reparten/guían, no un loader. */
-.dot {
-  width: clamp(0.6rem, 0.9vw, 0.95rem);
-  height: clamp(0.6rem, 0.9vw, 0.95rem);
-  border-radius: 50%;
-  background: #ec0000;
-  flex: 0 0 auto;
-  box-shadow:
-    0 10px 26px rgba(236, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  will-change: transform, opacity;
-}
-
-/* Barrido rojo fino de registro/cierre (máscara). */
-.introSweep {
-  width: min(58vw, 700px);
-  height: clamp(2px, 0.3vw, 4px);
-  background: #ec0000;
-  border-radius: 3px;
-  box-shadow: 0 0 24px rgba(236, 0, 0, 0.5);
-  pointer-events: none;
-  z-index: 7;
-}
-
-/* Regla editorial fina (dirección/alineación). Entra y se retira por escala. */
-.introRule {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.42);
-  transform: scaleX(0);
-  transform-origin: left center;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Contenedores de estallido tipográfico: ocupan todo el stage; sus fragmentos
-   se posicionan en absoluto (composición asimétrica). El overflow:hidden del
-   stage recorta los fragmentos sobredimensionados → crop intencional, nunca
-   overflow horizontal de página. */
-.burst {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Fragmento tipográfico: material de diseño. Entra Y sale por máscara
-   (clip-path), no se queda fijo como una lista. */
-.fragment {
-  position: absolute;
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: #ffffff;
-  will-change: clip-path, opacity;
-}
-
-/* Burst A — RITMO / SISTEMA / CRITERIO / FORMA (composición asimétrica). */
-.fragA1 {
-  top: 17%;
-  left: 8%;
-  font-size: clamp(2rem, 6vw, 5rem);
-}
-
-.fragA2 {
-  top: 39%;
-  left: 30%;
-  font-size: clamp(3rem, 9.5vw, 8.6rem);
-}
-
-.fragA3 {
-  top: 24%;
-  right: 9%;
-  font-size: clamp(0.95rem, 1.9vw, 1.7rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.58);
-}
-
-.fragA4 {
-  bottom: 16%;
-  left: 13%;
-  font-size: clamp(2rem, 6.6vw, 5.6rem);
-}
-
-/* Burst B — DIRECCIÓN (sobredimensionada, recortada al borde) / IDENTIDAD /
-   HILO (anotación roja) / ETECÉ. */
-.fragB1 {
-  top: 30%;
-  right: -5%;
-  font-size: clamp(3.4rem, 12.5vw, 11rem);
-}
-
-.fragB2 {
-  top: 19%;
-  left: 7%;
-  font-size: clamp(1.6rem, 3.6vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.fragB3 {
-  bottom: 30%;
-  left: 9%;
-  font-size: clamp(0.95rem, 1.9vw, 1.65rem);
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: #ec0000;
-}
-
-.fragB4 {
-  bottom: 16%;
-  right: 16%;
-  font-size: clamp(2.3rem, 7vw, 6rem);
-}
-
-/* Ruido → orden: tres copias apiladas en la misma celda. Entran desalineadas
-   y de baja opacidad, luego ENCAJAN en una sola estructura limpia (sin glitch,
-   sin RGB split). */
-.ghosts {
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.ghostWord {
-  grid-area: 1 / 1;
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-weight: 900;
-  font-size: clamp(2.6rem, 8.5vw, 7.4rem);
-  line-height: 0.86;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  color: #ffffff;
-  white-space: nowrap;
-  will-change: transform, opacity, clip-path;
-}
-
-/* Lockup tipográfico de la intro: "etecé / studio". CONTROLADO: fracción
-   moderada del viewport (no es un logo gigante). */
-.lockup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.3rem, 0.7vw, 0.6rem);
-  width: min(34vw, 420px);
-  max-width: 420px;
-  pointer-events: none;
-  z-index: 6;
-}
-
-.introWord {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(2.4rem, 5.2vw, 5.8rem);
-  line-height: 0.86;
-  letter-spacing: -0.05em;
-  font-weight: 900;
-  color: #ffffff;
-  text-transform: lowercase;
-  will-change: clip-path, opacity;
-}
-
-.introSubword {
-  font-family: "Jura", "Inter", system-ui, sans-serif;
-  font-size: clamp(0.7rem, 1.2vw, 1.05rem);
-  letter-spacing: 0.28em;
-  font-weight: 800;
-  color: #ec0000;
-  text-transform: uppercase;
-  will-change: clip-path, opacity;
-}
-
-/* Frase editorial de la intro (cap.4): "ANTES DE LA IMAGEN, / EL SISTEMA."
-   Composición de dos líneas reveladas por máscara, con una regla fina encima
-   y un punto rojo de pausa al final. No es un título PowerPoint: entra por
-   máscara horizontal y sale por máscara. */
-.introPhrase {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.05rem, 0.3vw, 0.25rem);
-  pointer-events: none;
-  z-index: 6;
-}
-
-.introPhraseRule {
-  width: min(42vw, 460px);
-  height: 1px;
-  margin-bottom: clamp(0.8rem, 1.6vw, 1.4rem);
-  background: rgba(255, 255, 255, 0.5);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
-.introPhraseLine {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(1.5rem, 4.2vw, 3.3rem);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #ffffff;
-  white-space: nowrap;
-  text-align: center;
-  will-change: clip-path, transform;
-}
-
-/* Segunda línea ("EL SISTEMA·") en gris editorial; el punto, rojo. */
-.introPhraseLine:nth-child(3) {
-  color: rgba(255, 255, 255, 0.66);
-}
-
-.introPhraseDot {
-  display: inline-block;
-  width: clamp(0.4rem, 0.7vw, 0.58rem);
-  height: clamp(0.4rem, 0.7vw, 0.58rem);
-  margin-left: 0.28em;
-  border-radius: 50%;
-  background: #ec0000;
-  vertical-align: baseline;
-}
-
-/* ─── Escenario de la pieza ───────────────────────────────── */
+/* ─── Escenario del stack ─────────────────────────────────── */
 .stage {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
   pointer-events: none;
+  /* Reserva espacio inferior para el ticker (no taparlo). */
+  padding-bottom: calc(var(--ticker-h) + clamp(1.2rem, 3vw, 2.4rem));
 }
 
-/* Atmósfera: halo neutro muy difuso detrás de la pieza (sin glow rojo
-   constante; el rojo queda reservado al micro-marco del pop-up). */
+/* Halo neutro muy difuso detrás del stack. */
 .stage::before {
   content: "";
   position: absolute;
@@ -334,432 +38,50 @@
   pointer-events: none;
 }
 
-/* Wrapper que centra la pieza y aporta profundidad premium. El drop-shadow
-   vive AQUÍ (no en la imagen) porque GSAP anima `filter: blur()` sobre la
-   imagen en entrada/salida y sobrescribiría el filtro; en el wrapper la
-   sombra permanece intacta. Sirve para PNG con transparencia y fotos. */
-.frame {
+/* Contenedor del stack: compacto, centrado, sin desbordar viewport. */
+.cardStack {
   position: relative;
   z-index: 2;
+  width: min(68vw, 680px);
+  height: min(52vh, 520px);
+  max-width: 86vw;
+  max-height: 56vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* FIX permanente del radio: el marco recorta SIEMPRE con el mismo radio y
-     overflow:hidden → la captura nunca puede quedar con esquinas cuadradas,
-     pase lo que pase con clip-path/scale durante entrada o salida. El
-     drop-shadow se pinta FUERA del recorte, así que la profundidad se
-     mantiene intacta. */
-  border-radius: var(--hero-popup-radius);
+}
+
+/* Tarjeta individual: posición absoluta, esquinas redondeadas SIEMPRE. */
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--hero-card-radius);
   overflow: hidden;
-  /* FIX esquina cuadrada: la imagen lleva `will-change: transform` (capa GPU
-     compositada). Un overflow:hidden redondeado NO recorta de forma fiable a
-     un hijo compositado/transformado a sus esquinas redondeadas durante el
-     scale/clip de salida → parpadeo cuadrado. Promovemos el marco a su propia
-     capa (translateZ + isolation) para que el recorte redondeado se aplique
-     SIEMPRE en compositor, en entrada, hold y salida. No anima border-radius. */
   transform: translateZ(0);
   isolation: isolate;
   backface-visibility: hidden;
-  filter:
-    drop-shadow(0 34px 70px rgba(0, 0, 0, 0.72))
-    drop-shadow(0 0 28px rgba(255, 255, 255, 0.055));
-}
-
-/* La imagen es un objeto recto sobre negro: tamaño fijo por preset (GSAP fija
-   max-width/max-height), object-fit contain → siempre completa. SIN zoom ni
-   rotación: el hold no anima nada. El `filter`/`clip-path` los controla GSAP
-   en la entrada/salida (revelado editorial). */
-.sequenceImage {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: min(72vw, 960px);
-  max-height: min(62vh, 680px);
-  object-fit: contain;
-  border-radius: var(--hero-popup-radius);
-  will-change: transform, opacity, filter, clip-path;
-  opacity: 0;
-}
-
-/* Cue de captura LOCAL (no flash de pantalla): filo rojo fino al borde del
-   marco que parpadea al abrir cada imagen. Mismo radio → nunca cuadrado. */
-.popFrame {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  border: 1px solid rgba(236, 0, 0, 0.72);
-  border-radius: var(--hero-popup-radius);
-  pointer-events: none;
-  opacity: 0;
-}
-
-.negro {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.68),
+    0 8px 24px rgba(0, 0, 0, 0.42),
+    0 0 20px rgba(255, 255, 255, 0.04);
+  will-change: transform, opacity;
 }
 
-/* ─── Capa de transiciones editoriales ────────────────────── */
-.transitionsLayer {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.transition {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: clamp(1.5rem, 5vw, 3rem);
-  background: #000000;
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Stages que crean contexto de posición y apilan frase real + fantasmas. */
-.t1Stage,
-.t3Stage,
-.t4Stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-}
-
-.t1Stage > *,
-.t4Stage > * {
-  grid-area: 1 / 1;
-}
-
-/* Copias fantasma (muy tenues): se desfasan y colapsan en la frase limpia
-   (ruido → claridad). Sin glitch, sin RGB splits, legibilidad intacta. */
-.t1Ghost,
-.t4Ghost {
-  pointer-events: none;
-}
-
-.t1Ghost {
-  border-left-color: transparent !important;
-}
-
-.t1Ghost .tHuge,
-.t4Ghost .tHuge {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.t1Ghost .tSmall,
-.t4Ghost .tSmall {
-  color: rgba(255, 255, 255, 0.32);
-}
-
-/* Barrido rojo de registro (D1). */
-.t1Sweep {
-  position: absolute;
-  top: 50%;
-  left: 8%;
-  right: 8%;
-  height: clamp(2px, 0.32vw, 4px);
-  background: #ec0000;
-  border-radius: 3px;
-  box-shadow: 0 0 22px rgba(236, 0, 0, 0.5);
-  transform: scaleX(0);
-  transform-origin: left center;
-  z-index: 3;
-  pointer-events: none;
-}
-
-/* Regla roja vertical (D3). */
-.t3Rule {
-  position: absolute;
-  top: 18%;
-  bottom: 18%;
-  left: clamp(8%, 12vw, 16%);
-  width: clamp(3px, 0.4vw, 5px);
-  background: #ec0000;
-  box-shadow: 0 0 22px rgba(236, 0, 0, 0.45);
-  transform: scaleY(0);
-  transform-origin: center top;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.t3WordWrap {
-  position: relative;
-  display: inline-block;
-}
-
-.t3Ghost {
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #ec0000;
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.tLine {
-  display: block;
-}
-
-.tStack,
-.tDiagonal,
-.tSteps {
-  margin: 0;
-}
-
-/* T1 — NOS ENCARGAMOS / DE TODO */
-.t1 .tStack {
-  text-align: left;
-  margin-left: clamp(8%, 12vw, 18%);
-  padding-left: clamp(1rem, 2vw, 2rem);
-  border-left: 2px solid #ec0000;
-}
-
-.t1 .tSmall {
-  font-family: "Jura", "Inter", system-ui, sans-serif;
-  font-size: clamp(0.85rem, 1.4vw, 1.35rem);
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 0.6rem;
-}
-
-.t1 .tHuge {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(3.5rem, 12vw, 11rem);
-  font-weight: 900;
-  line-height: 0.88;
-  letter-spacing: -0.06em;
-  text-transform: uppercase;
-  color: #ffffff;
-}
-
-.t1 .tUnderline {
-  position: relative;
-  display: inline-block;
-}
-
-.t1 .tUnderline::after {
-  content: "";
-  display: block;
-  width: 72%;
-  height: clamp(5px, 0.6vw, 9px);
-  margin-top: 0.35rem;
-  background: #ec0000;
-}
-
-/* T2 — DE TODO / LO DEMÁS / ... */
-.t2 .tStack {
-  text-align: center;
-  transform: translateX(-4%);
-}
-
-.t2 .tHuge {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(3.2rem, 11vw, 10rem);
-  font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  color: #ffffff;
-}
-
-.t2 .tOutline {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
-  color: transparent;
-}
-
-.t2 .tDots {
-  display: flex;
-  justify-content: center;
-  gap: 0.65rem;
-  margin-top: clamp(1rem, 2vw, 1.6rem);
-}
-
-.t2 .tDots i {
-  width: clamp(0.55rem, 1vw, 0.85rem);
-  height: clamp(0.55rem, 1vw, 0.85rem);
-  border-radius: 2px;
-  background: #ec0000;
-  box-shadow: 0 8px 18px rgba(236, 0, 0, 0.35);
-}
-
-/* T3 — TE / IMPULSAMOS */
-.t3 .tDiagonal {
-  text-align: left;
-  margin-left: clamp(6%, 10vw, 14%);
-}
-
-.t3 .tTag {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 2.4rem);
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #ec0000;
-  margin-bottom: 0.4rem;
-}
-
-.t3 .tTag::before {
-  content: "";
-  display: inline-block;
-  width: clamp(40px, 6vw, 80px);
-  height: 2px;
-  background: #ec0000;
-  margin-right: 0.75rem;
-  vertical-align: middle;
-}
-
-.t3 .tStretch {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(3.8rem, 13vw, 12rem);
-  font-weight: 900;
-  line-height: 0.86;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  color: #ffffff;
-}
-
-/* T4 — MENOS / RUIDO */
-.t4 .tStack {
-  text-align: right;
-  margin-right: clamp(8%, 12vw, 16%);
-}
-
-.t4 .tSmall {
-  font-family: "Jura", "Inter", system-ui, sans-serif;
-  font-size: clamp(0.9rem, 1.5vw, 1.4rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 0.5rem;
-}
-
-.t4 .tHuge {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(3.8rem, 12vw, 10.5rem);
-  font-weight: 900;
-  line-height: 0.88;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #ffffff;
-}
-
-.t4 .tStrike {
-  position: relative;
-}
-
-.t4 .tStrike::after {
-  content: "";
-  position: absolute;
-  left: -4%;
-  right: -4%;
-  top: 52%;
-  height: 3px;
-  background: #ec0000;
-  transform: rotate(-2deg);
-}
-
-/* T5 — EMPIEZA / EVOLUCIONA / ESCALA */
-.t5 .tSteps {
-  width: min(92vw, 900px);
-}
-
-.t5 .tStep1 {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(2rem, 6vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin-left: 0;
-}
-
-.t5 .tStep2 {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(2.4rem, 7vw, 6rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  color: #ec0000;
-  margin-left: clamp(18%, 22vw, 28%);
-  margin-top: 0.15rem;
-}
-
-.t5 .tStep3 {
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(2.8rem, 8.5vw, 7.5rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin-left: clamp(36%, 40vw, 48%);
-  margin-top: 0.15rem;
-}
-
-/* Final — ··· */
-.tFinal {
-  place-items: center;
-}
-
-.tFinalDots {
-  display: flex;
-  gap: clamp(0.65rem, 1.2vw, 1rem);
-  align-items: center;
-  justify-content: center;
-}
-
-.tFinalDots i {
-  width: clamp(0.7rem, 1.2vw, 1rem);
-  height: clamp(0.7rem, 1.2vw, 1rem);
-  border-radius: 2px;
-  background: #ec0000;
-  box-shadow: 0 10px 24px rgba(236, 0, 0, 0.4);
-}
-
-.tFinalDots i:nth-child(2) {
-  background: #ffffff;
-}
-
-/* ─── Estado final ─────────────────────────────────────────── */
-.final {
-  position: absolute;
-  inset: 0;
-  bottom: var(--ticker-h);
-  z-index: 1;
-  background: #000000;
-  display: grid;
-  place-items: center;
-  visibility: hidden;
-}
-
-.finalFrame {
-  width: min(82vw, 1320px);
-  height: min(calc(72vh - var(--ticker-h)), 720px);
-  overflow: hidden;
-}
-
-.finalImage {
+.cardImage {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: inherit;
+  pointer-events: none;
+  user-select: none;
 }
 
-/* ─── Ticker de marca: señal roja sutil EMBEBIDA en el hero negro ──
-   Pastilla con inset horizontal + esquinas redondeadas + halo suave →
-   ya no parece una sección/banner separado, sino parte del hero. */
+/* ─── Ticker rojo permanente (NO TOCAR) ───────────────────── */
 .ticker {
   position: absolute;
   left: clamp(1rem, 3vw, 2rem);
@@ -777,7 +99,6 @@
     0 8px 20px rgba(236, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
     inset 0 -1px 0 rgba(0, 0, 0, 0.18);
-  /* Difumina los extremos contra la pastilla redondeada. */
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent,
@@ -788,7 +109,6 @@
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 
-/* Halo rojo muy suave que funde la pastilla con el negro del hero. */
 .ticker::before {
   content: "";
   position: absolute;
@@ -805,7 +125,6 @@
   gap: clamp(1.25rem, 2.5vw, 2.4rem);
   width: max-content;
   white-space: nowrap;
-  /* Velocidad calmada (≈40s): viva pero sin protagonismo. */
   animation: heroTickerMove 40s linear infinite;
 }
 
@@ -835,34 +154,16 @@
 
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 900px) {
-  /* Las piezas ocupan más ancho relativo, sin llenar la pantalla. */
-  .sequenceImage {
-    max-width: 86vw;
-    max-height: 56vh;
-  }
-
-  .t1 .tStack {
-    margin-left: 6%;
-  }
-
-  .t4 .tStack {
-    margin-right: 6%;
-  }
-
-  /* Intro: rebaja un punto la escala de las piezas grandes. */
-  .fragA2 {
-    font-size: clamp(2.6rem, 11vw, 5.5rem);
-  }
-
-  .fragB1 {
-    font-size: clamp(3rem, 14vw, 6rem);
+  .cardStack {
+    width: min(74vw, 620px);
+    height: min(50vh, 480px);
   }
 }
 
 @media (max-width: 768px) {
   .root {
     --ticker-h: clamp(30px, 8vw, 40px);
-    --hero-popup-radius: 16px;
+    --hero-card-radius: 16px;
   }
 
   .ticker {
@@ -876,127 +177,32 @@
     letter-spacing: 0.08em;
   }
 
-  /* Lockup contenido en móvil (no ocupa media pantalla). */
-  .lockup {
-    width: min(62vw, 280px);
-    max-width: 280px;
-  }
-
-  .introWord {
-    font-size: clamp(2.2rem, 12vw, 4rem);
-  }
-
-  .introSubword {
-    font-size: clamp(0.62rem, 3vw, 0.85rem);
-    letter-spacing: 0.22em;
-  }
-
-  /* Frase editorial en móvil: legible, sin overflow horizontal. */
-  .introPhraseLine {
-    font-size: clamp(1.15rem, 6.4vw, 1.9rem);
-    white-space: normal;
-  }
-
-  .introPhraseRule {
-    width: min(70vw, 320px);
-    margin-bottom: 0.9rem;
-  }
-
-  /* Móvil: intro más limpia — se conserva el motivo de tres puntos y las
-     palabras grandes; se ocultan las anotaciones pequeñas (CRITERIO/HILO) y un
-     fragmento secundario para evitar saturación/overflow, y se recolocan las
-     piezas grandes hacia el centro. */
-  .fragA1,
-  .fragA3,
-  .fragB3 {
-    display: none;
-  }
-
-  .fragA2 {
-    top: 33%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: clamp(2.4rem, 16vw, 4.4rem);
-  }
-
-  .fragA4 {
-    bottom: 22%;
-    left: 12%;
-    font-size: clamp(1.9rem, 12vw, 3.4rem);
-  }
-
-  .fragB1 {
-    top: 30%;
-    right: -8%;
-    font-size: clamp(3rem, 22vw, 6rem);
-  }
-
-  .fragB2 {
-    top: 17%;
-    left: 8%;
-    font-size: clamp(1.4rem, 6vw, 2.2rem);
-  }
-
-  .fragB4 {
-    bottom: 22%;
-    right: 12%;
-    font-size: clamp(2rem, 12vw, 3.6rem);
-  }
-
-  .ghostWord {
-    font-size: clamp(2.2rem, 14vw, 3.8rem);
-  }
-
-  .sequenceImage {
+  .cardStack {
+    width: min(86vw, 520px);
+    height: min(56vh, 460px);
     max-width: 86vw;
-    max-height: 52vh;
+    max-height: 56vh;
   }
 }
 
 @media (max-width: 640px) {
-  .sequenceImage {
-    max-width: 88vw;
-    max-height: 50vh;
-  }
-
-  .t1 .tHuge,
-  .t2 .tHuge,
-  .t3 .tStretch,
-  .t4 .tHuge {
-    font-size: clamp(2.4rem, 14vw, 4.5rem);
-  }
-
-  .t5 .tStep1 {
-    font-size: clamp(1.6rem, 8vw, 2.4rem);
-  }
-
-  .t5 .tStep2 {
-    font-size: clamp(1.8rem, 9vw, 2.8rem);
-    margin-left: 14%;
-  }
-
-  .t5 .tStep3 {
-    font-size: clamp(2rem, 10vw, 3.2rem);
-    margin-left: 28%;
+  .cardStack {
+    width: min(86vw, 480px);
+    height: min(54vh, 420px);
+    max-height: 54vh;
   }
 }
 
 @media (max-width: 420px) {
-  .sequenceImage {
-    max-width: 84vw;
-    max-height: 46vh;
-  }
-
-  .t1 .tHuge,
-  .t2 .tHuge,
-  .t3 .tStretch,
-  .t4 .tHuge {
-    font-size: clamp(2.1rem, 13vw, 3.6rem);
+  .cardStack {
+    width: min(86vw, 440px);
+    height: min(52vh, 400px);
+    max-height: 52vh;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sequenceImage {
+  .card {
     will-change: auto;
   }
 

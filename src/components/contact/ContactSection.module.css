@@ -455,6 +455,20 @@
   font-weight: 500;
 }
 
+/* ─── MARGEN PREMIUM · rango intermedio escritorio/portátil ───
+   Solo entre 14" y 27" (1366–1919px): margen lateral firme de ~80px por lado
+   topando en 1360px (= --section-max-width) → mismo tope que el resto de
+   secciones y SIN salto al pasar a ≥1920px. Solo afecta al shell negro exterior
+   (.shell); el formulario, email, titular y demás contenido no se tocan. */
+@media (min-width: 1366px) and (max-width: 1919px) {
+  .shell {
+    width: calc(100% - 160px);
+    max-width: 1360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* ─── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 980px) {
   .shell {
