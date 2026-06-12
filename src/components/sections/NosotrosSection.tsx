@@ -117,7 +117,7 @@ export function NosotrosSection() {
     >
       {/* Hoja editorial diseñada: zona superior clara + zona inferior negra
           dominante con gráfico de contorno blanco derivado de la identidad. */}
-      <div className={styles.sheet}>
+      <div className={`${styles.sheet} postHeroSafeFrame`}>
         {/* ─── ZONA SUPERIOR CLARA ─────────────────────────────── */}
         <div className={styles.sheetTop}>
           {/* Atmósfera editorial sutil: profundidad de papel + líneas finas de
@@ -140,7 +140,7 @@ export function NosotrosSection() {
               <div className={styles.visualFrame}>
                 <img
                   src="/assets/Studio.png"
-                  alt="Espacio creativo de Etecé Studio, agencia de branding, diseño web y comunicación visual"
+                  alt=""
                   className={styles.visualImg}
                   loading="lazy"
                   decoding="async"

@@ -147,13 +147,13 @@ export function EnfoqueSection() {
       className={`landing-block landing-block--enfoque ${styles.enfoque}`}
       aria-label="Enfoque"
     >
-      <div className={styles.bg} aria-hidden="true">
+      <div className={`${styles.bg} postHeroSafeFrame`} aria-hidden="true">
         <div className={styles.bgStripe} />
         <div className={styles.bgWash} />
         <div className={styles.bgGrain} />
       </div>
 
-      <div className={styles.inner}>
+      <div className={`${styles.inner} postHeroSafeFrame`}>
         <div className={styles.topEditorial}>
           {/* h2 con display:contents → mantiene la semántica de un único
               encabezado, pero sus partes se colocan en celdas del grid:

@@ -101,6 +101,35 @@
   }
 }
 
+/* Móvil ≤768px: barra sólida más ligera y premium — menos padding vertical,
+   gap algo más ajustado y logo levemente más contenido (solo el extremo alto del
+   clamp), de modo que ocupe un poco menos de alto sin perder presencia. No toca
+   labels, colores, estado activo, min-height ni la lógica. El rango táblet
+   (769–1024px) y la barra de escritorio quedan intactos. */
+@media (max-width: 768px) {
+  .mobileTopNav {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    gap: clamp(0.55rem, 2.5vw, 0.8rem);
+  }
+
+  .mobileTopNavLogo img {
+    width: clamp(62px, 16.5vw, 90px);
+  }
+}
+
+/* iPhones (391–430px): un punto más de ligereza, logo aún claramente visible. */
+@media (max-width: 430px) {
+  .mobileTopNav {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .mobileTopNavLogo img {
+    width: clamp(58px, 15.5vw, 78px);
+  }
+}
+
 /* Very small screens: keep the bar compact and avoid horizontal overflow. */
 @media (max-width: 390px) {
   .mobileTopNav {

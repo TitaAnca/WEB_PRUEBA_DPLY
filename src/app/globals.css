@@ -1417,9 +1417,11 @@ body.site-revealed .site-footer {
 /* Mobile: footer más compacto — labels más pequeñas, gaps reducidos y los
    enlaces legales envueltos en fila. Se conserva el orden y todos los enlaces. */
 @media (max-width: 768px) {
+  /* Footer compacto: firma de cierre justo bajo el Contact (no una nueva
+     sección larga). Solo se reduce alto/gaps; enlaces y orden intactos. */
   .site-footer {
-    padding-block: clamp(2.5rem, 10vw, 4rem);
-    gap: clamp(1.2rem, 5vw, 1.8rem);
+    padding-block: clamp(1rem, 4vw, 1.5rem);
+    gap: clamp(0.7rem, 3vw, 1.05rem);
   }
 
   /* Iconos sociales: entre "Etecé Solutions" y los enlaces legales. */
@@ -1491,6 +1493,13 @@ body.site-revealed .site-footer {
 
   .site-footer__legal {
     gap: 0.45rem 0.7rem;
+  }
+}
+
+/* iPhones pequeños: firma de cierre aún más compacta. */
+@media (max-width: 430px) {
+  .site-footer {
+    padding-block: 0.9rem;
   }
 }
 
@@ -2679,4 +2688,29 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   box-sizing: border-box;
   margin-block: 0;
   padding: 0;
+}
+
+/* ============================================================
+   SAFE-AREA POST-HERO · franja intermedia escritorio/portátil
+   Sistema único y explícito (sustituye a las antiguas reglas dispersas por
+   módulo). Se aplica manualmente en el JSX a los shells VISIBLES post-Hero:
+     · Nosotros → .sheet
+     · Enfoque  → .bg (panel negro) + .inner (contenido)
+     · Contacto → .shell
+   Solo entre 1180px y 1919px: el ancho se calcula contra el viewport (100vw)
+   y las zonas de chrome fijas. Márgenes asimétricos a propósito → la derecha
+   es mayor porque el grupo nav/social ocupa más espacio. A ≥1920px y <1180px
+   no tiene efecto. No afecta a Hero ni a la navegación (no llevan la clase).
+   El overflow-x:hidden de html/body recorta cualquier sub-píxel del 100vw. */
+@media (min-width: 1180px) and (max-width: 1919px) {
+  .postHeroSafeFrame {
+    --post-hero-safe-left: clamp(130px, 9vw, 180px);
+    --post-hero-safe-right: clamp(210px, 14vw, 290px);
+
+    width: calc(100vw - var(--post-hero-safe-left) - var(--post-hero-safe-right)) !important;
+    max-width: none !important;
+    margin-left: var(--post-hero-safe-left) !important;
+    margin-right: var(--post-hero-safe-right) !important;
+    box-sizing: border-box;
+  }
 }

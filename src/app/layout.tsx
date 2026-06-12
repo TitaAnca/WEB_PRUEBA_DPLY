@@ -2,13 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const SITE_URL = "https://etecestudio.com";
-const SITE_TITLE =
-  "Etecé Studio | Agencia de branding, diseño web y comunicación visual";
+const SITE_TITLE = "Etecé Studio | Branding, diseño web y comunicación visual";
 const SITE_DESCRIPTION =
-  "Agencia de branding, diseño web y comunicación visual. Creamos marcas, identidades visuales, sistemas gráficos y webs con estrategia, dirección creativa y coherencia.";
-// Variante breve para tarjetas sociales (OG/Twitter).
-const SHARE_DESCRIPTION =
-  "Creamos marcas, identidades visuales, sistemas gráficos y webs con estrategia, dirección creativa y coherencia.";
+  "Estudio de branding, diseño web y comunicación visual. Creamos identidades, webs y sistemas visuales para que todo lo demás también importe.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -18,38 +14,22 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "agencia de branding",
-    "agencia de diseño",
-    "agencia de comunicación visual",
-    "agencia de diseño gráfico",
-    "agencia de marcas",
-    "estudio de branding",
-    "estudio de diseño",
-    "diseño web",
-    "diseño web para marcas",
     "branding",
-    "branding para empresas",
-    "identidad visual",
-    "diseño de identidad visual",
-    "estrategia de marca",
-    "dirección creativa",
+    "diseño web",
     "comunicación visual",
+    "identidad visual",
+    "dirección creativa",
+    "estrategia de marca",
     "diseño gráfico",
-    "sistemas visuales",
-    "diseño editorial",
-    "diseño de packaging",
-    "creación de marca",
-    "rediseño de marca",
+    "estudio de branding",
+    "agencia de branding",
     "Etecé Studio",
   ],
   creator: "Etecé Studio",
   publisher: "Etecé Studio",
-  category: "Branding, diseño web y comunicación visual",
+  category: "branding, diseño web y comunicación visual",
   alternates: {
     canonical: "/",
-    languages: {
-      "es-ES": "/",
-    },
   },
   robots: {
     index: true,
@@ -71,112 +51,40 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Etecé Studio",
     title: SITE_TITLE,
-    description: SHARE_DESCRIPTION,
+    description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
-    description: SHARE_DESCRIPTION,
+    description: SITE_DESCRIPTION,
   },
 };
 
 // JSON-LD (ProfessionalService). Solo datos verificados: web, email, servicios,
 // país, perfiles sociales reales y logo (ruta sin acentos, segura para URL).
-// Sin dirección, teléfono, reseñas, clientes ni premios inventados.
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "@id": `${SITE_URL}/#organization`,
   name: "Etecé Studio",
-  alternateName: "ETECÉ STUDIO",
   url: SITE_URL,
   email: "contacto@etecestudio.com",
   description: SITE_DESCRIPTION,
-  slogan: "Etecé es la filosofía de hacer que todo lo demás importe.",
   logo: `${SITE_URL}/assets/_LOGO_NegroRojo.svg`,
-  areaServed: [
-    {
-      "@type": "Country",
-      name: "España",
-    },
-  ],
-  knowsAbout: [
+  areaServed: {
+    "@type": "Country",
+    name: "España",
+  },
+  serviceType: [
     "Branding",
     "Diseño web",
-    "Comunicación visual",
     "Identidad visual",
-    "Diseño gráfico",
-    "Estrategia de marca",
+    "Comunicación visual",
     "Dirección creativa",
+    "Estrategia de marca",
     "Diseño editorial",
     "Diseño de packaging",
-    "Sistemas visuales de marca",
-    "Creación de marca",
-    "Rediseño de marca",
   ],
-  serviceType: [
-    "Agencia de branding",
-    "Diseño web",
-    "Diseño gráfico",
-    "Comunicación visual",
-    "Identidad visual",
-    "Estrategia de marca",
-    "Dirección creativa",
-    "Diseño editorial",
-    "Diseño de packaging",
-    "Sistemas visuales de marca",
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Servicios de branding, diseño y comunicación visual",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Branding e identidad visual",
-          description:
-            "Creación y desarrollo de marcas, identidades visuales y sistemas gráficos coherentes.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Diseño web",
-          description:
-            "Diseño de webs para marcas que necesitan presencia digital, coherencia visual y comunicación clara.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Comunicación visual",
-          description:
-            "Diseño de piezas, sistemas visuales y recursos gráficos para comunicar marcas con intención.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Estrategia de marca y dirección creativa",
-          description:
-            "Definición de criterio, tono visual y dirección creativa para construir marcas reconocibles.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Diseño editorial y packaging",
-          description:
-            "Diseño de soportes editoriales, packaging y piezas gráficas para marcas y proyectos visuales.",
-        },
-      },
-    ],
-  },
   sameAs: [
     "https://www.instagram.com/etece_studio/",
     "https://x.com/etecestudio",
@@ -197,9 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="preloading" suppressHydrationWarning>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         {children}
       </body>

@@ -105,7 +105,7 @@ export function ContactSection() {
       aria-label="Contacto"
     >
       {/* THE BRIEF ROOM — sala de brief negra dentro de la página clara. */}
-      <div className={styles.shell}>
+      <div className={`${styles.shell} postHeroSafeFrame`}>
         {/* Firma de marca: tres puntos Etecé gigantes, sutiles y recortados. */}
         <div className={styles.backgroundDots} aria-hidden="true">
           <span />

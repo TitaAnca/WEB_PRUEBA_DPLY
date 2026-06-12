@@ -34,7 +34,7 @@ export default function HomePage() {
             border: 0,
           }}
         >
-          Etecé Studio — Agencia de branding, diseño web y comunicación visual
+          Etecé Studio — Branding, diseño web y comunicación visual
         </h1>
         <HeroSection />
         <NosotrosSection />

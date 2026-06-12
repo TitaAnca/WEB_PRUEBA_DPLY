@@ -437,15 +437,8 @@
    contenido (.inner) comparten la MISMA fórmula → quedan concéntricos y el
    contenido nunca se sale del marco negro. No se tocan tarjetas, imagen ni
    tipografía. */
-@media (min-width: 1366px) and (max-width: 1919px) {
-  .bg,
-  .inner {
-    width: calc(100% - 160px);
-    max-width: 1360px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
+/* Safe-area post-Hero (1180–1919px): ahora la gobierna la clase global
+   .postHeroSafeFrame aplicada en el JSX a .bg y .inner (ver globals.css). */
 
 /* ─── Reduced motion ──────────────────────────────────────── */
 /* Móvil: altura natural y padding compacto (sin forzar 100vh). */
@@ -454,8 +447,44 @@
     min-height: auto;
   }
 
+  /* Ritmo vertical móvil compacto: menos padding de shell, gaps y separación
+     del cierre → Enfoque se siente más corto sin perder el proceso editorial. */
   .inner {
-    padding-block: clamp(3rem, 9vw, 4.75rem);
+    padding-block: clamp(1.6rem, 6vw, 2.6rem);
+  }
+
+  .topEditorial {
+    gap: clamp(1rem, 4vw, 1.6rem);
+    margin-bottom: clamp(1.1rem, 4vw, 1.7rem);
+  }
+
+  .intro {
+    font-size: clamp(0.9rem, 3.6vw, 1rem);
+    line-height: 1.55;
+    max-width: 100%;
+  }
+
+  /* Foto un poco más baja en móvil → acorta la zona editorial sin recortarla. */
+  .photoWrap {
+    height: clamp(220px, 50vw, 320px);
+  }
+
+  .method {
+    gap: clamp(0.8rem, 3.5vw, 1.1rem);
+  }
+
+  .card {
+    gap: clamp(0.55rem, 2.5vw, 0.8rem);
+    padding: clamp(0.95rem, 4vw, 1.25rem);
+  }
+
+  .cardText {
+    line-height: 1.5;
+  }
+
+  .closing {
+    margin-top: clamp(1.3rem, 5vw, 2rem);
+    padding-top: clamp(1.1rem, 4vw, 1.6rem);
   }
 
   /* En móvil el titular se simplifica a una columna y ajusta naturalmente
@@ -479,6 +508,25 @@
   .line1,
   .line2 {
     font-size: clamp(2.1rem, 9.5vw, 3rem);
+  }
+}
+
+/* iPhones pequeños: un punto más de compactación, manteniendo legibilidad. */
+@media (max-width: 430px) {
+  .inner {
+    padding-block: 1.2rem;
+  }
+
+  .photoWrap {
+    height: clamp(200px, 52vw, 280px);
+  }
+
+  .method {
+    gap: 0.75rem;
+  }
+
+  .card {
+    padding: 0.95rem;
   }
 }
 
