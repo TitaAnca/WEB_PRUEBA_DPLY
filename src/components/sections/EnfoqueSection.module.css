@@ -430,15 +430,10 @@
   box-shadow: 0 8px 18px rgba(236, 0, 0, 0.18);
 }
 
-/* ─── MARGEN PREMIUM · rango intermedio escritorio/portátil ───
-   Solo entre 14" y 27" (1366–1919px): margen lateral firme de ~80px por lado
-   topando en 1360px (= --section-max-width) → mismo tope que el resto de
-   secciones y SIN salto al pasar a ≥1920px. El panel negro visible (.bg) y su
-   contenido (.inner) comparten la MISMA fórmula → quedan concéntricos y el
-   contenido nunca se sale del marco negro. No se tocan tarjetas, imagen ni
-   tipografía. */
-/* Safe-area post-Hero (1180–1919px): ahora la gobierna la clase global
-   .postHeroSafeFrame aplicada en el JSX a .bg y .inner (ver globals.css). */
+/* Margen lateral intermedio (14"–27"): gestionado globalmente por la clase
+   compartida .postHeroSafeFrame (en globals.css). Se aplica desde el JSX tanto al
+   panel negro visible (.bg) como a su contenido (.inner) → ambos quedan
+   concéntricos con el mismo encuadre, igual que Nosotros y Contacto. */
 
 /* ─── Reduced motion ──────────────────────────────────────── */
 /* Móvil: altura natural y padding compacto (sin forzar 100vh). */

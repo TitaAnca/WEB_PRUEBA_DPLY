@@ -22,7 +22,7 @@ export const NAV_SOCIAL_LINKS = [
     variant: "x" as const,
   },
   {
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/company/129174233/",
     label: "LinkedIn",
     srcDefault: "/assets/Linkedin.png",
     srcOnRed: "/assets/Linkedin_blanco.png",

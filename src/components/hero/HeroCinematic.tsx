@@ -737,8 +737,8 @@ export function HeroCinematic() {
           {Array.from({ length: POOL_SIZE }).map((_, i) => (
             <div className={styles.card} data-card key={`card-${i}`}>
               <img
-                alt=""
-                decoding="async"
+          alt=""
+          decoding="async"
                 src={HERO_BLOCKS[0].images[i % HERO_BLOCKS[0].images.length]}
               />
             </div>

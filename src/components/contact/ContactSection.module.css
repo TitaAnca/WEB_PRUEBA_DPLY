@@ -455,8 +455,9 @@
   font-weight: 500;
 }
 
-/* Safe-area post-Hero (1180–1919px): ahora la gobierna la clase global
-   .postHeroSafeFrame aplicada en el JSX a .shell (ver globals.css). */
+/* Margen lateral intermedio (14"–27"): gestionado globalmente por la clase
+   compartida .postHeroSafeFrame (en globals.css), aplicada al shell .shell desde
+   el JSX. Mantiene el mismo ritmo lateral que Nosotros y Enfoque. */
 
 /* ─── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 980px) {

@@ -2691,17 +2691,14 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
 }
 
 /* ============================================================
-   SAFE-AREA POST-HERO · franja intermedia escritorio/portátil
-   Sistema único y explícito (sustituye a las antiguas reglas dispersas por
-   módulo). Se aplica manualmente en el JSX a los shells VISIBLES post-Hero:
-     · Nosotros → .sheet
-     · Enfoque  → .bg (panel negro) + .inner (contenido)
-     · Contacto → .shell
-   Solo entre 1180px y 1919px: el ancho se calcula contra el viewport (100vw)
-   y las zonas de chrome fijas. Márgenes asimétricos a propósito → la derecha
-   es mayor porque el grupo nav/social ocupa más espacio. A ≥1920px y <1180px
-   no tiene efecto. No afecta a Hero ni a la navegación (no llevan la clase).
-   El overflow-x:hidden de html/body recorta cualquier sub-píxel del 100vw. */
+   SAFE-AREA LATERAL POST-HERO · 14"–27" (1180–1919px)
+   ------------------------------------------------------------
+   Clase compartida y explícita aplicada en el JSX al shell visible de cada
+   sección post-Hero (Nosotros .sheet, Enfoque .bg + .inner, Contacto .shell).
+   Calcula el ancho contra el viewport y reserva una zona segura mayor a la
+   derecha (grupo nav/social, más ancho) que a la izquierda (logo fijo), para que
+   el contenido no choque con la chrome fija. Solo actúa en el rango intermedio:
+   a ≥1920px y a <1180px no tiene efecto. No afecta a Hero ni a la navegación. */
 @media (min-width: 1180px) and (max-width: 1919px) {
   .postHeroSafeFrame {
     --post-hero-safe-left: clamp(130px, 9vw, 180px);
