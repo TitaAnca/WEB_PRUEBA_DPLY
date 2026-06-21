@@ -39,9 +39,14 @@ export default function HomePage() {
         <HeroSection />
         <NosotrosSection />
         <EnfoqueSection />
-        <ContactoSection />
+        {/* Escena de cierre: Contacto + Footer comparten UNA pantalla en
+            escritorio/portátil (≥1180px). En móvil/tablet el wrapper es neutro
+            (flujo normal), conservando el comportamiento actual. */}
+        <div className="closing-viewport">
+          <ContactoSection />
+          <SiteFooter />
+        </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

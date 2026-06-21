@@ -205,7 +205,7 @@
 
 @media (min-width: 981px) {
   .grid {
-    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
     gap: clamp(3rem, 6vw, 6rem);
   }
 }
@@ -249,18 +249,17 @@
 }
 
 .title {
-  margin: 0 0 clamp(0.4rem, 1vw, 0.8rem);
+  margin: 4px 0 clamp(18px, 2.2vh, 30px);
   font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  /* Título-manifiesto más largo: cuerpo ligeramente reducido + line-height
-     controlado para mantener la fuerza editorial sin aumentar la altura de la
-     hoja ni provocar overflow horizontal. line-height ligeramente más holgado
-     para dar aire entre líneas sin crecer la sección. */
-  font-size: clamp(3rem, 4.6vw, 5.4rem);
-  line-height: 0.94;
-  letter-spacing: -0.065em;
+  /* Escala idéntica a Enfoque (.line1 / .line2) — misma fórmula en cada breakpoint. */
+  font-size: clamp(36px, 3.75vw, 57px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
   font-weight: 900;
   text-transform: uppercase;
   color: var(--ink);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .titleLine {
@@ -299,7 +298,8 @@
   display: flex;
   align-items: center;
   padding: clamp(2.6rem, 4.6vw, 4rem);
-  min-height: clamp(240px, 32vh, 380px);
+  /* Altura dirigida por el cierre: padding conserva aire sin bloque decorativo extra. */
+  min-height: 0;
   /* Profundidad sutil: halo rojo muy tenue en la esquina inferior derecha +
      degradado vertical → la banda deja de verse plana sin volverse roja. */
   background:
@@ -323,76 +323,6 @@
     transparent 60%
   );
   z-index: 3;
-}
-
-/* ─── TIPOGRAFÍA FANTASMA EDITORIAL ("ETCÉTERA") ──────────── */
-.blackWord {
-  position: absolute;
-  right: clamp(-1rem, -1vw, 0rem);
-  bottom: clamp(-1.4rem, -1.4vw, -0.4rem);
-  margin: 0;
-  font-family: "Poppins", "Manrope", system-ui, sans-serif;
-  font-size: clamp(5rem, 14vw, 12rem);
-  line-height: 0.82;
-  letter-spacing: -0.08em;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.04);
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  z-index: 1;
-}
-
-/* Pequeño acento rojo para dar ritmo sin sobredecorar. */
-.blackWord::after {
-  content: "";
-  position: absolute;
-  right: 8%;
-  bottom: 30%;
-  width: 56px;
-  height: 2px;
-  background: rgba(236, 0, 0, 0.9);
-}
-
-/* "Todo lo demás": campo tenue de micro-decisiones (marca-agua editorial) en la
-   esquina inferior derecha de la banda negra. Extremadamente sutil → nunca
-   compite con el cierre. Vive detrás (z-index 0). */
-.bandField {
-  position: absolute;
-  right: clamp(1.6rem, 5vw, 4.5rem);
-  bottom: clamp(1.6rem, 3.5vw, 3.2rem);
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 0.5rem 1.6rem;
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.5;
-  z-index: 0;
-}
-
-.bandField span {
-  position: relative;
-  font-family: "Jura", "Inter", system-ui, sans-serif;
-  font-size: clamp(0.58rem, 0.72vw, 0.74rem);
-  line-height: 1;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.16);
-}
-
-/* Tres micro-puntos rojos como separadores de "decisión" (sin glow fuerte). */
-.bandField span:nth-child(3n)::before {
-  content: "";
-  position: absolute;
-  left: -0.85rem;
-  top: 50%;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(236, 0, 0, 0.55);
-  transform: translateY(-50%);
 }
 
 /* ─── CIERRE / MANIFIESTO ─────────────────────────────────── */
@@ -448,6 +378,151 @@
    compartida .postHeroSafeFrame (en globals.css), aplicada al shell .sheet desde
    el JSX. Mantiene el mismo ritmo lateral que Enfoque y Contacto. */
 
+/* ─── DENSIDAD VERTICAL · portátil/escritorio intermedio (1180–1919px) ───
+   En este rango la sección deja de ocupar una pantalla completa: se quita el
+   min-height 100svh, se reducen paddings/gaps y se ajustan títulos para una
+   composición compacta. A ≥1920px se conserva la versión amplia (no aplica) y a
+   ≤1179px gobiernan las reglas móviles/tablet. Solo altura/espaciado: no toca el
+   marco lateral (.postHeroSafeFrame) ni el contenido. */
+/* ─── UNA PANTALLA · escritorio/portátil (≥1180, continuo) ───────────────
+   Nosotros se resuelve dentro de 100svh: composición horizontal centrada, con
+   padding/gaps/título/banda sensibles al ALTO del viewport para compactar sin
+   estrechar el contenido. Solo escala/espaciado: copy e imagen intactos. */
+@media (min-width: 1180px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: 100svh;
+    padding-block: clamp(36px, 5vh, 64px);
+  }
+
+  .meta {
+    margin-bottom: clamp(0.8rem, 1.6vh, 1.6rem);
+  }
+
+  .sheetTop {
+    padding: clamp(28px, 2.8vw, 44px) clamp(1.8rem, 3vw, 3.4rem);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    gap: clamp(24px, 2.8vh, 36px);
+    column-gap: clamp(28px, 3vw, 52px);
+    align-items: start;
+    align-content: start;
+  }
+
+  /* Título e imagen ≥1600: cascada final al final del módulo. */
+
+  .editorial {
+    padding-top: 0;
+    justify-content: flex-start;
+    align-content: start;
+  }
+
+  .titleRule {
+    margin-top: clamp(14px, 1.8vh, 20px);
+  }
+
+  .copy {
+    margin-top: clamp(16px, 2vh, 24px);
+    max-width: 52ch;
+  }
+
+  .copyText {
+    font-size: clamp(0.95rem, 0.95vw, 1.14rem);
+    line-height: clamp(1.5, 1.6vh, 1.75);
+  }
+
+  /* Banda inferior negra compacta (cierre editorial; altura por contenido). */
+  .sheetBottom {
+    min-height: 0;
+    padding: clamp(1.4rem, 3vh, 3rem) clamp(1.8rem, 3vw, 3.4rem);
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.7rem, 2.6vw, 3.5rem);
+  }
+}
+
+/* Gran escritorio (≥1920): un poco más de aire imagen↔texto.
+   Título e imagen de cabecera: gobernados por la cascada final ≥1600 al final del módulo. */
+@media (min-width: 1920px) {
+  .grid {
+    gap: clamp(26px, 2.8vh, 40px);
+    column-gap: clamp(32px, 3.2vw, 52px);
+  }
+
+  .sheetTop {
+    padding: clamp(32px, 3vw, 48px) clamp(1.8rem, 3vw, 3.4rem);
+  }
+}
+
+/* Imagen Studio.png en formato LIGERAMENTE apaisado (no retrato) dentro de su
+   columna. ≥1180 base; ≥1600 gobernado por cascada final al final del módulo. */
+@media (min-width: 1180px) {
+  .visual {
+    width: 100%;
+    justify-content: flex-start;
+    align-self: start;
+    display: block;
+    height: auto;
+    min-height: 0;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    height: clamp(360px, 40vh, 488px);
+    max-height: clamp(360px, 40vh, 488px);
+    min-height: 0;
+    aspect-ratio: 1.12 / 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center 38%;
+    border-radius: inherit;
+    display: block;
+  }
+}
+
+/* Portátil de poca altura: se recortan alturas verticales (título, imagen,
+   paddings) manteniendo el ancho de las columnas. */
+@media (min-width: 1180px) and (max-height: 820px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    padding-block: clamp(14px, 2.4vh, 30px);
+  }
+
+  .sheetTop {
+    padding: clamp(1.1rem, 2.4vh, 2.2rem) clamp(1.6rem, 2.6vw, 2.8rem);
+  }
+
+  .title {
+    font-size: clamp(34.5px, 3.3vw, 49.5px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+  }
+
+  .sheetBottom {
+    padding: clamp(1.1rem, 2.2vh, 2rem) clamp(1.6rem, 2.6vw, 2.8rem);
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.5rem, 2.2vw, 2.4rem);
+  }
+}
+
 /* ─── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 980px) {
   .grid {
@@ -476,13 +551,10 @@
   }
 
   .title {
-    font-size: clamp(2.9rem, 7vw, 5rem);
-  }
-
-  .blackWord {
-    font-size: clamp(4rem, 18vw, 8rem);
-    right: -0.5rem;
-    bottom: -0.5rem;
+    font-size: clamp(27px, 6.75vw, 39px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
   }
 }
 
@@ -493,11 +565,14 @@
   }
 
   .sheetBottom {
-    min-height: 220px;
+    min-height: 0;
   }
 
   .title {
-    font-size: clamp(2.8rem, 13vw, 4.8rem);
+    font-size: clamp(24px, 7.125vw, 34.5px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
   }
 
   .copyText {
@@ -507,13 +582,6 @@
   .closingFirst,
   .closingSecond {
     font-size: clamp(1.7rem, 8vw, 2.5rem);
-  }
-
-  .blackWord {
-    font-size: clamp(3.2rem, 20vw, 5.8rem);
-    color: rgba(255, 255, 255, 0.08);
-    right: -0.5rem;
-    bottom: -0.5rem;
   }
 
   .visualFrame {
@@ -527,14 +595,10 @@
   }
 }
 
-/* ─── FIX imagen Nosotros por debajo de 14" (1366px) ───────────
-   En la franja desktop el marco usa aspect-ratio fijo + object-fit: cover, que
-   RECORTA la foto al estrechar el viewport. Por debajo de 1366px el marco pasa a
-   envolver la imagen a su proporción natural (aspect-ratio: auto + height: auto)
-   con object-fit: contain → la foto se ve COMPLETA, sin recorte ni barras de
-   letterbox. Se conservan esquinas redondeadas (overflow hidden + radio) y la
-   sombra premium. Solo afecta a la imagen de Nosotros; no toca desktop ≥1366px. */
-@media (max-width: 1365px) {
+/* ─── FIX imagen Nosotros · tablet (769–980) ─────────────────────────────
+   En tablet el marco envuelve la proporción natural (sin recorte). ≥981 usa
+   aspect-ratio editorial en la cascada final al final del módulo. */
+@media (min-width: 769px) and (max-width: 980px) {
   /* Contenedor flex: centra el marco para que la foto se lea como pieza
      editorial intencional (no encajada/estrujada) en toda la franja <1366px. */
   .visual {
@@ -575,9 +639,14 @@
 }
 
 @media (max-width: 768px) {
+  /* Título más contenido en móvil → menos saltos de línea y menos alto, sin
+     perder fuerza. ETECÉ sigue en rojo (sin tocar el color). */
   .title {
-    font-size: clamp(2.35rem, 10vw, 4rem);
+    font-size: clamp(27px, 6.75vw, 39px);
     line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(18px, 2.2vh, 30px);
   }
 
   .titleRule {
@@ -604,11 +673,6 @@
   .copyText {
     line-height: 1.78;
   }
-
-  .bandField {
-    opacity: 0.4;
-    right: 2rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -616,8 +680,7 @@
   .editorialLineTwo,
   .editorialLineFlow,
   .redMarkImage,
-  .redMarkParagraph,
-  .bandField {
+  .redMarkParagraph {
     display: none;
   }
 
@@ -652,23 +715,46 @@
     padding: clamp(1.3rem, 5.5vw, 2.2rem);
   }
 
+  /* Gap imagen↔texto más ajustado (la imagen ya no es alta → menos hueco). */
   .grid {
-    gap: clamp(1.4rem, 5vw, 2.2rem);
+    gap: clamp(1.1rem, 4.5vw, 1.6rem);
+  }
+
+  /* Imagen Studio.png LIGERAMENTE apaisada (no retrato): se anula el ratio natural
+     + object-fit:contain heredado de la regla <1365px. Ancho completo de la tarjeta,
+     alto derivado del ratio → la sección se acorta de verdad. Esquinas redondeadas y
+     asset intactos. */
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 1.14 / 1;
+    height: auto;
+    max-height: none;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
   }
 
   .copy {
-    margin-top: clamp(1rem, 4vw, 1.5rem);
+    margin-top: clamp(0.85rem, 3.6vw, 1.25rem);
     max-width: 100%;
   }
 
   .copyText {
-    font-size: clamp(0.92rem, 3.6vw, 1.02rem);
-    line-height: 1.62;
+    font-size: clamp(0.95rem, 3.8vw, 1.06rem);
+    line-height: 1.55;
   }
 
+  /* Banda negra inferior compacta: altura dirigida por contenido (sin min-height
+     grande). */
   .sheetBottom {
-    padding: clamp(1.5rem, 6.5vw, 2.4rem);
-    min-height: clamp(190px, 44vw, 260px);
+    padding: clamp(1.3rem, 5vw, 2rem);
+    min-height: 0;
   }
 }
 
@@ -690,6 +776,1093 @@
 
   .sheetBottom {
     padding: 1.5rem;
-    min-height: auto;
+    min-height: 0;
+  }
+}
+
+/* ─── Móvil efectivo (≤768) · cascada final ─────────────────────────────
+   Anula 100svh global (height + max-height), ratios retrato heredados y huecos
+   verticales. Debe ir al final del módulo para ganar en especificidad/orden.
+   Ritmo +20px: micro→título +4 · título→regla +5 · regla→párrafo +5 ·
+   padding sección +3 arriba/abajo. Imagen: +20px sobre ratio 1.1 previo. */
+@media (max-width: 768px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding-block: calc(clamp(24px, 6vw, 38px) + 3px);
+    align-items: flex-start;
+  }
+
+  .sheetTop {
+    padding: clamp(18px, 5vw, 28px);
+  }
+
+  .meta {
+    margin-bottom: calc(clamp(14px, 4vw, 20px) + 4px);
+  }
+
+  .grid {
+    gap: clamp(16px, 4.5vw, 22px);
+    align-content: start;
+    justify-content: flex-start;
+  }
+
+  .visual {
+    container-type: inline-size;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    height: calc(100cqw / 1.1 + 20px);
+    max-height: none;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .editorial {
+    padding-top: 0;
+  }
+
+  .title {
+    font-size: clamp(27px, 6.75vw, 39px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(18px, 2.2vh, 30px);
+  }
+
+  .titleRule {
+    width: 48px;
+    margin-top: calc(clamp(12px, 3.5vw, 16px) + 5px);
+  }
+
+  .copy {
+    margin-top: calc(clamp(14px, 4vw, 18px) + 5px);
+  }
+
+  .copyText {
+    font-size: clamp(0.92rem, 3.8vw, 1.02rem);
+    line-height: 1.52;
+  }
+
+  .sheetBottom {
+    height: auto;
+    min-height: 0;
+    padding-block: clamp(18px, 5vw, 28px);
+    align-items: flex-start;
+  }
+
+  .closingSecond {
+    margin-top: clamp(10px, 3vw, 14px);
+  }
+
+  .dots {
+    margin-top: clamp(12px, 3.5vw, 16px);
+  }
+}
+
+/* Portátil compacto 14" (1180–1599): altura natural, imagen con presencia editorial
+   (casi cuadrada, algo más alta que la versión comprimida). Sin forzar 100svh. */
+@media (min-width: 1180px) and (max-width: 1599px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: 0;
+    height: auto;
+    padding-block: clamp(44px, 5.5vh, 72px);
+  }
+
+  .sheetTop {
+    padding: clamp(28px, 2.8vw, 44px) clamp(1.8rem, 3vw, 3.2rem);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    gap: clamp(22px, 2.5vh, 34px);
+    column-gap: clamp(28px, 3vw, 52px);
+    align-items: start;
+    align-content: start;
+    justify-content: flex-start;
+  }
+
+  .visual {
+    justify-content: flex-start;
+    align-self: start;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: block;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    height: clamp(360px, 40vh, 488px);
+    max-height: clamp(360px, 40vh, 488px);
+    min-height: 0;
+    aspect-ratio: 1.12 / 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center 38%;
+    display: block;
+  }
+
+  .editorial {
+    align-self: start;
+    justify-content: flex-start;
+    height: auto;
+    min-height: 0;
+    padding-top: 0;
+  }
+
+  .title {
+    font-size: clamp(40.5px, 3.9vw, 63px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(18px, 2.2vh, 30px);
+  }
+
+  .titleRule {
+    margin-top: clamp(14px, 1.8vh, 20px);
+  }
+
+  .copy {
+    margin-top: clamp(16px, 2vh, 24px);
+    max-width: 50ch;
+  }
+
+  .copyText {
+    font-size: clamp(0.96rem, 0.98vw, 1.1rem);
+    line-height: 1.58;
+  }
+
+  .sheetBottom {
+    padding: clamp(1.6rem, 3vh, 2.8rem) clamp(1.8rem, 3vw, 3.2rem);
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.65rem, 2.4vw, 2.8rem);
+  }
+}
+
+@media (min-width: 1180px) and (max-width: 1599px) and (max-height: 850px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    padding-block: clamp(36px, 4.8vh, 58px);
+  }
+
+  .title {
+    font-size: clamp(37.5px, 3.6vw, 54px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+  }
+}
+
+/* ─── Gran escritorio (≥1600) · balance imagen/título · cascada final ───
+   Anula reglas ≥1180/≥1920 que fuerzan 100svh, centran verticalmente,
+   comprimen la imagen (max-height) o dejan el texto dominando la rejilla.
+   Solo ≥1600 — portátil 14" y compacto (<1600) intactos. */
+@media (min-width: 1600px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: 0;
+    height: auto;
+    align-items: flex-start;
+    padding-block: clamp(44px, 5vh, 72px);
+  }
+
+  .sheetTop {
+    padding: clamp(28px, 2.8vw, 44px) clamp(1.8rem, 3vw, 3.4rem);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(22px, 2.4vh, 32px);
+    column-gap: clamp(32px, 3vw, 56px);
+    align-items: start;
+    align-content: start;
+  }
+
+  .visual {
+    width: 100%;
+    justify-content: flex-start;
+    align-self: start;
+    height: auto;
+    min-height: 0;
+    display: block;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    height: clamp(360px, 40vh, 488px);
+    max-height: clamp(360px, 40vh, 488px);
+    min-height: 0;
+    aspect-ratio: 1.12 / 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center 38%;
+  }
+
+  .editorial {
+    width: 100%;
+    max-width: none;
+    align-self: start;
+    min-height: 0;
+    height: auto;
+    padding-top: 0;
+  }
+
+  /* Idéntico a Enfoque .line1 / .line2 (≥1180, <1920). */
+  .title {
+    font-size: clamp(40.5px, 3.9vw, 63px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(18px, 2.2vh, 30px);
+    max-width: 100%;
+  }
+
+  .titleLine {
+    display: block;
+    text-wrap: balance;
+    max-width: 100%;
+  }
+
+  .copy {
+    margin-top: clamp(16px, 2vh, 24px);
+    max-width: 48ch;
+  }
+}
+
+@media (min-width: 1920px) {
+  .grid {
+    column-gap: clamp(32px, 3.2vw, 56px);
+  }
+
+  /* Idéntico a Enfoque .line1 / .line2 (≥1920). */
+  .title {
+    font-size: clamp(54px, 3.75vw, 78px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+  }
+}
+
+/* ─── Desktop/laptop · composición compacta · cascada final ─────────────
+   Imagen: ancho completo de columna; alto controlado (~50% del stretch previo);
+   crop apaisado editorial. Título/párrafo intactos. */
+@media (min-width: 981px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: 0;
+    height: auto;
+    align-items: flex-start;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    column-gap: clamp(28px, 3vw, 52px);
+    align-items: start;
+    align-content: start;
+  }
+
+  .visual {
+    align-self: start;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: block;
+  }
+
+  .visualFrame {
+    width: 100%;
+    height: clamp(360px, 40vh, 488px);
+    max-height: clamp(360px, 40vh, 488px);
+    min-height: 0;
+    aspect-ratio: 1.12 / 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+    display: block;
+  }
+
+  .editorial {
+    align-self: start;
+    justify-content: flex-start;
+    align-content: start;
+    height: auto;
+    min-height: 0;
+    padding-top: 0;
+  }
+
+  /* Enfoque base (<1180): .title */
+  .title {
+    font-size: clamp(36px, 3.75vw, 57px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(20px, 2.5vh, 32px);
+    max-width: 100%;
+  }
+
+  .titleLine {
+    text-wrap: balance;
+  }
+
+  .copy {
+    margin-top: clamp(16px, 2vh, 24px);
+  }
+}
+
+/* ≥1180: título idéntico a Enfoque */
+@media (min-width: 1180px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: 0;
+    height: auto;
+  }
+
+  .grid {
+    align-items: start;
+  }
+
+  .visual {
+    align-self: start;
+  }
+
+  .visualFrame {
+    width: 100%;
+    height: clamp(360px, 40vh, 488px);
+    max-height: clamp(360px, 40vh, 488px);
+    min-height: 0;
+    aspect-ratio: 1.12 / 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .visualImg {
+    object-position: center 38%;
+  }
+
+  .title {
+    font-size: clamp(40.5px, 3.9vw, 63px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(20px, 2.5vh, 32px);
+  }
+}
+
+/* ≥1920: título idéntico a Enfoque (≥1920) */
+@media (min-width: 1920px) {
+  .title {
+    font-size: clamp(54px, 3.75vw, 78px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+  }
+}
+
+/* ─── Studio.png · compactación ~20% · cascada final (≥981) ─────────────
+   Ancho intacto; alto controlado apaisado; sin estirar la fila ni la sección. */
+@media (min-width: 981px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: 0;
+    height: auto;
+    align-items: flex-start;
+  }
+
+  .sheetTop {
+    padding-bottom: clamp(24px, 3vh, 40px);
+  }
+
+  .grid {
+    align-items: start;
+    align-content: start;
+  }
+
+  .visual {
+    align-self: start;
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .visualFrame {
+    width: 100%;
+    height: clamp(360px, 40vh, 488px);
+    max-height: clamp(360px, 40vh, 488px);
+    min-height: 0;
+    aspect-ratio: 1.12 / 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 38%;
+  }
+
+  .editorial {
+    align-self: start;
+    height: auto;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 1920px) {
+  .visualFrame {
+    height: clamp(380px, 42vh, 520px);
+    max-height: clamp(380px, 42vh, 520px);
+    aspect-ratio: 1.12 / 1;
+  }
+}
+
+/* ─── Studio.png · alineación inferior con párrafo · cascada final (≥981)
+   Extensiones medidas (paragraphBottom − imageBottom) por franja two-column. */
+@media (min-width: 981px) and (max-width: 1279px) {
+  .visualFrame {
+    height: calc(clamp(360px, 40vh, 488px) + 45px);
+    max-height: calc(clamp(360px, 40vh, 488px) + 45px);
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .visualFrame {
+    height: calc(clamp(360px, 40vh, 488px) + 60px);
+    max-height: calc(clamp(360px, 40vh, 488px) + 60px);
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1499px) {
+  .visualFrame {
+    height: calc(clamp(360px, 40vh, 488px) + 56px);
+    max-height: calc(clamp(360px, 40vh, 488px) + 56px);
+  }
+}
+
+@media (min-width: 1500px) and (max-width: 1599px) {
+  .visualFrame {
+    height: calc(clamp(360px, 40vh, 488px) + 71px);
+    max-height: calc(clamp(360px, 40vh, 488px) + 71px);
+  }
+}
+
+@media (min-width: 1600px) and (max-width: 1919px) {
+  .visualFrame {
+    height: calc(clamp(360px, 40vh, 488px) + 68px);
+    max-height: calc(clamp(360px, 40vh, 488px) + 68px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .visualFrame {
+    height: calc(clamp(380px, 42vh, 520px) + 114px);
+    max-height: calc(clamp(380px, 42vh, 520px) + 114px);
+  }
+}
+
+/* ─── Studio.png · alineación superior con eyebrow (≥981 · two-column) ─────
+   Causa: .meta está fuera de .grid; la imagen arrancaba tras eyebrow + margen.
+   Compensación exacta en el wrapper (sin mover eyebrow, título ni párrafo). */
+@media (min-width: 981px) and (max-width: 1179px) {
+  .visual {
+    margin-top: calc(
+      -1 * (
+        clamp(0.62rem, 0.7vw, 0.78rem) + clamp(1.6rem, 2.4vw, 2.4rem)
+      )
+    );
+  }
+}
+
+@media (min-width: 1180px) {
+  .visual {
+    margin-top: calc(
+      -1 * (
+        clamp(0.62rem, 0.7vw, 0.78rem) + clamp(0.8rem, 1.6vh, 1.6rem)
+      )
+    );
+  }
+}
+
+/* ─── Título principal · +5px separación respecto al eyebrow (≥981) ─────────
+   Base margin-top 4px → 9px; bloque completo, sin mover eyebrow ni párrafo. */
+@media (min-width: 981px) {
+  .title {
+    margin-top: calc(4px + 5px);
+  }
+}
+
+/* ─── Párrafo · marca roja fuera del texto + baseline con imagen (≥981) ────
+   .redMarkParagraph usaba bottom:% del sheet y invadía el párrafo (~“forma”).
+   El párrafo se compacta con line-height/max-width medidos; imagen intacta. */
+@media (min-width: 981px) {
+  .redMarkParagraph {
+    display: none;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1279px) {
+  .copy {
+    max-width: 57ch;
+  }
+
+  .copyText {
+    line-height: 1.38;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1359px) and (max-height: 799px) {
+  .copy {
+    max-width: 56ch;
+  }
+
+  .copyText {
+    line-height: 1.395;
+  }
+}
+
+@media (min-width: 1360px) and (max-width: 1439px) and (max-height: 799px) {
+  .copy {
+    max-width: 63ch;
+  }
+
+  .copyText {
+    line-height: 1.22;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) and (min-height: 800px) {
+  .copy {
+    max-width: 60ch;
+  }
+
+  .copyText {
+    line-height: 1.32;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .copy {
+    max-width: 68ch;
+  }
+
+  .copyText {
+    line-height: 1.12;
+  }
+}
+
+@media (min-width: 1600px) and (max-width: 1919px) {
+  .copy {
+    max-width: 52ch;
+  }
+
+  .copyText {
+    line-height: 1.38;
+  }
+}
+
+@media (min-width: 1920px) {
+  .copy {
+    max-width: 49ch;
+  }
+
+  .copyText {
+    line-height: 1.41;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE RECOMPOSITION · authoritative cascade (<1440px)
+   Desktop ≥1440px stays locked — rules above remain pixel-identical.
+   Overrides min-width:981/1180 geometry that leaked below desktop.
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1439px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    align-items: flex-start;
+  }
+}
+
+/* ─── COMPACT LAPTOP · 1100–1439 ─────────────────────────────── */
+@media (min-width: 1100px) and (max-width: 1439px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    padding-block: clamp(2rem, 4.2vh, 3.25rem);
+  }
+
+  .sheetTop {
+    padding: clamp(1.65rem, 2.2vw, 2.45rem) clamp(1.5rem, 2.6vw, 2.35rem)
+      clamp(1.5rem, 2.4vh, 2rem);
+  }
+
+  .meta {
+    margin-bottom: clamp(0.9rem, 1.6vh, 1.35rem);
+    text-align: right;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.66fr);
+    column-gap: clamp(26px, 2.4vw, 38px);
+    row-gap: clamp(1rem, 2vh, 1.5rem);
+    align-items: start;
+    align-content: start;
+    justify-items: stretch;
+  }
+
+  .visual {
+    margin-top: 0;
+    align-self: start;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: block;
+    justify-content: flex-start;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    height: clamp(328px, calc(39.2vh + 20px), 468px);
+    max-height: clamp(328px, calc(39.2vh + 20px), 468px);
+    min-height: 0;
+    aspect-ratio: 1.15 / 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center 38%;
+    display: block;
+  }
+
+  .editorial {
+    align-self: start;
+    justify-content: flex-start;
+    height: auto;
+    min-height: 0;
+    padding-top: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .title {
+    font-size: clamp(31px, 3.1vw, 46px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-top: calc(4px + 5px);
+    margin-bottom: clamp(14px, 2vh, 22px);
+    max-width: 100%;
+  }
+
+  .titleRule {
+    margin-top: clamp(12px, 1.5vh, 16px);
+  }
+
+  .copy {
+    margin-top: clamp(14px, 1.8vh, 20px);
+    max-width: 100%;
+  }
+
+  .copyText {
+    font-size: clamp(0.94rem, 0.98vw, 1.06rem);
+    line-height: 1.62;
+  }
+
+  .sheetBottom {
+    min-height: 0;
+    height: auto;
+    padding: clamp(1.35rem, 2.6vh, 2.2rem) clamp(1.5rem, 2.6vw, 2.35rem);
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.45rem, 2.1vw, 2.35rem);
+  }
+}
+
+/* ─── TABLET · two columns · 900–1099 ────────────────────────── */
+@media (min-width: 900px) and (max-width: 1099px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    padding-block: clamp(1.85rem, 4vh, 2.85rem);
+  }
+
+  .sheetTop {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .meta {
+    margin-bottom: clamp(0.85rem, 1.8vh, 1.25rem);
+    text-align: right;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    column-gap: clamp(24px, 3vw, 36px);
+    row-gap: clamp(1rem, 2vh, 1.5rem);
+    align-items: start;
+    align-content: start;
+    justify-items: stretch;
+  }
+
+  .visual {
+    margin-top: 0;
+    align-self: start;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: block;
+    justify-content: flex-start;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    height: clamp(208px, calc(24vh + 20px), 280px);
+    max-height: clamp(208px, calc(24vh + 20px), 280px);
+    min-height: 0;
+    aspect-ratio: 1.14 / 1;
+    overflow: hidden;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .editorial {
+    align-self: start;
+    padding-top: 0;
+    height: auto;
+    min-height: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .title {
+    font-size: clamp(28px, 3.4vw, 38px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(14px, 2vh, 20px);
+  }
+
+  .titleRule {
+    margin-top: 0.85rem;
+  }
+
+  .copy {
+    margin-top: clamp(0.9rem, 2vh, 1.15rem);
+    max-width: 100%;
+  }
+
+  .copyText {
+    font-size: clamp(0.94rem, 1.05vw, 1.04rem);
+    line-height: 1.68;
+  }
+
+  .sheetBottom {
+    min-height: 0;
+    padding: clamp(1.25rem, 2.8vh, 1.85rem) clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.35rem, 2.4vw, 2rem);
+  }
+}
+
+/* ─── TABLET · single column · 768–899 ───────────────────────── */
+@media (min-width: 768px) and (max-width: 899px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    padding-block: clamp(1.75rem, 3.8vh, 2.65rem);
+  }
+
+  .sheetTop {
+    padding: clamp(1.4rem, 3.2vw, 2rem);
+  }
+
+  .meta {
+    margin-bottom: clamp(0.8rem, 1.6vh, 1.1rem);
+    text-align: left;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: clamp(1.15rem, 2.8vw, 1.65rem);
+    align-items: start;
+    align-content: start;
+    justify-items: stretch;
+  }
+
+  .editorial {
+    order: 1;
+    width: 100%;
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .visual {
+    order: 2;
+    margin-top: 0;
+    width: 100%;
+    justify-content: stretch;
+    align-self: stretch;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    height: clamp(196px, calc(32vw + 20px), 268px);
+    max-height: clamp(196px, calc(32vw + 20px), 268px);
+    min-height: 0;
+    aspect-ratio: 1.16 / 1;
+    overflow: hidden;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .title {
+    font-size: clamp(27px, 4.2vw, 36px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-bottom: clamp(14px, 2vh, 20px);
+  }
+
+  .titleRule {
+    width: 52px;
+    margin-top: 0.85rem;
+  }
+
+  .copy {
+    margin-top: clamp(0.85rem, 2vh, 1.1rem);
+    max-width: 100%;
+  }
+
+  .copyText {
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    line-height: 1.65;
+  }
+
+  .sheetBottom {
+    min-height: 0;
+    padding: clamp(1.2rem, 2.6vh, 1.75rem) clamp(1.4rem, 3.2vw, 1.85rem);
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.3rem, 2.8vw, 1.85rem);
+  }
+}
+
+/* ─── MOBILE · 0–767 ─────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding-block: clamp(1.35rem, 5.5vw, 2.15rem);
+    align-items: flex-start;
+  }
+
+  .sheetTop {
+    padding: clamp(1.15rem, 4.8vw, 1.75rem);
+  }
+
+  .meta {
+    margin-bottom: clamp(0.75rem, 3.2vw, 1rem);
+    text-align: left;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 4vw, 1.45rem);
+    align-items: start;
+    align-content: start;
+    justify-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .editorial {
+    order: 1;
+    width: 100%;
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .visual {
+    order: 2;
+    margin-top: 0;
+    width: 100%;
+    min-width: 0;
+    justify-content: stretch;
+    align-self: stretch;
+    container-type: inline-size;
+  }
+
+  .visualFrame {
+    width: 100%;
+    max-width: none;
+    height: clamp(180px, calc(50vw + 20px), 240px);
+    max-height: clamp(180px, calc(50vw + 20px), 240px);
+    min-height: 0;
+    aspect-ratio: 1.14 / 1;
+    overflow: hidden;
+  }
+
+  .visualImg {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .title {
+    font-size: clamp(27px, 6.75vw, 39px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+    margin-top: 0;
+    margin-bottom: clamp(14px, 2vh, 20px);
+  }
+
+  .titleRule {
+    width: 48px;
+    margin-top: clamp(10px, 3vw, 14px);
+  }
+
+  .copy {
+    margin-top: clamp(0.75rem, 3.2vw, 1rem);
+    max-width: 100%;
+  }
+
+  .copyText {
+    font-size: clamp(0.92rem, 3.8vw, 1.02rem);
+    line-height: 1.58;
+  }
+
+  .sheetBottom {
+    height: auto;
+    min-height: 0;
+    padding: clamp(1.15rem, 4.5vw, 1.65rem);
+    align-items: flex-start;
+  }
+
+  .closingFirst,
+  .closingSecond {
+    font-size: clamp(1.25rem, 7.2vw, 1.85rem);
+  }
+
+  .closingSecond {
+    margin-top: clamp(0.65rem, 2.8vw, 0.95rem);
+  }
+
+  .dots {
+    margin-top: clamp(0.75rem, 3vw, 1rem);
+  }
+}
+
+@media (max-width: 430px) {
+  .section,
+  .section:global(.landing-block),
+  .section:global(.landing-block--nosotros) {
+    padding-block: 1.15rem;
+  }
+
+  .sheetTop {
+    padding: 1.1rem;
+  }
+
+  .grid {
+    gap: 0.95rem;
+  }
+
+  .visualFrame {
+    height: clamp(168px, calc(48vw + 20px), 216px);
+    max-height: clamp(168px, calc(48vw + 20px), 216px);
+  }
+
+  .sheetBottom {
+    padding: 1.25rem;
   }
 }

@@ -51,18 +51,7 @@ export function EnfoqueSection() {
           const q = gsap.utils.selector(root);
           const ease = "power3.out";
 
-          const kicker = q(`.${styles.kicker}`);
-          if (kicker.length) {
-            gsap.from(kicker, {
-              opacity: 0,
-              y: 18,
-              duration: 0.6,
-              ease,
-              scrollTrigger: { trigger: root, start: "top 80%" },
-            });
-          }
-
-          const titleLines = q(`.${styles.titleLine}`);
+          const titleLines = q(`.${styles.enfoqueTitleLine}`);
           if (titleLines.length) {
             gsap.from(titleLines, {
               y: 40,
@@ -74,14 +63,14 @@ export function EnfoqueSection() {
             });
           }
 
-          const intro = q(`.${styles.intro}`);
-          if (intro.length) {
-            gsap.from(intro, {
+          const paragraph = q(`.${styles.enfoqueParagraph}`);
+          if (paragraph.length) {
+            gsap.from(paragraph, {
               y: 24,
               opacity: 0,
               duration: 0.8,
               ease,
-              scrollTrigger: { trigger: intro[0], start: "top 88%" },
+              scrollTrigger: { trigger: paragraph[0], start: "top 88%" },
             });
           }
 
@@ -96,7 +85,7 @@ export function EnfoqueSection() {
                 duration: 1.15,
                 ease,
                 scrollTrigger: {
-                  trigger: q(`.${styles.photo}`)[0] ?? root,
+                  trigger: q(`.${styles.enfoqueImageWrapper}`)[0] ?? root,
                   start: "top 82%",
                 },
               },
@@ -113,23 +102,8 @@ export function EnfoqueSection() {
               stagger: 0.16,
               clearProps: "transform,opacity",
               scrollTrigger: {
-                trigger: q(`.${styles.method}`)[0] ?? root,
+                trigger: q(`.${styles.enfoqueCardsGrid}`)[0] ?? root,
                 start: "top 85%",
-              },
-            });
-          }
-
-          const closingLines = q(`.${styles.closingLine}`);
-          if (closingLines.length) {
-            gsap.from(closingLines, {
-              y: 30,
-              opacity: 0,
-              duration: 0.8,
-              ease,
-              stagger: 0.1,
-              scrollTrigger: {
-                trigger: q(`.${styles.closing}`)[0] ?? root,
-                start: "top 88%",
               },
             });
           }
@@ -154,43 +128,50 @@ export function EnfoqueSection() {
       </div>
 
       <div className={`${styles.inner} postHeroSafeFrame`}>
-        <div className={styles.topEditorial}>
-          {/* h2 con display:contents → mantiene la semántica de un único
-              encabezado, pero sus partes se colocan en celdas del grid:
-              línea 1 arriba · bloque línea 2 a la izquierda de la imagen. */}
-          <h2 className={styles.title}>
-            <span className={styles.line1}>
-              <span className={styles.titleLine}>DONDE OTROS VEN RUIDO,</span>
-            </span>
-            <span className={styles.line2}>
-              <span className={styles.titleLine}>NOSOTROS</span>
-              <span className={styles.titleLine}>VEMOS SISTEMA.</span>
+        <div className={styles.enfoqueHeader}>
+          <h2 className={styles.enfoqueTitleTop}>
+            <span className={styles.enfoqueTitleLine}>
+              DONDE OTROS VEN{" "}
+              <span className={styles.enfoqueAccent}>RUIDO</span>,
             </span>
           </h2>
 
-          <p className={styles.intro}>
-            No partimos de piezas sueltas, sino de un sistema capaz de unir lo
-            que la marca dice, muestra y provoca. Ordenamos el ruido, definimos
-            el criterio y convertimos cada decisión visual en una forma
-            reconocible de estar en el mundo.
-          </p>
+          <div className={styles.enfoqueLowerLeft}>
+            <div className={styles.enfoqueTitleBottom}>
+              <span className={styles.enfoqueTitleLine}>
+                <span className={styles.enfoqueTitleLowerLead}>
+                  NOSOTROS
+                  <br className={styles.enfoqueTitleBrDesktop} aria-hidden="true" />
+                  {" "}
+                  VEMOS
+                </span>
+                {" "}
+                <span className={styles.enfoqueAccent}>SISTEMA</span>.
+              </span>
+            </div>
 
-          <div className={styles.photoWrap}>
-            <figure className={styles.photo}>
-              <div className={styles.photoMedia}>
-                <img
-                  src={ENFOQUE_PHOTO_SRC}
-                  alt="Proceso creativo de Etecé Studio con materiales de identidad visual sobre una mesa de trabajo"
-                  className={styles.photoImg}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </figure>
+            <p className={styles.enfoqueParagraph}>
+              No partimos de piezas sueltas, sino de un sistema capaz de unir lo
+              que la marca dice, muestra y provoca. Ordenamos el ruido, definimos
+              el criterio y convertimos cada decisión visual en una forma
+              reconocible de estar en el mundo.
+            </p>
+          </div>
+
+          <div className={styles.enfoqueImageWrapper}>
+            <div className={styles.photoMedia}>
+              <img
+                src={ENFOQUE_PHOTO_SRC}
+                alt="Proceso creativo de Etecé Studio con materiales de identidad visual sobre una mesa de trabajo"
+                className={styles.photoImg}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
 
-        <div className={styles.method}>
+        <div className={styles.enfoqueCardsGrid}>
           {METHOD_CARDS.map((card) => (
             <article key={card.number} className={styles.card}>
               <span className={styles.cardNumber}>{card.number}</span>
@@ -200,18 +181,6 @@ export function EnfoqueSection() {
             </article>
           ))}
         </div>
-
-        <footer className={styles.closing}>
-          <p className={styles.closingLine}>No añadimos más ruido.</p>
-          <p className={styles.closingLine}>
-            Hacemos que todo hable el mismo idioma.
-          </p>
-          <div className={styles.closingDots} aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
-        </footer>
       </div>
     </section>
   );

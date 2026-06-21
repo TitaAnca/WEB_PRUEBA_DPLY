@@ -61,17 +61,6 @@ export function NosotrosSection() {
             });
           }
 
-          const blackWord = q(`.${styles.blackWord}`);
-          if (blackWord.length) {
-            gsap.from(blackWord, {
-              opacity: 0,
-              x: 48,
-              duration: 1.1,
-              ease,
-              scrollTrigger: { trigger: q(`.${styles.sheetBottom}`)[0], start: "top 88%" },
-            });
-          }
-
           const closingLines = q(`.${styles.closingLine}`);
           if (closingLines.length) {
             gsap.from(closingLines, {
@@ -175,25 +164,6 @@ export function NosotrosSection() {
 
         {/* ─── ZONA INFERIOR NEGRA DOMINANTE ───────────────────── */}
         <div className={styles.sheetBottom}>
-          {/* Tipografía fantasma editorial: "ETECÉ" gigante, recortada, como
-              capa gráfica de fondo (ligada a la filosofía de la sección). */}
-          <span className={styles.blackWord} aria-hidden="true">
-            Etecé
-          </span>
-
-          {/* "Todo lo demás": campo tenue de micro-decisiones (marca-agua
-              editorial). Vive detrás del cierre, no compite con él. */}
-          <div className={styles.bandField} aria-hidden="true">
-            <span>TONO</span>
-            <span>RITMO</span>
-            <span>FORMA</span>
-            <span>CRITERIO</span>
-            <span>SISTEMA</span>
-            <span>DETALLE</span>
-            <span>DIRECCIÓN</span>
-            <span>IDENTIDAD</span>
-          </div>
-
           <div className={styles.closing}>
             <p className={styles.closingFirst}>
               <span className={styles.closingLine}>Lo importante</span>

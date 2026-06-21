@@ -35,6 +35,10 @@
   --logo-hidden-scale: 0.96;
   --logo-full-scale: 1;
   --logo-symbol-scale: 1;
+  /* Jerarquía de grises editorial (secundario · apoyo · línea sutil). */
+  --etece-text-secondary: rgba(250, 250, 255, 0.72);
+  --etece-text-muted: rgba(250, 250, 255, 0.5);
+  --etece-line-subtle: rgba(250, 250, 255, 0.24);
 }
 
 /* ── Cascada del gutter de sección ───────────────────────────────────────
@@ -163,7 +167,7 @@ img {
      B) <img.preloader-logo-final>        — final coloured lockup (.svg)
    ───────────────────────────────────────────────────────────────────────── */
 .preloader-stage {
-  width: clamp(280px, 56vw, 720px);
+  width: min(86vw, 540px);
 }
 
 @media (min-width: 1800px) {
@@ -568,7 +572,7 @@ img {
   transform-origin: 50% 50%;
   will-change: transform, opacity;
   /* Mobile → desktop. UHD bump lives in the (min-width:1800px) media query. */
-  width: clamp(280px, 56vw, 720px);
+  width: min(86vw, 540px);
   padding: 0 1rem;
 }
 
@@ -1420,8 +1424,8 @@ body.site-revealed .site-footer {
   /* Footer compacto: firma de cierre justo bajo el Contact (no una nueva
      sección larga). Solo se reduce alto/gaps; enlaces y orden intactos. */
   .site-footer {
-    padding-block: clamp(1rem, 4vw, 1.5rem);
-    gap: clamp(0.7rem, 3vw, 1.05rem);
+    padding-block: clamp(18px, 4.5vw, 24px);
+    gap: clamp(0.55rem, 2.8vw, 0.9rem);
   }
 
   /* Iconos sociales: entre "Etecé Solutions" y los enlaces legales. */
@@ -2160,6 +2164,221 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   }
 }
 
+/* ============================================================
+   CROMO DE ESCRITORIO · ritmo fijo de 50px · 14"–27" (1180–1919px)
+   ------------------------------------------------------------
+   Sistema simple, explícito y equilibrado para el rango de navegación flotante
+   intermedio. Un único hueco FIJO de 50px gobierna las cuatro distancias
+   horizontales (sin valores fluidos ni asimétricos):
+
+       borde ▸ 50px ▸ LOGO ▸ 50px ▸ TARJETA post-Hero ▸ 50px ▸ NAV ▸ 50px ▸ borde
+
+   El logo (izq.) y el bloque de navegación (der.) comparten el mismo top
+   (--desktop-fixed-top). Las variables --desktop-* son la única fuente de verdad:
+   la tarjeta (.postHeroSafeFrame, más abajo) reserva exactamente
+   50 + ancho-logo + 50 a la izquierda y 50 + ancho-nav + 50 a la derecha, y ocupa
+   TODO el ancho restante. A ≥1920px no aplica (se conserva el layout grande
+   actual) y a ≤1179px gobierna la barra sólida móvil (intacta). Solo CSS /
+   posición fija: no toca Hero, enlaces, estados, colores ni la lógica (nav.locked.ts
+   y logo.locked.ts LEEN rects en vivo; no escriben estas reglas). */
+@media (min-width: 1180px) {
+  :root {
+    /* SISTEMA FLUIDO DE ESCRITORIO/PORTÁTIL (≥1180, continuo hasta gran desktop).
+       Una sola fuente de verdad fluida: bordes, top, logo y nav escalan con el
+       viewport (ancho + alto) mediante clamp(); a 1366 son contenidos, a 1920/2560
+       crecen progresivamente (sin valores fijos idénticos en todo el rango). */
+    /* Escala lateral reducida ~40% (≈60% del render anterior de 27"): el logo y la
+       navegación enmarcan la composición sin dominarla. Estos máximos son ahora la
+       referencia de gran desktop; por debajo, clamp() baja de forma continua hasta
+       portátil (sin saltos ni valores idénticos en todo el rango). */
+    --desktop-edge: clamp(28px, 3.2vw, 50px);
+    --desktop-top: clamp(24px, 2.6vw, 42px);
+    --desktop-logo-width: clamp(104px, 6.5vw, 148px);
+    --desktop-nav-width: clamp(120px, 7.8vw, 158px);
+    --desktop-icon: clamp(18px, 1.15vw, 25px);
+    --desktop-nav-font: clamp(11px, 0.72vw, 15px);
+
+    /* Alias retro-compatibles: la tarjeta post-Hero (.postHeroSafeFrame) sigue
+       reservando borde + logo + borde / borde + nav + borde con los mismos tokens. */
+    --desktop-fixed-gap: var(--desktop-edge);
+    --desktop-fixed-top: var(--desktop-top);
+
+    /* LOGO: se reutiliza el lever existente (variables --logo-*) sin tocar su lógica.
+       La caja se ancla en el borde fluido y el top compartido. En el Hero (fondo
+       NEGRO) y al hacer scroll se muestra el SÍMBOLO/imagotipo (--logo-symbol-width),
+       no el wordmark → es ese ancho el que gobierna el tamaño visible. Se escala de
+       forma fluida (ancho real, nunca transform-scale) manteniendo
+       _LOGO_BlancoRojo.svg: wordmark Hero vía --logo-full-width / --desktop-logo-width
+       (≈30–40% mayor que la escala anterior en portátil/escritorio). */
+    --logo-hero-left: var(--desktop-edge);
+    --logo-hero-top: var(--desktop-top);
+    --logo-hero-box-width: var(--desktop-logo-width);
+    --logo-full-width: var(--desktop-logo-width);
+    /* Símbolo/imagotipo (lo visible en el Hero negro y al hacer scroll): máximo
+       reducido a ~112px (≈60% del anterior). Ancho real, nunca transform-scale. */
+    --logo-symbol-width: clamp(74px, 4.6vw, 112px);
+  }
+
+  /* NAVEGACIÓN: misma esquina superior que el logo (mismo top), pegada al hueco
+     derecho, con ancho reservado claro. Se neutraliza cualquier caída vertical
+     (margin/padding/transform) para que arranque EXACTAMENTE en el mismo top que el
+     logo. El contenido sigue alineado a la derecha (align-items base). */
+  .text-nav nav {
+    top: var(--desktop-top);
+    right: var(--desktop-edge);
+    width: var(--desktop-nav-width);
+    margin: 0;
+    padding: 0;
+    transform: none;
+    box-sizing: border-box;
+    --nav-icon: var(--desktop-icon);
+    gap: clamp(16px, 1.5vw, 26px);
+  }
+
+  .text-nav nav .nav-social-row {
+    gap: clamp(7px, 0.65vw, 12px);
+  }
+
+  /* Iconos sociales: tamaño compartido en todas las cajas acopladas (icono, stack,
+     slot X y capa de redibujado) para que el overlay siga alineado. Visibles, no
+     diminutos. */
+  .text-nav nav .nav-social-icon,
+  .text-nav nav .nav-social-icon--png,
+  .text-nav nav .nav-social-icon-stack,
+  .text-nav nav .nav-social-icon-slot--x,
+  .text-nav nav .nav-social-icon-slot--x > .nav-social-icon-stack,
+  .text-nav nav .nav-social-redraw {
+    width: var(--nav-icon);
+    height: var(--nav-icon);
+  }
+
+  .text-nav nav .nav-social-icon-stack,
+  .text-nav nav .nav-social-icon-slot--x {
+    flex-basis: var(--nav-icon);
+  }
+
+  /* Labels: claramente legibles (≥14px). Mayúsculas, peso, color, estado activo y
+     hover se conservan. */
+  .text-nav nav a {
+    font-size: var(--desktop-nav-font);
+    line-height: 1;
+    letter-spacing: clamp(0.12em, 0.18vw, 0.22em);
+  }
+
+  .text-nav nav .nav-label-row {
+    gap: clamp(16px, 1.5vw, 26px);
+  }
+}
+
+/* Escritorio intermedio (1180–1919): logo Hero más presente, imagotipo scroll
+   ligeramente más pequeño, navegación compacta (hueco mínimo para los dots). */
+@media (min-width: 1180px) and (max-width: 1919px) {
+  :root {
+    --desktop-logo-width: clamp(120px, 8.2vw, 168px);
+    --logo-full-width: var(--desktop-logo-width);
+    --logo-hero-box-width: var(--desktop-logo-width);
+    /* Imagotipo scroll sin cambios — solo crece el wordmark Hero (_LOGO_BlancoRojo.svg). */
+    --logo-symbol-width: clamp(62px, 3.85vw, 92px);
+  }
+
+  .text-nav nav {
+    gap: clamp(12px, 1.25vh, 18px);
+    height: auto;
+    min-height: 0;
+    justify-content: flex-start;
+  }
+
+  .text-nav nav .nav-label-row {
+    gap: clamp(12px, 1.25vh, 18px);
+  }
+}
+
+/* Gran escritorio (≥1920): logo Hero aún más grande; nav con un poco más de aire;
+   escena de cierre reparte Contacto (~88%) + Footer (~12%) en una pantalla. */
+@media (min-width: 1920px) {
+  :root {
+    --desktop-logo-width: clamp(155px, 7vw, 198px);
+    --logo-full-width: var(--desktop-logo-width);
+    --logo-hero-box-width: var(--desktop-logo-width);
+    --logo-symbol-width: clamp(78px, 4vw, 104px);
+  }
+
+  .text-nav nav {
+    gap: clamp(14px, 1.4vh, 22px);
+  }
+
+  .text-nav nav .nav-label-row {
+    gap: clamp(14px, 1.4vh, 22px);
+  }
+}
+
+/* Portátil de poca altura (≈≤820px): se reduce SOLO la escala vertical y los
+   anclajes superiores (top, gaps del nav, logo) para que cada escena quepa en una
+   pantalla baja, sin estrechar el contenido. El ancho/columnas no cambian aquí. */
+@media (min-width: 1180px) and (max-height: 820px) {
+  :root {
+    --desktop-top: clamp(16px, 2vh, 30px);
+    --desktop-logo-width: clamp(98px, 6vw, 138px);
+    --logo-symbol-width: clamp(70px, 4.4vw, 100px);
+  }
+
+  .text-nav nav {
+    gap: clamp(11px, 1.4vh, 20px);
+  }
+
+  .text-nav nav .nav-label-row {
+    gap: clamp(11px, 1.4vh, 20px);
+  }
+}
+
+@media (min-width: 1180px) and (max-width: 1919px) and (max-height: 820px) {
+  :root {
+    --desktop-logo-width: clamp(114px, 7.6vw, 152px);
+    --logo-symbol-width: clamp(58px, 3.6vw, 82px);
+  }
+}
+
+/* Portátil compacto 14" (1180–1439): logo Hero, imagotipo scroll y nav ~+16.67%
+   respecto al render intermedio actual. Anchos reales (sin transform-scale). */
+@media (min-width: 1180px) and (max-width: 1599px) {
+  :root {
+    --desktop-logo-width: clamp(140px, 9.57vw, 196px);
+    --logo-full-width: var(--desktop-logo-width);
+    --logo-hero-box-width: var(--desktop-logo-width);
+    --logo-symbol-width: clamp(72px, 4.49vw, 107px);
+    --desktop-icon: clamp(21px, 1.34vw, 29px);
+    --desktop-nav-font: clamp(13px, 0.84vw, 17px);
+    --desktop-nav-width: clamp(132px, 9.1vw, 184px);
+  }
+
+  .text-nav nav {
+    gap: clamp(12px, 1.25vh, 18px);
+    width: var(--desktop-nav-width);
+  }
+
+  .text-nav nav .nav-label-row {
+    gap: clamp(12px, 1.25vh, 18px);
+  }
+
+  .text-nav nav .nav-social-row {
+    gap: clamp(8px, 0.75vw, 14px);
+  }
+}
+
+@media (min-width: 1180px) and (max-width: 1599px) and (max-height: 820px) {
+  :root {
+    --desktop-logo-width: clamp(133px, 8.87vw, 177px);
+    --logo-symbol-width: clamp(68px, 4.2vw, 96px);
+  }
+}
+
+@media (min-width: 1920px) and (max-height: 820px) {
+  :root {
+    --desktop-logo-width: clamp(134px, 6.5vw, 178px);
+    --logo-symbol-width: clamp(68px, 3.6vw, 90px);
+  }
+}
+
 /* Hero image sequence visual system */
 .hero-sequence {
   position: absolute;
@@ -2632,6 +2851,35 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   padding-block: 0;
 }
 
+/* Móvil (≤768): altura por contenido — anula el 100svh de arriba en bloques
+   post-Hero. Tablet/escritorio no se tocan. Hero (.landing-block--hero) intacto. */
+@media (max-width: 768px) {
+  .landing-block--nosotros,
+  .landing-block--enfoque,
+  .landing-block--contacto {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .closing-viewport {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .closing-viewport > .landing-block--contacto {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin-bottom: 0;
+  }
+
+  .closing-viewport > .site-footer {
+    margin-top: 0;
+  }
+}
+
 @media (min-width: 1440px) {
   .landing-block > .story-block {
     width: 100%;
@@ -2690,24 +2938,183 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   padding: 0;
 }
 
-/* ============================================================
-   SAFE-AREA LATERAL POST-HERO · 14"–27" (1180–1919px)
-   ------------------------------------------------------------
-   Clase compartida y explícita aplicada en el JSX al shell visible de cada
-   sección post-Hero (Nosotros .sheet, Enfoque .bg + .inner, Contacto .shell).
-   Calcula el ancho contra el viewport y reserva una zona segura mayor a la
-   derecha (grupo nav/social, más ancho) que a la izquierda (logo fijo), para que
-   el contenido no choque con la chrome fija. Solo actúa en el rango intermedio:
-   a ≥1920px y a <1180px no tiene efecto. No afecta a Hero ni a la navegación. */
-@media (min-width: 1180px) and (max-width: 1919px) {
-  .postHeroSafeFrame {
-    --post-hero-safe-left: clamp(130px, 9vw, 180px);
-    --post-hero-safe-right: clamp(210px, 14vw, 290px);
+/* ─── ESCENA DE CIERRE · Contacto + Footer ─────────────────────────────
+   Móvil/tablet: wrapper neutro (flujo normal) → comportamiento intacto. */
+.closing-viewport {
+  box-sizing: border-box;
+  margin-block: 0;
+  padding: 0;
+}
 
-    width: calc(100vw - var(--post-hero-safe-left) - var(--post-hero-safe-right)) !important;
+.narrative-flow > .closing-viewport {
+  margin-top: 0;
+}
+
+/* Escritorio/portátil compacto (1180–1439): Contacto + Footer comparten UNA pantalla.
+   Contacto ocupa el espacio flexible y el Footer queda compacto debajo, visible
+   sin scroll extra. ≥1440: grid 78/22 en cascada final. */
+@media (min-width: 1180px) and (max-width: 1439px) {
+  .closing-viewport {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .closing-viewport > .landing-block--contacto {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .closing-viewport > .site-footer {
+    flex: 0 0 auto;
+  }
+
+  /* Footer compacto en escritorio/portátil: altura dirigida por contenido y
+     padding sensible al alto de pantalla → cierra la escena sin consumir otra
+     pantalla. Enlaces, social y "© Etecé Studio" intactos. */
+  .closing-viewport > .site-footer {
+    padding-block: clamp(12px, 1.8vh, 24px);
+  }
+}
+
+/* Portátil compacto (1180–1439): Contacto + Footer en una pantalla con reparto
+   explícito; Footer más contenido para recuperar altura del formulario. */
+@media (min-width: 1180px) and (max-width: 1439px) {
+  .closing-viewport {
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .closing-viewport > .landing-block--contacto {
+    min-height: 0;
+  }
+
+  .closing-viewport > .site-footer {
+    padding-block: clamp(10px, 1.5vh, 18px);
+  }
+}
+
+/* Por debajo del 14" aprobado (≤1439): Contacto deja de forzar 100svh y la
+   escena de cierre crece solo con su contenido → Footer más cerca. ≥1440 intacto. */
+@media (max-width: 1439px) {
+  .landing-block--contacto {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1439px) {
+  .closing-viewport {
+    min-height: 0;
+    height: auto;
+    display: block;
+  }
+
+  .closing-viewport > .landing-block--contacto {
+    flex: none;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .closing-viewport > .site-footer {
+    margin-top: 0;
+    padding-block: clamp(10px, 1.4vh, 18px);
+  }
+}
+
+/* 14" aprobado y escritorios (≥1440): Contacto ~78% + Footer ~22%
+   en un único viewport. ÚNICA cascada desktop de cierre. */
+@media (min-width: 1440px) {
+  .landing-block--contacto {
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+  }
+
+  .narrative-flow > .closing-viewport,
+  .closing-viewport {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    display: grid;
+    grid-template-rows: minmax(0, 78fr) minmax(0, 22fr);
+    gap: 0;
+    align-content: stretch;
+  }
+
+  .closing-viewport > .landing-block--contacto,
+  .narrative-flow > .closing-viewport > .landing-block--contacto {
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+    flex: none;
+    overflow: hidden;
+  }
+
+  .closing-viewport > .site-footer,
+  .narrative-flow > .closing-viewport > .site-footer {
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+    flex: none;
+    flex-grow: 0;
+    align-self: stretch;
+    align-content: center;
+    overflow: hidden;
+    align-items: center;
+    padding: clamp(10px, 1.4vh, 18px) clamp(1rem, 2.5vw, 2.25rem);
+    gap: clamp(0.35rem, 0.75vw, 0.65rem);
+  }
+
+  .closing-viewport > .site-footer .site-footer__solutions-zone {
+    margin-top: 0;
+  }
+
+  .closing-viewport > .site-footer p {
+    margin: 0.08rem 0;
+    line-height: 1.28;
+  }
+
+  .closing-viewport > .site-footer .site-footer__legal {
+    gap: 0.18rem;
+  }
+
+  .closing-viewport > .site-footer .site-footer__legal-link {
+    line-height: 1.28;
+  }
+}
+
+/* ============================================================
+   TARJETA POST-HERO · ritmo fijo de 50px · 14"–27" (1180–1919px)
+   ------------------------------------------------------------
+   Clase compartida aplicada en el JSX al shell visible de cada sección post-Hero
+   (Nosotros .sheet, Enfoque .bg + .inner, Contacto .shell). La tarjeta reserva solo
+   el espacio de los anclajes fijos, usando las MISMAS variables --desktop-* que el
+   logo y la navegación (única fuente de verdad):
+
+       margen izq. = 50px (borde▸logo) + ancho-logo + 50px (logo▸tarjeta)
+       margen der. = 50px (tarjeta▸nav) + ancho-nav + 50px (nav▸borde)
+
+   y ocupa TODO el ancho restante. Así las cuatro distancias horizontales valen
+   exactamente 50px y la tarjeta recupera anchura (menos saltos de línea, secciones
+   más cortas). El borde es fluido (--desktop-edge) y continúa por encima de 1920px;
+   a ≤1179px gobierna el layout móvil/tablet. */
+@media (min-width: 1180px) {
+  .postHeroSafeFrame {
+    --post-hero-frame-left: calc(
+      var(--desktop-fixed-gap) + var(--desktop-logo-width) + var(--desktop-fixed-gap)
+    );
+    --post-hero-frame-right: calc(
+      var(--desktop-fixed-gap) + var(--desktop-nav-width) + var(--desktop-fixed-gap)
+    );
+
+    width: calc(100vw - var(--post-hero-frame-left) - var(--post-hero-frame-right)) !important;
     max-width: none !important;
-    margin-left: var(--post-hero-safe-left) !important;
-    margin-right: var(--post-hero-safe-right) !important;
+    margin-left: var(--post-hero-frame-left) !important;
+    margin-right: var(--post-hero-frame-right) !important;
     box-sizing: border-box;
   }
 }
