@@ -1,41 +1,10 @@
 import type { MetadataRoute } from "next";
+import { PUBLIC_SITEMAP_ROUTES, SITE_URL } from "@/lib/seo/publicRoutes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://etecestudio.com";
-  const lastModified = new Date();
-
-  // Solo páginas reales. Nosotros/Enfoque/Contacto son secciones (anclas) del
-  // home, no rutas, así que no se incluyen. /admin queda fuera (noindex).
-  return [
-    {
-      url: baseUrl,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/aviso-legal`,
-      lastModified,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/politica-privacidad`,
-      lastModified,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/politica-cookies`,
-      lastModified,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/portal-transparencia`,
-      lastModified,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-  ];
+  return PUBLIC_SITEMAP_ROUTES.map(({ path, changeFrequency, priority }) => ({
+    url: path === "" ? SITE_URL : `${SITE_URL}${path}`,
+    changeFrequency,
+    priority,
+  }));
 }
