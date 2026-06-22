@@ -382,20 +382,20 @@ export async function runHeroImageSequence(options: RunHeroSequenceOptions = {})
   let isMobile = false;
   mm.add(
     {
-      desktop: "(min-width: 1025px)",
-      tablet: "(min-width: 768px) and (max-width: 1024px)",
-      mobile: "(max-width: 767px)",
+      desktop: "(min-width: 820px)",
+      tablet: "(min-width: 614px) and (max-width: 819px)",
+      mobile: "(max-width: 613px)",
     },
     (context) => {
       if (context.conditions?.mobile) {
         isMobile = true;
-        profile = { statementY: 10, statementScale: 1.004, closingDotY: 4, closingStagger: 0.14, typeStrokeTravel: 88, crossfadeScale: 1.004 };
+        profile = { statementY: 8, statementScale: 1.004, closingDotY: 4, closingStagger: 0.14, typeStrokeTravel: 70, crossfadeScale: 1.004 };
       } else if (context.conditions?.tablet) {
         isMobile = false;
-        profile = { statementY: 13, statementScale: 1.005, closingDotY: 5, closingStagger: 0.16, typeStrokeTravel: 104, crossfadeScale: 1.006 };
+        profile = { statementY: 10, statementScale: 1.005, closingDotY: 4, closingStagger: 0.16, typeStrokeTravel: 83, crossfadeScale: 1.006 };
       } else {
         isMobile = false;
-        profile = { statementY: 16, statementScale: 1.006, closingDotY: 6, closingStagger: 0.19, typeStrokeTravel: 120, crossfadeScale: 1.008 };
+        profile = { statementY: 13, statementScale: 1.006, closingDotY: 5, closingStagger: 0.19, typeStrokeTravel: 96, crossfadeScale: 1.008 };
       }
     }
   );

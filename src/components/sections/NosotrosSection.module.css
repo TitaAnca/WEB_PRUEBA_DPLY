@@ -51,7 +51,7 @@
      tope = --section-max-width; margen lateral = --section-gutter a cada lado. */
   width: min(var(--section-max-width), calc(100% - var(--section-gutter) * 2));
   margin-inline: auto;
-  border-radius: 24px;
+  border-radius: 19px;
   overflow: hidden;
   background: #fafaff;
   box-shadow:
@@ -64,7 +64,7 @@
    decisión que conecta visualmente el título con el cuerpo de texto. */
 .titleRule {
   display: block;
-  width: clamp(48px, 5vw, 72px);
+  width: clamp(38.4px, 5vw, 57.6px);
   height: 4px;
   border-radius: 999px;
   margin-top: clamp(1.1rem, 1.8vw, 1.5rem);
@@ -165,14 +165,14 @@
 
 .redMarkImage {
   width: 4px;
-  height: 38px;
+  height: 30.4px;
   top: 30%;
   left: clamp(1rem, 2.2vw, 2.2rem);
   box-shadow: 0 10px 22px rgba(236, 0, 0, 0.16);
 }
 
 .redMarkParagraph {
-  width: 26px;
+  width: 20.8px;
   height: 4px;
   bottom: 16%;
   right: clamp(1.5rem, 4vw, 4rem);
@@ -203,7 +203,7 @@
   align-items: start;
 }
 
-@media (min-width: 981px) {
+@media (min-width: 785px) {
   .grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
     gap: clamp(3rem, 6vw, 6rem);
@@ -252,7 +252,7 @@
   margin: 4px 0 clamp(18px, 2.2vh, 30px);
   font-family: "Poppins", "Manrope", system-ui, sans-serif;
   /* Escala idéntica a Enfoque (.line1 / .line2) — misma fórmula en cada breakpoint. */
-  font-size: clamp(36px, 3.75vw, 57px);
+  font-size: clamp(29px, 3.75vw, 46px);
   line-height: 0.92;
   letter-spacing: -0.035em;
   font-weight: 900;
@@ -388,7 +388,7 @@
    Nosotros se resuelve dentro de 100svh: composición horizontal centrada, con
    padding/gaps/título/banda sensibles al ALTO del viewport para compactar sin
    estrechar el contenido. Solo escala/espaciado: copy e imagen intactos. */
-@media (min-width: 1180px) {
+@media (min-width: 944px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -448,7 +448,7 @@
 
 /* Gran escritorio (≥1920): un poco más de aire imagen↔texto.
    Título e imagen de cabecera: gobernados por la cascada final ≥1600 al final del módulo. */
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   .grid {
     gap: clamp(26px, 2.8vh, 40px);
     column-gap: clamp(32px, 3.2vw, 52px);
@@ -461,7 +461,7 @@
 
 /* Imagen Studio.png en formato LIGERAMENTE apaisado (no retrato) dentro de su
    columna. ≥1180 base; ≥1600 gobernado por cascada final al final del módulo. */
-@media (min-width: 1180px) {
+@media (min-width: 944px) {
   .visual {
     width: 100%;
     justify-content: flex-start;
@@ -474,8 +474,8 @@
   .visualFrame {
     width: 100%;
     max-width: none;
-    height: clamp(360px, 40vh, 488px);
-    max-height: clamp(360px, 40vh, 488px);
+    height: clamp(288px, 40vh, 488px);
+    max-height: clamp(288px, 40vh, 488px);
     min-height: 0;
     aspect-ratio: 1.12 / 1;
     overflow: hidden;
@@ -495,7 +495,7 @@
 
 /* Portátil de poca altura: se recortan alturas verticales (título, imagen,
    paddings) manteniendo el ancho de las columnas. */
-@media (min-width: 1180px) and (max-height: 820px) {
+@media (min-width: 944px) and (max-height: 820px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -507,7 +507,7 @@
   }
 
   .title {
-    font-size: clamp(34.5px, 3.3vw, 49.5px);
+    font-size: clamp(28px, 3.3vw, 40px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -524,7 +524,7 @@
 }
 
 /* ─── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 980px) {
+@media (max-width: 784px) {
   .grid {
     justify-items: center;
   }
@@ -536,14 +536,14 @@
 
   .visualFrame {
     width: 100%;
-    max-width: 420px;
+    max-width: 336px;
     aspect-ratio: 4 / 5;
     max-height: 58vh;
   }
 
   .editorial {
     width: 100%;
-    max-width: 640px;
+    max-width: 512px;
   }
 
   .meta {
@@ -558,7 +558,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 384px) {
   .sheetTop,
   .sheetBottom {
     padding: 1.4rem;
@@ -569,7 +569,7 @@
   }
 
   .title {
-    font-size: clamp(24px, 7.125vw, 34.5px);
+    font-size: clamp(24px, 7.125vw, 43.13px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -589,7 +589,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 336px) {
   .visualFrame {
     max-height: 48vh;
   }
@@ -598,9 +598,9 @@
 /* ─── FIX imagen Nosotros · tablet (769–980) ─────────────────────────────
    En tablet el marco envuelve la proporción natural (sin recorte). ≥981 usa
    aspect-ratio editorial en la cascada final al final del módulo. */
-@media (min-width: 769px) and (max-width: 980px) {
+@media (min-width: 615px) and (max-width: 784px) {
   /* Contenedor flex: centra el marco para que la foto se lea como pieza
-     editorial intencional (no encajada/estrujada) en toda la franja <1366px. */
+     editorial intencional (no encajada/estrujada) en toda la franja <1093px. */
   .visual {
     width: 100%;
     justify-content: center;
@@ -608,7 +608,7 @@
 
   .visualFrame {
     width: 100%;
-    max-width: 520px;
+    max-width: 416px;
     aspect-ratio: auto;
     height: auto;
     max-height: none;
@@ -629,7 +629,7 @@
 
 /* Móvil: altura natural (sin forzar 100vh → evita huecos) y padding más
    compacto. Iguala la especificidad de las reglas .landing-block. */
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -638,7 +638,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   /* Título más contenido en móvil → menos saltos de línea y menos alto, sin
      perder fuerza. ETECÉ sigue en rojo (sin tocar el color). */
   .title {
@@ -659,7 +659,7 @@
    La atmósfera se simplifica al estrechar el viewport para priorizar la
    legibilidad: menos opacidad y más aire en portátil/tablet; sin líneas finas,
    micro-acentos ni campo de la banda en móvil. */
-@media (max-width: 1024px) {
+@media (max-width: 819px) {
   .editorialLineOne,
   .editorialLineTwo,
   .editorialLineFlow {
@@ -675,7 +675,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .editorialLineOne,
   .editorialLineTwo,
   .editorialLineFlow,
@@ -693,7 +693,7 @@
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 416px) {
   .editorialLayer::before {
     display: none;
   }
@@ -704,7 +704,7 @@
    título→párrafo y el padding/alto de la banda negra para que Nosotros se
    sienta más corto sin perder la composición editorial premium. Solo móvil:
    no toca el desktop ni el contenido. Se coloca al final → gana en cascada. */
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -759,7 +759,7 @@
 }
 
 /* iPhones pequeños: un punto más de compactación, manteniendo legibilidad. */
-@media (max-width: 430px) {
+@media (max-width: 344px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -785,7 +785,7 @@
    verticales. Debe ir al final del módulo para ganar en especificidad/orden.
    Ritmo +20px: micro→título +4 · título→regla +5 · regla→párrafo +5 ·
    padding sección +3 arriba/abajo. Imagen: +20px sobre ratio 1.1 previo. */
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -878,7 +878,7 @@
 
 /* Portátil compacto 14" (1180–1599): altura natural, imagen con presencia editorial
    (casi cuadrada, algo más alta que la versión comprimida). Sin forzar 100svh. */
-@media (min-width: 1180px) and (max-width: 1599px) {
+@media (min-width: 944px) and (max-width: 1279px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -912,8 +912,8 @@
   .visualFrame {
     width: 100%;
     max-width: none;
-    height: clamp(360px, 40vh, 488px);
-    max-height: clamp(360px, 40vh, 488px);
+    height: clamp(288px, 40vh, 488px);
+    max-height: clamp(288px, 40vh, 488px);
     min-height: 0;
     aspect-ratio: 1.12 / 1;
     overflow: hidden;
@@ -938,7 +938,7 @@
   }
 
   .title {
-    font-size: clamp(40.5px, 3.9vw, 63px);
+    font-size: clamp(32px, 3.9vw, 50px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -969,7 +969,7 @@
   }
 }
 
-@media (min-width: 1180px) and (max-width: 1599px) and (max-height: 850px) {
+@media (min-width: 944px) and (max-width: 1279px) and (max-height: 850px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -977,7 +977,7 @@
   }
 
   .title {
-    font-size: clamp(37.5px, 3.6vw, 54px);
+    font-size: clamp(30px, 3.6vw, 43px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -988,7 +988,7 @@
    Anula reglas ≥1180/≥1920 que fuerzan 100svh, centran verticalmente,
    comprimen la imagen (max-height) o dejan el texto dominando la rejilla.
    Solo ≥1600 — portátil 14" y compacto (<1600) intactos. */
-@media (min-width: 1600px) {
+@media (min-width: 819px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1022,8 +1022,8 @@
   .visualFrame {
     width: 100%;
     max-width: none;
-    height: clamp(360px, 40vh, 488px);
-    max-height: clamp(360px, 40vh, 488px);
+    height: clamp(288px, 40vh, 488px);
+    max-height: clamp(288px, 40vh, 488px);
     min-height: 0;
     aspect-ratio: 1.12 / 1;
     overflow: hidden;
@@ -1049,7 +1049,7 @@
 
   /* Idéntico a Enfoque .line1 / .line2 (≥1180, <1920). */
   .title {
-    font-size: clamp(40.5px, 3.9vw, 63px);
+    font-size: clamp(32px, 3.9vw, 50px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -1069,14 +1069,14 @@
   }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   .grid {
     column-gap: clamp(32px, 3.2vw, 56px);
   }
 
   /* Idéntico a Enfoque .line1 / .line2 (≥1920). */
   .title {
-    font-size: clamp(54px, 3.75vw, 78px);
+    font-size: clamp(43px, 3.75vw, 62px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -1086,7 +1086,7 @@
 /* ─── Desktop/laptop · composición compacta · cascada final ─────────────
    Imagen: ancho completo de columna; alto controlado (~50% del stretch previo);
    crop apaisado editorial. Título/párrafo intactos. */
-@media (min-width: 981px) {
+@media (min-width: 785px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1112,8 +1112,8 @@
 
   .visualFrame {
     width: 100%;
-    height: clamp(360px, 40vh, 488px);
-    max-height: clamp(360px, 40vh, 488px);
+    height: clamp(288px, 40vh, 488px);
+    max-height: clamp(288px, 40vh, 488px);
     min-height: 0;
     aspect-ratio: 1.12 / 1;
     overflow: hidden;
@@ -1139,7 +1139,7 @@
 
   /* Enfoque base (<1180): .title */
   .title {
-    font-size: clamp(36px, 3.75vw, 57px);
+    font-size: clamp(29px, 3.75vw, 46px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -1157,7 +1157,7 @@
 }
 
 /* ≥1180: título idéntico a Enfoque */
-@media (min-width: 1180px) {
+@media (min-width: 944px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1175,8 +1175,8 @@
 
   .visualFrame {
     width: 100%;
-    height: clamp(360px, 40vh, 488px);
-    max-height: clamp(360px, 40vh, 488px);
+    height: clamp(288px, 40vh, 488px);
+    max-height: clamp(288px, 40vh, 488px);
     min-height: 0;
     aspect-ratio: 1.12 / 1;
     overflow: hidden;
@@ -1188,7 +1188,7 @@
   }
 
   .title {
-    font-size: clamp(40.5px, 3.9vw, 63px);
+    font-size: clamp(32px, 3.9vw, 50px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -1197,9 +1197,9 @@
 }
 
 /* ≥1920: título idéntico a Enfoque (≥1920) */
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   .title {
-    font-size: clamp(54px, 3.75vw, 78px);
+    font-size: clamp(43px, 3.75vw, 62px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     font-weight: 900;
@@ -1208,7 +1208,7 @@
 
 /* ─── Studio.png · compactación ~20% · cascada final (≥981) ─────────────
    Ancho intacto; alto controlado apaisado; sin estirar la fila ni la sección. */
-@media (min-width: 981px) {
+@media (min-width: 785px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1236,8 +1236,8 @@
 
   .visualFrame {
     width: 100%;
-    height: clamp(360px, 40vh, 488px);
-    max-height: clamp(360px, 40vh, 488px);
+    height: clamp(288px, 40vh, 488px);
+    max-height: clamp(288px, 40vh, 488px);
     min-height: 0;
     aspect-ratio: 1.12 / 1;
     overflow: hidden;
@@ -1259,62 +1259,62 @@
   }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   .visualFrame {
-    height: clamp(380px, 42vh, 520px);
-    max-height: clamp(380px, 42vh, 520px);
+    height: clamp(380px, 42vh, 416px);
+    max-height: clamp(380px, 42vh, 416px);
     aspect-ratio: 1.12 / 1;
   }
 }
 
 /* ─── Studio.png · alineación inferior con párrafo · cascada final (≥981)
    Extensiones medidas (paragraphBottom − imageBottom) por franja two-column. */
-@media (min-width: 981px) and (max-width: 1279px) {
+@media (min-width: 785px) and (max-width: 1023px) {
   .visualFrame {
-    height: calc(clamp(360px, 40vh, 488px) + 45px);
-    max-height: calc(clamp(360px, 40vh, 488px) + 45px);
+    height: calc(clamp(288px, 40vh, 488px) + 60px);
+    max-height: calc(clamp(288px, 40vh, 488px) + 60px);
   }
 }
 
-@media (min-width: 1280px) and (max-width: 1439px) {
+@media (min-width: 819px) and (max-width: 1151px) {
   .visualFrame {
-    height: calc(clamp(360px, 40vh, 488px) + 60px);
-    max-height: calc(clamp(360px, 40vh, 488px) + 60px);
+    height: calc(clamp(288px, 40vh, 488px) + 75px);
+    max-height: calc(clamp(288px, 40vh, 488px) + 75px);
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1499px) {
+@media (min-width: 1152px) and (max-width: 1199px) {
   .visualFrame {
-    height: calc(clamp(360px, 40vh, 488px) + 56px);
-    max-height: calc(clamp(360px, 40vh, 488px) + 56px);
+    height: calc(clamp(288px, 40vh, 488px) + 71px);
+    max-height: calc(clamp(288px, 40vh, 488px) + 71px);
   }
 }
 
-@media (min-width: 1500px) and (max-width: 1599px) {
+@media (min-width: 1200px) and (max-width: 1279px) {
   .visualFrame {
-    height: calc(clamp(360px, 40vh, 488px) + 71px);
-    max-height: calc(clamp(360px, 40vh, 488px) + 71px);
+    height: calc(clamp(288px, 40vh, 488px) + 86px);
+    max-height: calc(clamp(288px, 40vh, 488px) + 86px);
   }
 }
 
-@media (min-width: 1600px) and (max-width: 1919px) {
+@media (min-width: 819px) and (max-width: 1535px) {
   .visualFrame {
-    height: calc(clamp(360px, 40vh, 488px) + 68px);
-    max-height: calc(clamp(360px, 40vh, 488px) + 68px);
+    height: calc(clamp(288px, 40vh, 488px) + 83px);
+    max-height: calc(clamp(288px, 40vh, 488px) + 83px);
   }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   .visualFrame {
-    height: calc(clamp(380px, 42vh, 520px) + 114px);
-    max-height: calc(clamp(380px, 42vh, 520px) + 114px);
+    height: calc(clamp(380px, 42vh, 416px) + 129px);
+    max-height: calc(clamp(380px, 42vh, 416px) + 129px);
   }
 }
 
 /* ─── Studio.png · alineación superior con eyebrow (≥981 · two-column) ─────
    Causa: .meta está fuera de .grid; la imagen arrancaba tras eyebrow + margen.
    Compensación exacta en el wrapper (sin mover eyebrow, título ni párrafo). */
-@media (min-width: 981px) and (max-width: 1179px) {
+@media (min-width: 785px) and (max-width: 943px) {
   .visual {
     margin-top: calc(
       -1 * (
@@ -1324,7 +1324,7 @@
   }
 }
 
-@media (min-width: 1180px) {
+@media (min-width: 944px) {
   .visual {
     margin-top: calc(
       -1 * (
@@ -1336,7 +1336,7 @@
 
 /* ─── Título principal · +5px separación respecto al eyebrow (≥981) ─────────
    Base margin-top 4px → 9px; bloque completo, sin mover eyebrow ni párrafo. */
-@media (min-width: 981px) {
+@media (min-width: 785px) {
   .title {
     margin-top: calc(4px + 5px);
   }
@@ -1345,13 +1345,13 @@
 /* ─── Párrafo · marca roja fuera del texto + baseline con imagen (≥981) ────
    .redMarkParagraph usaba bottom:% del sheet y invadía el párrafo (~“forma”).
    El párrafo se compacta con line-height/max-width medidos; imagen intacta. */
-@media (min-width: 981px) {
+@media (min-width: 785px) {
   .redMarkParagraph {
     display: none;
   }
 }
 
-@media (min-width: 981px) and (max-width: 1279px) {
+@media (min-width: 785px) and (max-width: 1023px) {
   .copy {
     max-width: 57ch;
   }
@@ -1361,7 +1361,7 @@
   }
 }
 
-@media (min-width: 1280px) and (max-width: 1359px) and (max-height: 799px) {
+@media (min-width: 819px) and (max-width: 1087px) and (max-height: 799px) {
   .copy {
     max-width: 56ch;
   }
@@ -1371,7 +1371,7 @@
   }
 }
 
-@media (min-width: 1360px) and (max-width: 1439px) and (max-height: 799px) {
+@media (min-width: 1088px) and (max-width: 1151px) and (max-height: 799px) {
   .copy {
     max-width: 63ch;
   }
@@ -1381,7 +1381,7 @@
   }
 }
 
-@media (min-width: 1280px) and (max-width: 1439px) and (min-height: 800px) {
+@media (min-width: 819px) and (max-width: 1151px) and (min-height: 800px) {
   .copy {
     max-width: 60ch;
   }
@@ -1391,7 +1391,7 @@
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1599px) {
+@media (min-width: 1152px) and (max-width: 1279px) {
   .copy {
     max-width: 68ch;
   }
@@ -1401,7 +1401,7 @@
   }
 }
 
-@media (min-width: 1600px) and (max-width: 1919px) {
+@media (min-width: 819px) and (max-width: 1535px) {
   .copy {
     max-width: 52ch;
   }
@@ -1411,7 +1411,7 @@
   }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   .copy {
     max-width: 49ch;
   }
@@ -1427,7 +1427,7 @@
    Overrides min-width:981/1180 geometry that leaked below desktop.
    ═══════════════════════════════════════════════════════════════ */
 
-@media (max-width: 1439px) {
+@media (max-width: 1151px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1439,7 +1439,7 @@
 }
 
 /* ─── COMPACT LAPTOP · 1100–1439 ─────────────────────────────── */
-@media (min-width: 1100px) and (max-width: 1439px) {
+@media (min-width: 880px) and (max-width: 1151px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1478,8 +1478,8 @@
   .visualFrame {
     width: 100%;
     max-width: none;
-    height: clamp(328px, calc(39.2vh + 20px), 468px);
-    max-height: clamp(328px, calc(39.2vh + 20px), 468px);
+    height: clamp(343px, calc(39.2vh + 35px), 483px);
+    max-height: clamp(343px, calc(39.2vh + 35px), 483px);
     min-height: 0;
     aspect-ratio: 1.15 / 1;
     overflow: hidden;
@@ -1542,7 +1542,7 @@
 }
 
 /* ─── TABLET · two columns · 900–1099 ────────────────────────── */
-@media (min-width: 900px) and (max-width: 1099px) {
+@media (min-width: 720px) and (max-width: 879px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1639,7 +1639,7 @@
 }
 
 /* ─── TABLET · single column · 768–899 ───────────────────────── */
-@media (min-width: 768px) and (max-width: 899px) {
+@media (min-width: 614px) and (max-width: 719px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1732,7 +1732,7 @@
 }
 
 /* ─── MOBILE · 0–767 ─────────────────────────────────────────── */
-@media (max-width: 767px) {
+@media (max-width: 613px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1842,7 +1842,7 @@
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 344px) {
   .section,
   .section:global(.landing-block),
   .section:global(.landing-block--nosotros) {
@@ -1864,5 +1864,32 @@
 
   .sheetBottom {
     padding: 1.25rem;
+  }
+}
+
+/* ─── Studio.png · micro-ajuste alineación vertical (≥944 · escritorio/portátil)
+   +10px abajo respecto a la compensación eyebrow; +20px de alto en el frame.
+   Armoniza el tope con el eyebrow y la base con el párrafo sin mover el texto. */
+@media (min-width: 944px) {
+  .visual {
+    margin-top: calc(
+      -1 * (
+        clamp(0.62rem, 0.7vw, 0.78rem) + clamp(0.8rem, 1.6vh, 1.6rem)
+      ) + 10px
+    );
+  }
+}
+
+@media (min-width: 944px) and (max-width: 1535px) {
+  .visualFrame {
+    height: calc(clamp(288px, 40vh, 488px) + 103px);
+    max-height: calc(clamp(288px, 40vh, 488px) + 103px);
+  }
+}
+
+@media (min-width: 1536px) {
+  .visualFrame {
+    height: calc(clamp(380px, 42vh, 416px) + 149px);
+    max-height: calc(clamp(380px, 42vh, 416px) + 149px);
   }
 }

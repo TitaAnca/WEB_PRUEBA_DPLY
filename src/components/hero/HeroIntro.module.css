@@ -36,7 +36,7 @@
   left: 50%;
   top: 50%;
   width: 34vw;
-  height: clamp(8px, 1.2vw, 16px);
+  height: clamp(6.4px, 1.2vw, 12.8px);
   margin: 0;
   transform: translate(-50%, -50%);
   transform-origin: center;
@@ -54,12 +54,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(18px, 3vw, 56px);
+  gap: clamp(9.23px, 3vw, 28.68px);
   will-change: transform;
 }
 
 .dot {
-  width: clamp(22px, 4vw, 64px);
+  width: clamp(17.6px, 4vw, 51.2px);
   aspect-ratio: 1 / 1;
   border-radius: 999px;
   background: #ffffff;
@@ -78,9 +78,9 @@
 }
 
 .gridInner {
-  --ec-cell: 10px;
+  --ec-cell: 8px;
   display: grid;
-  gap: 6px;
+  gap: 4.8px;
   will-change: transform;
 }
 

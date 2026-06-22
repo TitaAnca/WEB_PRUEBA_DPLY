@@ -3,7 +3,7 @@
   background: #000000;
   color: #FFFFFF;
   padding-block: clamp(2.75rem, 8vh, 5.25rem);
-  padding-inline: clamp(24px, 5vw, 100px);
+  padding-inline: clamp(12.29px, 5vw, 51.2px);
   position: relative;
   z-index: 1;
   font-family: "Jura", "Inter", system-ui, -apple-system, sans-serif;
@@ -11,9 +11,9 @@
 }
 
 /* Desktop: aire lateral REAL de 100 px a cada lado. */
-@media (min-width: 1024px) {
+@media (min-width: 819px) {
   .page {
-    padding-inline: 100px;
+    padding-inline: 80px;
   }
 }
 
@@ -332,7 +332,7 @@
 
 /* ─────────────────────────────── Responsive ───────────────────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .altSection,
   .altSectionLeft,
   .altSectionRight,
@@ -343,6 +343,6 @@
   }
   .table {
     font-size: 0.9rem;
-    min-width: 480px;
+    min-width: 384px;
   }
 }

@@ -58,10 +58,10 @@ export function getPushPullMetrics(category: LayoutCategory): PushPullMetrics {
   }
   if (category === "tablet") {
     return {
-      incomingOffsetX: 16,
-      incomingOffsetY: 7,
-      underlayerOffsetX: 27,
-      underlayerOffsetY: 13,
+    incomingOffsetX: 13,
+    incomingOffsetY: 6,
+    underlayerOffsetX: 22,
+    underlayerOffsetY: 10,
       underlayerScale: 0.915,
       underlayerOpacity: 0.67,
       biasMaxX: 7,
@@ -71,16 +71,16 @@ export function getPushPullMetrics(category: LayoutCategory): PushPullMetrics {
     };
   }
   return {
-    incomingOffsetX: 28,
-    incomingOffsetY: 10,
-    underlayerOffsetX: 41,
-    underlayerOffsetY: 18,
+    incomingOffsetX: 22,
+    incomingOffsetY: 8,
+    underlayerOffsetX: 33,
+    underlayerOffsetY: 14,
     underlayerScale: 0.9,
     underlayerOpacity: 0.64,
-    biasMaxX: 10,
-    biasMaxY: 6,
-    exitPushX: 20,
-    exitUnderPushX: 16,
+    biasMaxX: 8,
+    biasMaxY: 5,
+    exitPushX: 16,
+    exitUnderPushX: 13,
   };
 }
 

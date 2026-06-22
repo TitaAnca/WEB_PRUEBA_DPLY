@@ -16,16 +16,16 @@
     radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.045), transparent 28%),
     #000000;
   overflow: hidden;
-  --ticker-h: clamp(34px, 3.8vw, 48px);
-  --hero-nav-safe-space: clamp(72px, 10vh, 96px);
-  --hero-announcement-gap: 28px;
+  --ticker-h: clamp(27px, 3.8vw, 38px);
+  --hero-nav-safe-space: clamp(58px, 10vh, 77px);
+  --hero-announcement-gap: 22px;
   --hero-announcement-safe-space: calc(var(--ticker-h) + var(--hero-announcement-gap));
   --hero-usable-height: calc(
     100svh - var(--hero-nav-safe-space) - var(--hero-announcement-safe-space)
   );
   --hero-stage-height: min(58vh, calc(var(--hero-usable-height) * 0.82));
-  --hero-stage-width: min(92vw, 900px);
-  --hero-popup-radius: 22px;
+  --hero-stage-width: min(92vw, 720px);
+  --hero-popup-radius: 18px;
   /* Radio ÚNICO de las tarjetas: el wrapper y la imagen comparten SIEMPRE este
      valor (border-radius nunca se anima) → las esquinas nunca se vuelven
      cuadradas durante entrada, baraja o salida. */
@@ -254,7 +254,7 @@
   column-gap: clamp(0.3em, 1vw, 0.62em);
   row-gap: clamp(0.08em, 0.55vw, 0.2em);
   width: min(92vw, 1500px);
-  padding-inline: clamp(28px, 4vw, 76px);
+  padding-inline: clamp(14.34px, 4vw, 38.91px);
   margin: 0;
   font-family: "Poppins", "Manrope", system-ui, sans-serif;
   font-weight: 800;
@@ -354,7 +354,7 @@
 .ticker::before {
   content: "";
   position: absolute;
-  inset: -18px -24px;
+  inset: -14.4px -19.2px;
   background: radial-gradient(circle at 50% 50%, rgba(236, 0, 0, 0.16), transparent 70%);
   filter: blur(18px);
   pointer-events: none;
@@ -398,7 +398,7 @@
 /* ─── Responsive · tamaño de imágenes Hero (orientación × rol) ────────────
    Tablet/móvil únicamente (≤1179). Escritorio/portátil 1180–1919 conserva los
    topes px del bloque base ≥1920 — evita el mega-zoom por vw sin límite. */
-@media (max-width: 1179px) {
+@media (max-width: 943px) {
   .cardStack {
     --ls-s-w: 57vw;
     --ls-s-h: 38vh;
@@ -429,7 +429,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 613px) {
   .cardStack {
     --ls-s-w: 66vw;
     --ls-s-h: min(44vh, 56vh);
@@ -460,7 +460,7 @@
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 344px) {
   .cardStack {
     --ls-s-w: 66vw;
     --ls-m-w: 74vw;
@@ -477,7 +477,7 @@
   }
 }
 
-@media (max-width: 374px) {
+@media (max-width: 299px) {
   .cardStack {
     --ls-s-w: 68vw;
     --ls-m-w: 75vw;
@@ -525,7 +525,7 @@
   }
 }
 
-@media (max-width: 1179px) and (max-height: 760px) {
+@media (max-width: 943px) and (max-height: 760px) {
   .cardStack {
     --ls-s-h: min(30vh, var(--ls-s-h));
     --ls-m-h: min(34vh, var(--ls-m-h));
@@ -561,14 +561,14 @@
 }
 
 /* ─── Responsive · UI Hero (separadores, ticker) ─────────────────────── */
-@media (max-width: 1024px) {
+@media (max-width: 819px) {
   .separatorPhrase {
-    width: min(94vw, 1100px);
+    width: min(94vw, 880px);
     padding-inline: clamp(22px, 4vw, 48px);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .separatorPhrase {
     width: 100%;
     padding-inline: clamp(18px, 5vw, 28px);
@@ -581,13 +581,13 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 336px) {
   .phraseTeImpulsamos.phraseShort {
     font-size: clamp(2.2rem, 10vw, 2.5rem);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .root {
     --ticker-h: clamp(30px, 8vw, 40px);
     --hero-card-radius: 16px;
@@ -608,20 +608,20 @@
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 615px) and (max-width: 819px) {
   .root {
     --hero-announcement-gap: 22px;
     --hero-stage-height: min(56vh, calc(var(--hero-usable-height) * 0.8));
   }
 }
 
-@media (min-width: 1024px) and (max-height: 820px) {
+@media (min-width: 819px) and (max-height: 820px) {
   .root {
     --hero-stage-height: min(calc(58vh * 0.9), calc(var(--hero-usable-height) * 0.82 * 0.9));
   }
 }
 
-@media (min-width: 1024px) and (max-height: 720px) {
+@media (min-width: 819px) and (max-height: 720px) {
   .root {
     --hero-stage-height: min(calc(58vh * 0.82), calc(var(--hero-usable-height) * 0.82 * 0.82));
   }
@@ -630,55 +630,55 @@
 /* ─── Large-screen Hero image caps (≥1440 only) ─────────────────────────
    1180–1439 conserva el bloque base .cardStack. Solo reduce escala en portátil
    grande, escritorio y monitores altos. Jerarquía orientación × rol intacta. */
-@media (min-width: 1440px) {
+@media (min-width: 1152px) {
   .root {
-    --hero-stage-width: min(92vw, 900px);
+    --hero-stage-width: min(92vw, 720px);
   }
 
   .cardStack {
     --hero-desk-w-scale: 1;
     --hero-desk-h-scale: 1;
-    --ls-s-w: calc(520px * var(--hero-desk-w-scale));
-    --ls-m-w: calc(610px * var(--hero-desk-w-scale));
-    --ls-l-w: calc(690px * var(--hero-desk-w-scale));
-    --ls-f-w: calc(760px * var(--hero-desk-w-scale));
-    --pt-s-w: calc(280px * var(--hero-desk-w-scale));
-    --pt-m-w: calc(330px * var(--hero-desk-w-scale));
-    --pt-l-w: calc(380px * var(--hero-desk-w-scale));
-    --pt-f-w: calc(430px * var(--hero-desk-w-scale));
-    --sq-s-w: calc(370px * var(--hero-desk-w-scale));
-    --sq-m-w: calc(440px * var(--hero-desk-w-scale));
-    --sq-l-w: calc(500px * var(--hero-desk-w-scale));
-    --sq-f-w: calc(560px * var(--hero-desk-w-scale));
+    --ls-s-w: calc(416px * var(--hero-desk-w-scale));
+    --ls-m-w: calc(488px * var(--hero-desk-w-scale));
+    --ls-l-w: calc(552px * var(--hero-desk-w-scale));
+    --ls-f-w: calc(608px * var(--hero-desk-w-scale));
+    --pt-s-w: calc(224px * var(--hero-desk-w-scale));
+    --pt-m-w: calc(264px * var(--hero-desk-w-scale));
+    --pt-l-w: calc(304px * var(--hero-desk-w-scale));
+    --pt-f-w: calc(344px * var(--hero-desk-w-scale));
+    --sq-s-w: calc(296px * var(--hero-desk-w-scale));
+    --sq-m-w: calc(352px * var(--hero-desk-w-scale));
+    --sq-l-w: calc(400px * var(--hero-desk-w-scale));
+    --sq-f-w: calc(448px * var(--hero-desk-w-scale));
   }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   .cardStack {
-    --ls-s-w: min(520px, 520px);
-    --ls-m-w: min(610px, 610px);
-    --ls-l-w: min(690px, 690px);
-    --ls-f-w: min(760px, 760px);
-    --pt-s-w: min(280px, 280px);
-    --pt-m-w: min(330px, 330px);
-    --pt-l-w: min(380px, 380px);
-    --pt-f-w: min(430px, 430px);
-    --sq-s-w: min(370px, 370px);
-    --sq-m-w: min(440px, 440px);
-    --sq-l-w: min(500px, 500px);
-    --sq-f-w: min(560px, 560px);
+    --ls-s-w: min(416px, 416px);
+    --ls-m-w: min(488px, 488px);
+    --ls-l-w: min(552px, 552px);
+    --ls-f-w: min(608px, 608px);
+    --pt-s-w: min(224px, 224px);
+    --pt-m-w: min(264px, 264px);
+    --pt-l-w: min(304px, 304px);
+    --pt-f-w: min(344px, 344px);
+    --sq-s-w: min(296px, 296px);
+    --sq-m-w: min(352px, 352px);
+    --sq-l-w: min(400px, 400px);
+    --sq-f-w: min(448px, 448px);
   }
 }
 
 /* Legacy large-screen scale helpers (low-height laptop) */
-@media (min-width: 1440px) and (max-height: 820px) {
+@media (min-width: 1152px) and (max-height: 820px) {
   .cardStack {
     --hero-desk-w-scale: 0.92;
     --hero-desk-h-scale: 0.9;
   }
 }
 
-@media (min-width: 1440px) and (max-height: 720px) {
+@media (min-width: 1152px) and (max-height: 720px) {
   .cardStack {
     --hero-desk-w-scale: 0.86;
     --hero-desk-h-scale: 0.83;

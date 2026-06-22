@@ -39,7 +39,7 @@
 
 .titleAccent {
   display: block;
-  width: clamp(72px, 9vw, 120px);
+  width: clamp(57.6px, 9vw, 96px);
   height: 4px;
   background: #EC0000;
   margin: 0.55rem 0 1.5rem;
@@ -57,7 +57,7 @@
 .sectionTitle::before {
   content: "";
   display: block;
-  width: 34px;
+  width: 27.2px;
   height: 2px;
   background: #EC0000;
   margin-bottom: 0.65rem;
@@ -79,7 +79,7 @@
 
 .tableTopAccent {
   display: block;
-  width: clamp(48px, 6vw, 80px);
+  width: clamp(38.4px, 6vw, 64px);
   height: 3px;
   background: #EC0000;
   margin: 1rem 0 0.35rem;
@@ -136,7 +136,7 @@
   font-weight: 400;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   /* En móvil todos los bloques colapsan a una columna y los títulos
      se vuelven a alinear a la izquierda — la barra roja también. */
   .sectionTitleRight {

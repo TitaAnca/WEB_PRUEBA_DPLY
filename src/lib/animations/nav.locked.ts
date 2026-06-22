@@ -10,6 +10,31 @@ type NavLinkWithCleanup = HTMLAnchorElement & {
   _navIconHoverCleanup?: () => void;
 };
 
+/** Desktop floating nav (≥944): ellipsis geometry scaled to current nav size. */
+function navEllipsisLayoutConstants() {
+  if (window.matchMedia("(min-width: 944px)").matches) {
+    return {
+      pad: 1.4175,
+      gMax: 4.725,
+      gMinStep: 0.23625,
+      clusterMax: 2.3625,
+      clusterMin: 0.945,
+      fallbackDotWidth: 5.1975,
+      letterSpacing: "0.11em",
+    };
+  }
+
+  return {
+    pad: 1.5,
+    gMax: 5,
+    gMinStep: 0.25,
+    clusterMax: 2.5,
+    clusterMin: 1,
+    fallbackDotWidth: 5.5,
+    letterSpacing: "0.14em",
+  };
+}
+
 /**
  * Tema VISUAL (color del fondo físico, no semántico) de cada sección:
  *  - "dark"  → fondo oscuro → label blanca / logo blanco / icono blanco
@@ -42,7 +67,10 @@ function setupNavSocialHoverGsap(): () => void {
     return () => {};
   }
 
-  gsap.set(labelLinks, { y: 0, letterSpacing: "0.14em" });
+  gsap.set(labelLinks, {
+    y: 0,
+    letterSpacing: navEllipsisLayoutConstants().letterSpacing,
+  });
   gsap.set(iconLinks, { x: 0, y: 0, scale: 1, rotate: 0, opacity: 1 });
 
   labelLinks.forEach((labelLink) => {
@@ -89,33 +117,37 @@ function setupNavSocialHoverGsap(): () => void {
     ) as HTMLElement[];
 
     function timingForViewport() {
-      if (window.matchMedia("(max-width: 767px)").matches) {
+      if (window.matchMedia("(max-width: 613px)").matches) {
         return { duration: 0.4, stagger: 0.038 };
       }
-      if (window.matchMedia("(max-width: 1024px)").matches) {
+      if (window.matchMedia("(max-width: 819px)").matches) {
         return { duration: 0.44, stagger: 0.044 };
       }
       return { duration: 0.5, stagger: 0.052 };
     }
 
     function measureEllipsisXs() {
+      const layout = navEllipsisLayoutConstants();
       const w = Math.max(0, wordSpan.getBoundingClientRect().width);
-      const d = dots[0]?.getBoundingClientRect().width || 5.5;
-      const pad = 1.5;
+      const d = dots[0]?.getBoundingClientRect().width || layout.fallbackDotWidth;
+      const pad = layout.pad;
       const maxLeft = Math.max(0, w - d - pad);
-      let g = Math.min(5, Math.max(0, (w - 3 * d - 2 * pad) / 2));
+      let g = Math.min(layout.gMax, Math.max(0, (w - 3 * d - 2 * pad) / 2));
       let endX2 = maxLeft;
       let endX1 = endX2 - d - g;
       let endX0 = endX1 - d - g;
-      while (endX0 < pad && g > 0.25) {
-        g -= 0.25;
+      while (endX0 < pad && g > layout.gMinStep) {
+        g -= layout.gMinStep;
         endX1 = endX2 - d - g;
         endX0 = endX1 - d - g;
       }
       if (endX0 < pad) endX0 = pad;
       if (endX1 < endX0) endX1 = endX0;
       if (endX2 < endX1) endX2 = endX1;
-      const cluster = Math.min(2.5, Math.max(1, d * 0.4));
+      const cluster = Math.min(
+        layout.clusterMax,
+        Math.max(layout.clusterMin, d * 0.4)
+      );
       let startX0 = pad;
       let startX1 = pad + cluster;
       let startX2 = pad + cluster * 2;

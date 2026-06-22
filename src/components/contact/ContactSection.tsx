@@ -115,11 +115,11 @@ export function ContactSection() {
 
         {/* ── Invitación del estudio ───────────────────────────── */}
         <div className={styles.left}>
-          <div className={styles.leadIn}>
-            <p className={styles.kicker}>
-              Etecé Studio | Branding &amp; Comunicación visual
-            </p>
+          <p className={styles.kicker}>
+            Etecé Studio | Branding &amp; Comunicación visual
+          </p>
 
+          <div className={styles.leadIn}>
             <p className={styles.statement}>
               <span>
                 EMPEZAMOS A CREAR LA HISTORIA<span className={styles.statementMarks}>???</span>
@@ -135,7 +135,12 @@ export function ContactSection() {
 
           <div className={styles.emailBlock}>
             <span>Email</span>
-            <a href="mailto:contacto@etecestudio.com">contacto@etecestudio.com</a>
+            <div className={styles.emailAddressGroup}>
+              <div className={styles.emailLinkRow}>
+                <a href="mailto:contacto@etecestudio.com">contacto@etecestudio.com</a>
+              </div>
+              <span className={styles.emailUnderline} aria-hidden="true" />
+            </div>
           </div>
         </div>
 

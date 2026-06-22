@@ -4,8 +4,8 @@
   --muted: #61616d;
   --accent: #EC0000;
   --line: #e6e6ee;
-  --radius: 18px;
-  --content: 1280px;
+  --radius: 14px;
+  --content: 1024px;
   /* Sistema de contenedor de sección unificado: ancho máximo + gutter lateral
      compartidos. TODAS las secciones principales usan la misma fórmula de shell
      → margen lateral idéntico en cualquier tamaño (referencia visual: 27").
@@ -15,23 +15,23 @@
      ancho y se ajusta por breakpoint más abajo: portátil generoso, tablet/móvil
      más ajustado, sin que las secciones lleguen nunca al borde del viewport.
      En ≥1441px el contenido queda topado en --section-max-width (look 27"). */
-  --section-max-width: 1360px;
+  --section-max-width: 1088px;
   --section-gutter: clamp(1.5rem, 5vw, 4.5rem);
   /*
    * Logo: .site-brand fixed at viewport (0,0) only — no per-state offsets on the link.
    * Hero: only --logo-hero-* (_LOGO_NegroRojo).
    * Scroll imagotype: width --logo-symbol-width; centered in .hero-logo-swap (no img left/top).
    */
-  --logo-hero-top: -5px;
-  --logo-hero-left: -15px;
-  /* Must match rendered hero logo width (see ≤620px override) — used to center scroll imagotype on hero */
-  --logo-hero-box-width: 220px;
-  --logo-full-width: 220px;
+  --logo-hero-top: -4px;
+  --logo-hero-left: -12px;
+  /* Must match rendered hero logo width (see ≤496px override) — used to center scroll imagotype on hero */
+  --logo-hero-box-width: 176px;
+  --logo-full-width: 176px;
   --logo-full-ratio: 1.7777778;
   --logo-slot-width: var(--logo-full-width);
   --logo-slot-height: calc(var(--logo-full-width) / var(--logo-full-ratio));
   /* Explicit width + height:auto; 0.6× prior 126px */
-  --logo-symbol-width: 75.6px;
+  --logo-symbol-width: 60px;
   --logo-hidden-scale: 0.96;
   --logo-full-scale: 1;
   --logo-symbol-scale: 1;
@@ -47,13 +47,13 @@
    portátil/tablet generoso pero contenido, móvil más ajustado sin tocar bordes.
    Por debajo de 1024px el sitio ya entra en modo compacto/móvil (barra superior
    fija); estos valores acompañan ese modo. */
-@media (max-width: 1024px) {
+@media (max-width: 819px) {
   :root {
     --section-gutter: clamp(1.1rem, 4vw, 2.25rem);
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 512px) {
   :root {
     --section-gutter: clamp(0.85rem, 4vw, 1.25rem);
   }
@@ -170,15 +170,15 @@ img {
   width: min(86vw, 540px);
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 1152px) {
   .preloader-stage {
     width: clamp(720px, 38vw, 1080px);
   }
 }
 
-@media (min-width: 2560px) {
+@media (min-width: 2048px) {
   .preloader-stage {
-    width: clamp(900px, 32vw, 1280px);
+    width: clamp(720px, 32vw, 819px);
   }
 }
 
@@ -306,7 +306,7 @@ img {
   --intro-flow-speed: 920ms;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 613px) {
   .brand-intro-inner {
     --intro-dot-size: clamp(4.2rem, 26vw, 8.8rem);
     --intro-dot-gap: clamp(0.38rem, 2.2vw, 0.76rem);
@@ -464,7 +464,7 @@ img {
 
 .brand-intro.s03 .brand-intro-main-dots {
   opacity: 1;
-  filter: blur(0.32px);
+  filter: blur(0.4px);
 }
 
 .brand-intro.s03 .brand-intro-main-dots span {
@@ -534,7 +534,7 @@ img {
 }
 
 .brand-intro.s07 .brand-intro-fragment {
-  filter: blur(0.28px);
+  filter: blur(0.35px);
 }
 
 .brand-intro.s08 .brand-intro-main-dots {
@@ -576,16 +576,22 @@ img {
   padding: 0 1rem;
 }
 
+.preloader-visual-scale {
+  width: 100%;
+  transform: scale(0.6);
+  transform-origin: center center;
+}
+
 /* UHD / 4K: scale the preloader up so the lockup is not a tiny island on a huge canvas. */
-@media (min-width: 1800px) {
+@media (min-width: 1152px) {
   .preloader-stage {
     width: clamp(720px, 38vw, 1080px);
   }
 }
 
-@media (min-width: 2560px) {
+@media (min-width: 2048px) {
   .preloader-stage {
-    width: clamp(900px, 32vw, 1280px);
+    width: clamp(720px, 32vw, 819px);
   }
 }
 
@@ -1387,7 +1393,7 @@ body.site-revealed .site-footer {
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 720px) {
   .site-footer {
     display: flex;
     flex-direction: column;
@@ -1420,7 +1426,7 @@ body.site-revealed .site-footer {
 
 /* Mobile: footer más compacto — labels más pequeñas, gaps reducidos y los
    enlaces legales envueltos en fila. Se conserva el orden y todos los enlaces. */
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   /* Footer compacto: firma de cierre justo bajo el Contact (no una nueva
      sección larga). Solo se reduce alto/gaps; enlaces y orden intactos. */
   .site-footer {
@@ -1488,7 +1494,7 @@ body.site-revealed .site-footer {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 336px) {
   .site-footer__legal-link,
   .site-footer__solutions {
     font-size: 0.68rem;
@@ -1501,13 +1507,13 @@ body.site-revealed .site-footer {
 }
 
 /* iPhones pequeños: firma de cierre aún más compacta. */
-@media (max-width: 430px) {
+@media (max-width: 344px) {
   .site-footer {
     padding-block: 0.9rem;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 720px) {
   .statement,
   .split-editorial {
     grid-template-columns: 1fr;
@@ -1567,7 +1573,7 @@ body.site-revealed .site-footer {
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 496px) {
   .floating-nav {
     width: min(calc(100% - 0.9rem), var(--content));
     top: 0.72rem;
@@ -1918,7 +1924,7 @@ body.site-revealed .text-nav nav {
    compacto/móvil (barra superior fija), no solo a 768px. La nav de escritorio
    se mantiene maquetada (opacity:0) para que la medición de contraste/tema
    siga leyendo su rect. */
-@media (max-width: 1024px) {
+@media (max-width: 819px) {
   body.site-revealed .text-nav nav {
     opacity: 0;
     pointer-events: none;
@@ -2134,7 +2140,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
 /* Mobile: el logo top-left se reduce notablemente para no pesar. Las reglas
    base usan width: var(--logo-*-width), así que basta con redefinir las
    variables por breakpoint (sin duplicar selectores ni tocar el desktop). */
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   :root {
     --logo-full-width: clamp(112px, 26vw, 148px);
     --logo-hero-box-width: clamp(112px, 26vw, 148px);
@@ -2142,7 +2148,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 496px) {
   :root {
     --logo-full-width: clamp(100px, 30vw, 128px);
     --logo-hero-box-width: clamp(100px, 30vw, 128px);
@@ -2156,7 +2162,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 336px) {
   :root {
     --logo-full-width: clamp(88px, 30vw, 112px);
     --logo-hero-box-width: clamp(88px, 30vw, 112px);
@@ -2181,7 +2187,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
    actual) y a ≤1179px gobierna la barra sólida móvil (intacta). Solo CSS /
    posición fija: no toca Hero, enlaces, estados, colores ni la lógica (nav.locked.ts
    y logo.locked.ts LEEN rects en vivo; no escriben estas reglas). */
-@media (min-width: 1180px) {
+@media (min-width: 944px) {
   :root {
     /* SISTEMA FLUIDO DE ESCRITORIO/PORTÁTIL (≥1180, continuo hasta gran desktop).
        Una sola fuente de verdad fluida: bordes, top, logo y nav escalan con el
@@ -2191,12 +2197,12 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
        navegación enmarcan la composición sin dominarla. Estos máximos son ahora la
        referencia de gran desktop; por debajo, clamp() baja de forma continua hasta
        portátil (sin saltos ni valores idénticos en todo el rango). */
-    --desktop-edge: clamp(28px, 3.2vw, 50px);
-    --desktop-top: clamp(24px, 2.6vw, 42px);
-    --desktop-logo-width: clamp(104px, 6.5vw, 148px);
-    --desktop-nav-width: clamp(120px, 7.8vw, 158px);
-    --desktop-icon: clamp(18px, 1.15vw, 25px);
-    --desktop-nav-font: clamp(11px, 0.72vw, 15px);
+    --desktop-edge: clamp(22px, 3.2vw, 40px);
+    --desktop-top: clamp(19px, 2.6vw, 34px);
+    --desktop-logo-width: clamp(104px, 8.2vw, 149px);
+    --desktop-nav-width: clamp(121px, 9.83vw, 158px);
+    --desktop-icon: clamp(22px, 1.56vw, 25px);
+    --desktop-nav-font: clamp(11.5px, 0.68vw, 11.5px);
 
     /* Alias retro-compatibles: la tarjeta post-Hero (.postHeroSafeFrame) sigue
        reservando borde + logo + borde / borde + nav + borde con los mismos tokens. */
@@ -2216,7 +2222,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
     --logo-full-width: var(--desktop-logo-width);
     /* Símbolo/imagotipo (lo visible en el Hero negro y al hacer scroll): máximo
        reducido a ~112px (≈60% del anterior). Ancho real, nunca transform-scale. */
-    --logo-symbol-width: clamp(74px, 4.6vw, 112px);
+    --logo-symbol-width: clamp(74px, 5.8vw, 114px);
   }
 
   /* NAVEGACIÓN: misma esquina superior que el logo (mismo top), pegada al hueco
@@ -2232,11 +2238,11 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
     transform: none;
     box-sizing: border-box;
     --nav-icon: var(--desktop-icon);
-    gap: clamp(16px, 1.5vw, 26px);
+    gap: clamp(12.5px, 1.42vw, 20.5px);
   }
 
   .text-nav nav .nav-social-row {
-    gap: clamp(7px, 0.65vw, 12px);
+    gap: clamp(6px, 0.61vw, 10px);
   }
 
   /* Iconos sociales: tamaño compartido en todas las cajas acopladas (icono, stack,
@@ -2257,125 +2263,177 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
     flex-basis: var(--nav-icon);
   }
 
+  /* X: ligero refuerzo óptico — el trazo diagonal ocupa menos área percibida. */
+  .text-nav nav .nav-social-icon-slot--x {
+    transform: scale(1.05);
+    transform-origin: center center;
+  }
+
   /* Labels: claramente legibles (≥14px). Mayúsculas, peso, color, estado activo y
      hover se conservan. */
   .text-nav nav a {
     font-size: var(--desktop-nav-font);
     line-height: 1;
-    letter-spacing: clamp(0.12em, 0.18vw, 0.22em);
+    letter-spacing: clamp(0.1em, 0.13vw, 0.16em);
   }
 
   .text-nav nav .nav-label-row {
-    gap: clamp(16px, 1.5vw, 26px);
+    gap: 0;
+  }
+
+  /* Single dot clearance per label: padding reserves the strip; row gap stays 0
+     so spacing is not stacked with the inter-label flex gap. */
+  .text-nav nav .nav-label-row a[data-nav] {
+    padding-bottom: 0.826875rem;
+  }
+
+  .text-nav nav .nav-label-ellipsis {
+    margin-top: 0.1134rem;
+    height: 0.3213rem;
+  }
+
+  .text-nav nav .nav-label-ellipsis-dot {
+    width: 0.3213rem;
+    height: 0.3213rem;
+    margin-top: -0.16065rem;
   }
 }
 
 /* Escritorio intermedio (1180–1919): logo Hero más presente, imagotipo scroll
    ligeramente más pequeño, navegación compacta (hueco mínimo para los dots). */
-@media (min-width: 1180px) and (max-width: 1919px) {
+@media (min-width: 944px) and (max-width: 1535px) {
   :root {
-    --desktop-logo-width: clamp(120px, 8.2vw, 168px);
+    --desktop-logo-width: clamp(121px, 10.33vw, 169px);
     --logo-full-width: var(--desktop-logo-width);
     --logo-hero-box-width: var(--desktop-logo-width);
     /* Imagotipo scroll sin cambios — solo crece el wordmark Hero (_LOGO_BlancoRojo.svg). */
-    --logo-symbol-width: clamp(62px, 3.85vw, 92px);
+    --logo-symbol-width: clamp(63px, 4.85vw, 94px);
   }
 
   .text-nav nav {
-    gap: clamp(12px, 1.25vh, 18px);
+    gap: clamp(11.5px, 1.18vh, 17.5px);
     height: auto;
     min-height: 0;
     justify-content: flex-start;
-  }
-
-  .text-nav nav .nav-label-row {
-    gap: clamp(12px, 1.25vh, 18px);
   }
 }
 
 /* Gran escritorio (≥1920): logo Hero aún más grande; nav con un poco más de aire;
    escena de cierre reparte Contacto (~88%) + Footer (~12%) en una pantalla. */
-@media (min-width: 1920px) {
+@media (min-width: 1536px) {
   :root {
-    --desktop-logo-width: clamp(155px, 7vw, 198px);
+    --desktop-logo-width: clamp(157px, 8.82vw, 199px);
     --logo-full-width: var(--desktop-logo-width);
     --logo-hero-box-width: var(--desktop-logo-width);
-    --logo-symbol-width: clamp(78px, 4vw, 104px);
+    --logo-symbol-width: clamp(78px, 5.04vw, 104px);
   }
 
   .text-nav nav {
-    gap: clamp(14px, 1.4vh, 22px);
-  }
-
-  .text-nav nav .nav-label-row {
-    gap: clamp(14px, 1.4vh, 22px);
+    gap: clamp(12.5px, 1.32vh, 20px);
   }
 }
 
 /* Portátil de poca altura (≈≤820px): se reduce SOLO la escala vertical y los
    anclajes superiores (top, gaps del nav, logo) para que cada escena quepa en una
    pantalla baja, sin estrechar el contenido. El ancho/columnas no cambian aquí. */
-@media (min-width: 1180px) and (max-height: 820px) {
+@media (min-width: 944px) and (max-height: 820px) {
   :root {
-    --desktop-top: clamp(16px, 2vh, 30px);
-    --desktop-logo-width: clamp(98px, 6vw, 138px);
-    --logo-symbol-width: clamp(70px, 4.4vw, 100px);
+    --desktop-top: clamp(13px, 2vh, 24px);
+    --desktop-logo-width: clamp(98px, 7.56vw, 139px);
+    --logo-symbol-width: clamp(70px, 5.54vw, 101px);
   }
 
   .text-nav nav {
-    gap: clamp(11px, 1.4vh, 20px);
-  }
-
-  .text-nav nav .nav-label-row {
-    gap: clamp(11px, 1.4vh, 20px);
+    gap: clamp(11.5px, 1.32vh, 19px);
   }
 }
 
-@media (min-width: 1180px) and (max-width: 1919px) and (max-height: 820px) {
+@media (min-width: 944px) and (max-width: 1535px) and (max-height: 820px) {
   :root {
-    --desktop-logo-width: clamp(114px, 7.6vw, 152px);
-    --logo-symbol-width: clamp(58px, 3.6vw, 82px);
+    --desktop-logo-width: clamp(114px, 9.58vw, 154px);
+    --logo-symbol-width: clamp(58px, 4.54vw, 83px);
   }
 }
 
-/* Portátil compacto 14" (1180–1439): logo Hero, imagotipo scroll y nav ~+16.67%
+/* Portátil compacto 14" (944–1279): logo Hero, imagotipo scroll y nav ~+16.67%
    respecto al render intermedio actual. Anchos reales (sin transform-scale). */
-@media (min-width: 1180px) and (max-width: 1599px) {
+@media (min-width: 944px) and (max-width: 1279px) {
   :root {
-    --desktop-logo-width: clamp(140px, 9.57vw, 196px);
+    --desktop-logo-width: clamp(142px, 12.06vw, 198px);
     --logo-full-width: var(--desktop-logo-width);
     --logo-hero-box-width: var(--desktop-logo-width);
-    --logo-symbol-width: clamp(72px, 4.49vw, 107px);
-    --desktop-icon: clamp(21px, 1.34vw, 29px);
-    --desktop-nav-font: clamp(13px, 0.84vw, 17px);
-    --desktop-nav-width: clamp(132px, 9.1vw, 184px);
+    --logo-symbol-width: clamp(73px, 5.66vw, 108px);
+    --desktop-icon: clamp(22px, 1.56vw, 25px);
+    --desktop-nav-font: clamp(12.5px, 0.79vw, 12.5px);
+    --desktop-nav-width: clamp(133px, 11.47vw, 186px);
   }
 
   .text-nav nav {
-    gap: clamp(12px, 1.25vh, 18px);
+    gap: clamp(11.5px, 1.18vh, 17.5px);
     width: var(--desktop-nav-width);
   }
 
-  .text-nav nav .nav-label-row {
-    gap: clamp(12px, 1.25vh, 18px);
+  .text-nav nav .nav-social-row {
+    gap: clamp(8px, 0.71vw, 12.5px);
+  }
+}
+
+@media (min-width: 944px) and (max-width: 1279px) and (max-height: 820px) {
+  :root {
+    --desktop-logo-width: clamp(133px, 11.18vw, 179px);
+    --logo-symbol-width: clamp(68px, 5.29vw, 97px);
+  }
+}
+
+/* Portátil 14" (1280–1535): escala flotante al 120% de los valores actuales del bloque.
+   Posición exterior (top/edge) y ritmo 50px sin cambios. */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  :root {
+    --desktop-logo-width: clamp(151px, 12.91vw, 211px);
+    --logo-full-width: var(--desktop-logo-width);
+    --logo-hero-box-width: var(--desktop-logo-width);
+    --logo-symbol-width: clamp(79px, 6.07vw, 118px);
+    --desktop-icon: clamp(28px, 1.96vw, 31px);
+    --desktop-nav-font: clamp(14px, 0.85vw, 14px);
+    --desktop-nav-width: clamp(151px, 12.29vw, 199px);
+  }
+
+  .text-nav nav {
+    gap: clamp(14.5px, 1.48vh, 22px);
+    width: var(--desktop-nav-width);
   }
 
   .text-nav nav .nav-social-row {
-    gap: clamp(8px, 0.75vw, 14px);
+    gap: clamp(8px, 0.77vw, 12.5px);
+  }
+
+  .text-nav nav .nav-label-row a[data-nav] {
+    padding-bottom: 1.03359375rem;
+  }
+
+  .text-nav nav .nav-label-ellipsis {
+    margin-top: 0.14175rem;
+    height: 0.401625rem;
+  }
+
+  .text-nav nav .nav-label-ellipsis-dot {
+    width: 0.401625rem;
+    height: 0.401625rem;
+    margin-top: -0.2008125rem;
   }
 }
 
-@media (min-width: 1180px) and (max-width: 1599px) and (max-height: 820px) {
+@media (min-width: 1280px) and (max-width: 1535px) and (max-height: 820px) {
   :root {
-    --desktop-logo-width: clamp(133px, 8.87vw, 177px);
-    --logo-symbol-width: clamp(68px, 4.2vw, 96px);
+    --desktop-logo-width: clamp(143px, 11.98vw, 193px);
+    --logo-symbol-width: clamp(72px, 5.68vw, 104px);
   }
 }
 
-@media (min-width: 1920px) and (max-height: 820px) {
+@media (min-width: 1536px) and (max-height: 820px) {
   :root {
-    --desktop-logo-width: clamp(134px, 6.5vw, 178px);
-    --logo-symbol-width: clamp(68px, 3.6vw, 90px);
+    --desktop-logo-width: clamp(136px, 8.2vw, 179px);
+    --logo-symbol-width: clamp(68px, 4.54vw, 91px);
   }
 }
 
@@ -2648,13 +2706,13 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
 
 .hero-scene.to-black-transition .hero-scene-main {
   transform: translate(-50%, -50%) scale(1.008);
-  filter: blur(1.4px) brightness(0.92);
+  filter: blur(1.75px) brightness(0.92);
 }
 
 .hero-scene.to-black-transition .hero-scene-fragment,
 .hero-scene.to-black-transition .hero-scene-focus {
   transform: scale(1.01);
-  filter: blur(1.8px) brightness(0.9);
+  filter: blur(2.25px) brightness(0.9);
 }
 
 .hero-scene.is-statement .hero-scene-fill,
@@ -2842,18 +2900,18 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   padding-block: 0;
 }
 
-/* Block 4 — Contacto */
+/* Block 4 — Contacto (altura gobernada por .closing-viewport en escritorio) */
 .landing-block--contacto {
   background: #FAFAFF;
-  height: 100svh;
-  min-height: 100svh;
-  max-height: 100svh;
+  height: auto;
+  min-height: 0;
+  max-height: none;
   padding-block: 0;
 }
 
 /* Móvil (≤768): altura por contenido — anula el 100svh de arriba en bloques
    post-Hero. Tablet/escritorio no se tocan. Hero (.landing-block--hero) intacto. */
-@media (max-width: 768px) {
+@media (max-width: 614px) {
   .landing-block--nosotros,
   .landing-block--enfoque,
   .landing-block--contacto {
@@ -2880,7 +2938,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1152px) {
   .landing-block > .story-block {
     width: 100%;
     margin-inline: 0;
@@ -2916,7 +2974,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   }
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 1152px) {
   .capability-panel {
     min-height: 220px;
   }
@@ -2950,122 +3008,47 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   margin-top: 0;
 }
 
-/* Escritorio/portátil compacto (1180–1439): Contacto + Footer comparten UNA pantalla.
-   Contacto ocupa el espacio flexible y el Footer queda compacto debajo, visible
-   sin scroll extra. ≥1440: grid 78/22 en cascada final. */
-@media (min-width: 1180px) and (max-width: 1439px) {
-  .closing-viewport {
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .closing-viewport > .landing-block--contacto {
-    flex: 1 1 auto;
-    min-height: 0;
-  }
-
-  .closing-viewport > .site-footer {
-    flex: 0 0 auto;
-  }
-
-  /* Footer compacto en escritorio/portátil: altura dirigida por contenido y
-     padding sensible al alto de pantalla → cierra la escena sin consumir otra
-     pantalla. Enlaces, social y "© Etecé Studio" intactos. */
-  .closing-viewport > .site-footer {
-    padding-block: clamp(12px, 1.8vh, 24px);
-  }
-}
-
-/* Portátil compacto (1180–1439): Contacto + Footer en una pantalla con reparto
-   explícito; Footer más contenido para recuperar altura del formulario. */
-@media (min-width: 1180px) and (max-width: 1439px) {
-  .closing-viewport {
-    min-height: 100svh;
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) auto;
-  }
-
-  .closing-viewport > .landing-block--contacto {
-    min-height: 0;
-  }
-
-  .closing-viewport > .site-footer {
-    padding-block: clamp(10px, 1.5vh, 18px);
-  }
-}
-
-/* Por debajo del 14" aprobado (≤1439): Contacto deja de forzar 100svh y la
-   escena de cierre crece solo con su contenido → Footer más cerca. ≥1440 intacto. */
-@media (max-width: 1439px) {
+/* Escritorio/portátil (≥944): Contacto + Footer comparten min-height 100svh. */
+@media (min-width: 944px) {
   .landing-block--contacto {
     height: auto;
     min-height: 0;
     max-height: none;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1439px) {
-  .closing-viewport {
-    min-height: 0;
-    height: auto;
-    display: block;
-  }
-
-  .closing-viewport > .landing-block--contacto {
-    flex: none;
-    height: auto;
-    min-height: 0;
-    max-height: none;
-  }
-
-  .closing-viewport > .site-footer {
-    margin-top: 0;
-    padding-block: clamp(10px, 1.4vh, 18px);
-  }
-}
-
-/* 14" aprobado y escritorios (≥1440): Contacto ~78% + Footer ~22%
-   en un único viewport. ÚNICA cascada desktop de cierre. */
-@media (min-width: 1440px) {
-  .landing-block--contacto {
-    height: 100%;
-    min-height: 0;
-    max-height: 100%;
   }
 
   .narrative-flow > .closing-viewport,
   .closing-viewport {
-    height: 100svh;
+    height: auto;
     min-height: 100svh;
-    max-height: 100svh;
-    display: grid;
-    grid-template-rows: minmax(0, 78fr) minmax(0, 22fr);
+    max-height: none;
+    display: flex;
+    flex-direction: column;
     gap: 0;
-    align-content: stretch;
   }
 
   .closing-viewport > .landing-block--contacto,
   .narrative-flow > .closing-viewport > .landing-block--contacto {
-    height: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
     min-height: 0;
-    max-height: 100%;
-    flex: none;
-    overflow: hidden;
+    max-height: none;
+    overflow: visible;
   }
 
   .closing-viewport > .site-footer,
   .narrative-flow > .closing-viewport > .site-footer {
-    height: 100%;
+    flex: 0 0 auto;
+    height: auto;
     min-height: 0;
-    max-height: 100%;
-    flex: none;
-    flex-grow: 0;
+    max-height: none;
+    overflow: visible;
     align-self: stretch;
     align-content: center;
-    overflow: hidden;
     align-items: center;
-    padding: clamp(10px, 1.4vh, 18px) clamp(1rem, 2.5vw, 2.25rem);
+    padding: clamp(10px, 1.4vh, 16px) clamp(1rem, 2.5vw, 2.25rem);
     gap: clamp(0.35rem, 0.75vw, 0.65rem);
   }
 
@@ -3087,6 +3070,35 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
   }
 }
 
+/* Por debajo del 14" aprobado (≤1439): Contacto sin 100svh propio. */
+@media (max-width: 1151px) {
+  .landing-block--contacto {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+}
+
+@media (min-width: 615px) and (max-width: 943px) {
+  .closing-viewport {
+    min-height: 0;
+    height: auto;
+    display: block;
+  }
+
+  .closing-viewport > .landing-block--contacto {
+    flex: none;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .closing-viewport > .site-footer {
+    margin-top: 0;
+    padding-block: clamp(10px, 1.4vh, 18px);
+  }
+}
+
 /* ============================================================
    TARJETA POST-HERO · ritmo fijo de 50px · 14"–27" (1180–1919px)
    ------------------------------------------------------------
@@ -3102,7 +3114,7 @@ body.on-light-bg .text-nav nav .nav-social-link:hover {
    exactamente 50px y la tarjeta recupera anchura (menos saltos de línea, secciones
    más cortas). El borde es fluido (--desktop-edge) y continúa por encima de 1920px;
    a ≤1179px gobierna el layout móvil/tablet. */
-@media (min-width: 1180px) {
+@media (min-width: 944px) {
   .postHeroSafeFrame {
     --post-hero-frame-left: calc(
       var(--desktop-fixed-gap) + var(--desktop-logo-width) + var(--desktop-fixed-gap)

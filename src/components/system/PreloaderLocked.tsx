@@ -99,6 +99,7 @@ export function PreloaderLocked() {
 
       <div id="preloader" className="preloader--simple" aria-hidden="true">
         <div className="preloader-stage">
+          <div className="preloader-visual-scale">
           <div className="preloader-logo-stack" aria-hidden="true">
             {/*
               Layer A — inline SVG of Preloader_EtecéStudio_Negro.svg.
@@ -231,6 +232,7 @@ export function PreloaderLocked() {
               aria-hidden="true"
               style={{ opacity: 0, left: "-6%" }}
             />
+          </div>
           </div>
         </div>
       </div>
