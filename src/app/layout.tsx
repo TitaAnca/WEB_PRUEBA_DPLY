@@ -58,6 +58,19 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
   },
+  icons: {
+    icon: [
+      {
+        url: "/Favicon_EteceStudio_Rojo.svg",
+        type: "image/svg+xml",
+        sizes: "any",
+      },
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+    ],
+  },
 };
 
 // JSON-LD (ProfessionalService). Solo datos verificados: web, email, servicios,

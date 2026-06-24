@@ -1656,3 +1656,122 @@
     margin-top: clamp(16px, 2vh, 24px);
   }
 }
+
+/* ─── Enfoque · escritorio intermedio (1152–1535) · composición equilibrada ───
+   Título contenido antes del rail de navegación; imagen dentro de columna;
+   altura ampliada hacia la línea inferior editorial; sin tocar ≥1536. */
+@media (min-width: 1152px) and (max-width: 1535px) {
+  .enfoque:global(.landing-block--enfoque) {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .inner {
+    justify-content: flex-start;
+    height: auto;
+    min-height: auto;
+    gap: clamp(24px, 3vh, 40px);
+    padding-block: clamp(36px, 4.2vh, 56px) clamp(28px, 3.2vh, 48px);
+    box-sizing: border-box;
+  }
+
+  .enfoqueHeader {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "titleTop titleTop"
+      "lowerLeft image";
+    column-gap: clamp(24px, 1.8vw, 32px);
+    row-gap: clamp(22px, 2.2vh, 30px);
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    container-type: normal;
+  }
+
+  .enfoqueTitleTop {
+    grid-area: titleTop;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    font-size: clamp(52px, 4.75vw, 78px);
+    line-height: 0.94;
+    letter-spacing: -0.018em;
+    margin-top: clamp(8px, 1vh, 12px);
+    margin-bottom: 0;
+  }
+
+  .enfoqueTitleTop .enfoqueTitleLine {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    text-wrap: nowrap;
+  }
+
+  .enfoqueTitleBottom {
+    font-size: clamp(42px, 3.6vw, 62px);
+    line-height: 0.98;
+    letter-spacing: -0.032em;
+    margin-top: clamp(2px, 0.3vh, 4px);
+  }
+
+  .enfoqueLowerLeft {
+    align-self: start;
+    height: auto;
+    min-height: 0;
+    gap: 0;
+  }
+
+  .enfoqueParagraph {
+    font-size: clamp(17px, 1.15vw, 20px);
+    line-height: 1.58;
+    margin-top: clamp(18px, 2.2vh, 28px);
+    max-width: clamp(300px, 32vw, 420px);
+  }
+
+  .enfoqueImageWrapper {
+    grid-area: image;
+    align-self: start;
+    justify-self: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+    height: clamp(430px, calc(52vh - 60px), 570px);
+    max-height: none;
+    aspect-ratio: auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .enfoqueImageWrapper::before {
+    inset: -8% 0 -8% -8%;
+  }
+
+  .photoMedia {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .photoImg {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .enfoqueCardsGrid {
+    margin-top: clamp(28px, 3.2vh, 44px);
+  }
+}

@@ -27,7 +27,7 @@ export const PUBLIC_SITEMAP_ROUTES: readonly PublicSitemapRoute[] = [
   { path: "/aviso-legal", changeFrequency: "yearly", priority: 0.3 },
   { path: "/politica-privacidad", changeFrequency: "yearly", priority: 0.3 },
   { path: "/politica-cookies", changeFrequency: "yearly", priority: 0.3 },
-  { path: "/portal-transparencia", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/portal-transparencia", changeFrequency: "yearly", priority: 0.4 },
 ] as const;
 
 /** Paths blocked in robots.txt (not indexable). */
