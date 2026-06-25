@@ -61,15 +61,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+      {
         url: "/Favicon_EteceStudio_Rojo.svg",
         type: "image/svg+xml",
         sizes: "any",
       },
-      {
-        url: "/favicon.ico",
-        sizes: "any",
-      },
     ],
+    shortcut: "/favicon.ico",
   },
 };
 
