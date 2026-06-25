@@ -1,0 +1,50 @@
+.services {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(1.4rem, 2.2vw, 2rem);
+  padding-top: clamp(1rem, 1.6vw, 1.4rem);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.label {
+  margin: 0 0 0.65rem;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.62rem, 0.7vw, 0.72rem);
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 600;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list a {
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.88rem, 0.95vw, 0.98rem);
+  line-height: 1.35;
+  color: rgba(0, 0, 0, 0.78);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.list a:hover,
+.list a:focus-visible {
+  color: #ec0000;
+  border-bottom-color: #ec0000;
+}
+
+.list a:focus-visible {
+  outline: 1px solid #ec0000;
+  outline-offset: 3px;
+}

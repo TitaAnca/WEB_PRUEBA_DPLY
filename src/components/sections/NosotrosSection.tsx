@@ -1,5 +1,6 @@
 "use client";
 
+import { HomeServicesIndex } from "@/components/seo/HomeServicesIndex";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -120,9 +121,9 @@ export function NosotrosSection() {
             <span className={styles.redMarkParagraph} />
           </div>
 
-          <p className={styles.meta}>
-            Etecé Studio / Branding &amp; Comunicación Visual
-          </p>
+          <p className={styles.meta}>ETECÉ STUDIO</p>
+
+          <h1 className={styles.seoH1}>Agencia de branding y comunicación visual</h1>
 
           <div className={styles.grid}>
             <div className={styles.visual}>
@@ -157,6 +158,12 @@ export function NosotrosSection() {
                   forma en la que habla, se ordena, se reconoce y consigue que
                   cada detalle parezca parte de la misma idea.
                 </p>
+                <p className={styles.seoSupport}>
+                  Desarrollamos estrategia de marca, identidad visual, rebranding,
+                  diseño web y comunicación visual para empresas en Madrid, Ciudad
+                  Real y toda España.
+                </p>
+                <HomeServicesIndex />
               </div>
             </div>
           </div>

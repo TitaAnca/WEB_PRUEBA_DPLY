@@ -182,7 +182,7 @@
 .meta {
   position: relative;
   z-index: 2;
-  margin: 0 0 clamp(1.6rem, 2.4vw, 2.4rem);
+  margin: 0 0 0.55rem;
   font-family: "Jura", "Inter", system-ui, sans-serif;
   font-size: clamp(0.62rem, 0.7vw, 0.78rem);
   line-height: 1;
@@ -191,6 +191,32 @@
   color: rgba(0, 0, 0, 0.52);
   font-weight: 600;
   text-align: right;
+}
+
+.seoH1 {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 clamp(1.6rem, 2.4vw, 2.4rem);
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.72rem, 0.85vw, 0.92rem);
+  line-height: 1.35;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.72);
+  font-weight: 600;
+  text-align: right;
+  max-width: 28ch;
+  margin-left: auto;
+}
+
+.seoSupport {
+  margin: clamp(1rem, 1.6vw, 1.35rem) 0 0;
+  font-family: "Jura", "Inter", system-ui, sans-serif;
+  font-size: clamp(0.92rem, 0.98vw, 1.05rem);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: rgba(0, 0, 0, 0.58);
+  font-weight: 400;
 }
 
 /* ─── GRID EDITORIAL: imagen · texto ──────────────────────── */

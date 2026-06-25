@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo/metadata";
 import styles from "@/components/legal/LegalPage.module.css";
 import pageStyles from "./page.module.css";
 import { contratosTransparencia } from "@/content/transparencia/contratos";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Portal de Transparencia | ETECÉ STUDIO",
   description:
     "Consulta pública de colaboraciones gratuitas, acuerdos y contratos publicados por ETECÉ STUDIO.",
-};
+  path: "/portal-transparencia",
+});
 
 export default function PortalTransparenciaPage() {
   const hasContratos = contratosTransparencia.length > 0;

@@ -115,9 +115,9 @@ export function ContactSection() {
 
         {/* ── Invitación del estudio ───────────────────────────── */}
         <div className={styles.left}>
-          <p className={styles.kicker}>
+          <h2 className={styles.kicker}>
             Etecé Studio | Branding &amp; Comunicación visual
-          </p>
+          </h2>
 
           <div className={styles.leadIn}>
             <p className={styles.statement}>

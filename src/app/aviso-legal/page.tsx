@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo/metadata";
 import styles from "@/components/legal/LegalPage.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Aviso legal | ETECÉ STUDIO",
   description:
     "Información legal y condiciones generales de uso del sitio web de ETECÉ STUDIO.",
-};
+  path: "/aviso-legal",
+});
 
 export default function AvisoLegalPage() {
   return (

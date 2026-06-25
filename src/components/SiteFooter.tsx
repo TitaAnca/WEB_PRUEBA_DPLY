@@ -2,6 +2,14 @@ import Link from "next/link";
 
 import { NAV_SOCIAL_LINKS } from "@/content/navigation.config";
 
+const SERVICE_LINKS = [
+  { href: "/branding", label: "Branding" },
+  { href: "/identidad-visual", label: "Identidad visual" },
+  { href: "/rebranding", label: "Rebranding" },
+  { href: "/diseno-web", label: "Diseño web" },
+  { href: "/comunicacion-visual", label: "Comunicación visual" },
+] as const;
+
 /** Inline brand glyphs so the footer socials render crisp red via currentColor. */
 function SocialGlyph({ label }: { label: string }) {
   if (label.toLowerCase().includes("instagram")) {
@@ -47,6 +55,17 @@ export function SiteFooter() {
           Etecé Solutions
         </a>
       </div>
+      <nav className="site-footer__services" aria-label="Servicios">
+        {SERVICE_LINKS.map((service) => (
+          <Link
+            key={service.href}
+            href={service.href}
+            className="site-footer__services-link"
+          >
+            {service.label}
+          </Link>
+        ))}
+      </nav>
       {/* Mobile only: redes sociales pequeñas y rojas, entre Etecé Solutions y
           los enlaces legales. Ocultas en desktop/tablet (ver globals.css). */}
       <div className="site-footer__socials" aria-label="Redes sociales">

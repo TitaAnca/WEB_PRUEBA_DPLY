@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo/metadata";
 import styles from "@/components/legal/LegalPage.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Política de privacidad | ETECÉ STUDIO",
   description:
     "Información sobre protección de datos personales y privacidad en el sitio web de ETECÉ STUDIO.",
-};
+  path: "/politica-privacidad",
+});
 
 export default function PoliticaPrivacidadPage() {
   return (
