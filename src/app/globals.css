@@ -1287,36 +1287,6 @@ body.site-revealed .site-footer {
   align-items: center;
 }
 
-.site-footer__services {
-  grid-column: 1;
-  justify-self: start;
-  align-self: start;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  margin-top: 0.65rem;
-}
-
-.site-footer__services-link {
-  font-size: 0.82rem;
-  font-weight: 400;
-  line-height: 1.35;
-  letter-spacing: 0.02em;
-  color: rgba(250, 250, 255, 0.52);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.site-footer__services-link:hover,
-.site-footer__services-link:focus-visible {
-  color: #ec0000;
-}
-
-.site-footer__services-link:focus-visible {
-  outline: 1px solid #ec0000;
-  outline-offset: 3px;
-}
-
 .site-footer__brand {
   position: absolute;
   top: -1px;
@@ -1434,7 +1404,6 @@ body.site-revealed .site-footer {
 
   .site-footer__brand,
   .site-footer__solutions-zone,
-  .site-footer__services,
   .site-footer__legal {
     position: static;
     justify-self: auto;
@@ -1451,11 +1420,6 @@ body.site-revealed .site-footer {
 
   .site-footer__solutions-zone {
     justify-content: center;
-    margin-top: 0;
-  }
-
-  .site-footer__services {
-    align-items: center;
     margin-top: 0;
   }
 }

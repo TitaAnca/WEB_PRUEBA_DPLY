@@ -13,12 +13,6 @@ export const metadata: Metadata = {
   },
 };
 
-const SERVICE_LINKS = [
-  { href: "/branding", label: "Branding" },
-  { href: "/identidad-visual", label: "Identidad visual" },
-  { href: "/diseno-web", label: "Diseño web" },
-] as const;
-
 export default function NotFound() {
   return (
     <main className={styles.notFoundPage}>
@@ -32,13 +26,6 @@ export default function NotFound() {
           <Link href="/">Volver al inicio</Link>
           <Link href="/#contacto">Contacto</Link>
         </div>
-        <nav className={styles.services} aria-label="Servicios">
-          {SERVICE_LINKS.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
       </section>
     </main>
   );
