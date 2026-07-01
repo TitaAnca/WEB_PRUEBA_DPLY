@@ -140,12 +140,11 @@ export function EnfoqueSection() {
         const BOTTOM_SAFETY = 18;
         const SCROLL_VH = 0.62;
         const SCROLL_MIN = 250;
-        const SCRUB_SMOOTH = 0.8;
-        const MOVE_RATIO = 0.92;
-        const SEGMENT_OVERLAP = 0.06;
+        const SCRUB_SMOOTH = 0.6;
+        const MOVE_RATIO = 0.88;
+        const SEGMENT_OVERLAP = 0.05;
         const SETTLE_RATIO = 0.02;
         const CLIP_LAG = 0.18;
-        const ACTIVE_CARD_LEAD = 0.12;
 
         type StackMetrics = {
           stackTop: number;
@@ -325,7 +324,6 @@ export function EnfoqueSection() {
               opacity: 1,
               top: getCardOffset(index, metrics),
               zIndex: 10 + index,
-              force3D: true,
               transformOrigin: "top center",
               clipPath: "inset(0px 0px 0px 0px)",
               y: startY,
@@ -342,16 +340,30 @@ export function EnfoqueSection() {
           const segment = 1 / transitions;
           const nextActive = Math.min(
             transitions,
-            Math.max(0, Math.floor(progress / segment + ACTIVE_CARD_LEAD)),
+            Math.max(0, Math.floor(progress / segment + 0.1)),
           );
 
-          if (nextActive !== activeCardRef.current) {
-            activeCardRef.current = nextActive;
-            stage.dataset.activeCard = String(nextActive);
-          }
+          if (nextActive === activeCardRef.current) return;
+
+          activeCardRef.current = nextActive;
+          stage.dataset.activeCard = String(nextActive);
         };
 
         let metrics = computeMetrics();
+        let lastResizeWidth = window.innerWidth;
+
+        const rebuildMobileStack = () => {
+          metrics = computeMetrics();
+          applyStackLayout(metrics);
+        };
+
+        let stackTimeline: gsap.core.Timeline | null = null;
+
+        const refreshMobileStackTrigger = () => {
+          rebuildMobileStack();
+          stackTimeline?.invalidate();
+          ScrollTrigger.getById("enfoque-mobile-card-stack")?.refresh();
+        };
 
         const ctx = gsap.context(() => {
           applyStackLayout(metrics);
@@ -369,16 +381,13 @@ export function EnfoqueSection() {
               pinSpacing: true,
               scrub: SCRUB_SMOOTH,
               anticipatePin: 1,
-              invalidateOnRefresh: true,
-              onRefresh: () => {
-                metrics = computeMetrics();
-                applyStackLayout(metrics);
-              },
               onUpdate: (self) => {
                 syncActiveCard(self.progress);
               },
             },
           });
+
+          stackTimeline = tl;
 
           const segment = 1 / transitions;
 
@@ -474,28 +483,29 @@ export function EnfoqueSection() {
           };
         }, root);
 
-        const refreshStack = () => {
-          metrics = computeMetrics();
-          applyStackLayout(metrics);
-          ScrollTrigger.refresh();
-        };
-
         let resizeTimer: ReturnType<typeof setTimeout> | undefined;
         const onResize = () => {
+          const nextWidth = window.innerWidth;
+          if (Math.abs(nextWidth - lastResizeWidth) < 4) return;
+
           if (resizeTimer) clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(refreshStack, 200);
+          resizeTimer = setTimeout(() => {
+            lastResizeWidth = nextWidth;
+            refreshMobileStackTrigger();
+          }, 220);
         };
 
         if (document.fonts?.ready) {
-          void document.fonts.ready.then(refreshStack);
+          void document.fonts.ready.then(refreshMobileStackTrigger);
         }
 
-        window.addEventListener("resize", onResize);
+        window.addEventListener("resize", onResize, { passive: true });
 
         return () => {
           window.removeEventListener("resize", onResize);
           if (resizeTimer) clearTimeout(resizeTimer);
           scrollNavRef.current = null;
+          stackTimeline = null;
           ctx.revert();
           stage.style.removeProperty("--enfoque-card-stack-gap");
           delete stage.dataset.activeCard;

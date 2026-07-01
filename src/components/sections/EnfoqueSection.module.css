@@ -1815,7 +1815,6 @@
     width: 100%;
     min-width: 0;
     overflow: hidden;
-    will-change: transform;
     --enfoque-card-stack-gap: 15px;
   }
 
@@ -1827,8 +1826,6 @@
     height: fit-content;
     min-height: 0;
     max-height: none;
-    transition: none;
-    will-change: transform;
     border: 1px solid var(--ec-line);
     border-radius: clamp(20px, 5vw, 24px);
     background: #0a0a0a;
