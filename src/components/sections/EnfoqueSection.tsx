@@ -140,10 +140,12 @@ export function EnfoqueSection() {
         const BOTTOM_SAFETY = 18;
         const SCROLL_VH = 0.62;
         const SCROLL_MIN = 250;
-        const HOLD_RATIO = 0.1;
-        const MOVE_RATIO = 0.8;
-        const SETTLE_RATIO = 0.1;
-        const CLIP_LAG = 0.24;
+        const SCRUB_SMOOTH = 0.8;
+        const MOVE_RATIO = 0.92;
+        const SEGMENT_OVERLAP = 0.06;
+        const SETTLE_RATIO = 0.02;
+        const CLIP_LAG = 0.18;
+        const ACTIVE_CARD_LEAD = 0.12;
 
         type StackMetrics = {
           stackTop: number;
@@ -336,20 +338,12 @@ export function EnfoqueSection() {
           });
         };
 
-        const syncActiveCard = (
-          progress: number,
-          duration: number,
-          labels: Record<string, number>,
-        ) => {
-          const elapsed = progress * duration;
-          let nextActive = 0;
-
-          for (let index = 0; index <= transitions; index += 1) {
-            const labelTime = labels[`card-0${index + 1}-active`];
-            if (labelTime !== undefined && elapsed >= labelTime - 0.0001) {
-              nextActive = index;
-            }
-          }
+        const syncActiveCard = (progress: number) => {
+          const segment = 1 / transitions;
+          const nextActive = Math.min(
+            transitions,
+            Math.max(0, Math.floor(progress / segment + ACTIVE_CARD_LEAD)),
+          );
 
           if (nextActive !== activeCardRef.current) {
             activeCardRef.current = nextActive;
@@ -373,7 +367,7 @@ export function EnfoqueSection() {
               end: () => `+=${metrics.scrollDistance}`,
               pin: stage,
               pinSpacing: true,
-              scrub: 0.68,
+              scrub: SCRUB_SMOOTH,
               anticipatePin: 1,
               invalidateOnRefresh: true,
               onRefresh: () => {
@@ -381,7 +375,7 @@ export function EnfoqueSection() {
                 applyStackLayout(metrics);
               },
               onUpdate: (self) => {
-                syncActiveCard(self.progress, tl.duration(), tl.labels);
+                syncActiveCard(self.progress);
               },
             },
           });
@@ -392,31 +386,23 @@ export function EnfoqueSection() {
 
           for (let index = 0; index < transitions; index += 1) {
             const segStart = index * segment;
-            const moveStart = segStart + segment * HOLD_RATIO;
-            const moveDuration = segment * MOVE_RATIO;
+            const overlap = index > 0 ? segment * SEGMENT_OVERLAP : 0;
+            const moveStart = Math.max(0, segStart - overlap);
+            const moveDuration = segment * MOVE_RATIO + overlap;
             const settledAt = moveStart + moveDuration;
             const incoming = cardEls[index + 1];
             const outgoing = cardEls[index];
-
-            if (index > 0) {
-              tl.set(
-                incoming,
-                { y: () => incomingStartY(index, metrics) },
-                moveStart,
-              );
-            }
+            const queueTween = segment * 0.1;
 
             tl.fromTo(
               incoming,
               {
                 y: () => incomingStartY(index, metrics),
                 scale: 0.99,
-                boxShadow: "0 6px 22px rgba(0,0,0,0.26)",
               },
               {
                 y: 0,
                 scale: 1,
-                boxShadow: "0 14px 44px rgba(0,0,0,0.44)",
                 duration: moveDuration,
               },
               moveStart,
@@ -434,36 +420,32 @@ export function EnfoqueSection() {
                 scale: 0.992,
                 duration: moveDuration * (1 - CLIP_LAG),
               },
-              `<${CLIP_LAG * 100}%`,
+              index === 0 ? moveStart : `<${CLIP_LAG * 100}%`,
             );
 
             tl.addLabel(`card-0${index + 2}-active`, settledAt);
 
-            tl.set(
-              outgoing,
-              {
-                clipPath: () =>
-                  headerClip(metrics.collapsedHeaderHeights[index]),
-                scale: 0.992,
-              },
-              settledAt,
-            );
-
-            tl.set(incoming, { y: 0 }, settledAt);
-
             if (index + 2 < cardEls.length) {
-              tl.set(
+              tl.to(
                 cardEls[index + 2],
-                { y: () => incomingStartY(index + 1, metrics) },
-                settledAt,
+                {
+                  y: () => incomingStartY(index + 1, metrics),
+                  duration: queueTween,
+                  ease: "none",
+                },
+                settledAt - segment * 0.08,
               );
             }
 
             if (index + 3 < cardEls.length) {
-              tl.set(
+              tl.to(
                 cardEls[index + 3],
-                { y: () => tuckedBelowStageY(index + 3, metrics) },
-                settledAt,
+                {
+                  y: () => tuckedBelowStageY(index + 3, metrics),
+                  duration: queueTween,
+                  ease: "none",
+                },
+                settledAt - segment * 0.05,
               );
             }
           }
@@ -498,11 +480,21 @@ export function EnfoqueSection() {
           ScrollTrigger.refresh();
         };
 
+        let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+        const onResize = () => {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(refreshStack, 200);
+        };
+
         if (document.fonts?.ready) {
           void document.fonts.ready.then(refreshStack);
         }
 
+        window.addEventListener("resize", onResize);
+
         return () => {
+          window.removeEventListener("resize", onResize);
+          if (resizeTimer) clearTimeout(resizeTimer);
           scrollNavRef.current = null;
           ctx.revert();
           stage.style.removeProperty("--enfoque-card-stack-gap");
